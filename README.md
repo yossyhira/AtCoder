@@ -10,6 +10,8 @@ AtCoderで作成したプログラム
 
 * [AtCoderBeginnerContest365](https://atcoder.jp/contests/abc365)
 
+* [AtCoderBeginnerContest366](https://atcoder.jp/contests/abc366)
+
 
 サンプルテストとその解答は[こちら](https://www.dropbox.com/sh/nx3tnilzqz7df8a/AAAYlTq2tiEHl5hsESw6-yfLa?e=1&dl=0)
 
