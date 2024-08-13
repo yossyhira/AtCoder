@@ -115,3 +115,9 @@ char c = '1';
 int ans = stringCount(s, c);
 System.out.println(ans);
 */
+
+//降順並び替え
+import java.util.Arrays;
+import java.util.Comparator;
+Integer[] num;
+Arrays.sort(num, Comparator.reverseOrder());
