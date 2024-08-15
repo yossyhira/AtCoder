@@ -141,6 +141,188 @@ b
 97
 */
 
+//文字列操作のコマンド集
+public class hige {
+
+    public static void main(String[] args) throws Exception {
+        
+        //String型を宣言
+        String str = "appleorangemelonorangemelon";
+        
+        //文字列にorangeがあるか無いかを出力
+        if(str.matches(".*orange.*"))
+        {
+            System.out.println("orange matched");
+        }
+
+        String str1 = "orange";
+        
+        //str1がある最初のIdxを出力。無ければ-1を出力。
+        int result = str.indexOf(str1);
+        //str1がある最後のIdxを出力。無ければ-1を出力。
+        int result1 = str.lastIndexOf(str1);
+
+        if (result != -1) {
+            System.out.println(str1 + "が見つかった位置：" + result);
+        } else {
+            System.out.println(str1 + "は見つかりませんでした");
+        }
+
+        if (result1 != -1) {
+            System.out.println(str1 + "が見つかった位置：" + result1);
+        } else {
+            System.out.println(str1 + "は見つかりませんでした");
+        }
+
+        //文字列に含まれるすべての”o”のインデックスを返す
+        int ans = -1;
+        do{
+            ans++;
+            ans = str.indexOf("o", ans);
+            System.out.println(ans);
+        }while(ans != -1 );
+        
+        //文字列の先頭にappleがあるか無いかを調べる
+          if (str.startsWith("apple")) {
+            System.out.println("前方一致しました");
+        } else {
+            System.out.println("前方一致しませんでした");
+        }
+        //文字列の最後にmelonがあるか無いかを調べる
+        if (str.endsWith("melon")) {
+            System.out.println("後方一致しました");
+        } else {
+            System.out.println("後方一致しませんでした");
+        }
+        
+        //splitメソッド(区切り系)
+        String str2 = "apple orange melon";
+        String[] fruits = str2.split(" ");//空白区切りで表示
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+        String str3 = "apple orange melon";
+        //str3.trim();//文字列全体の前後の半角スペース削除
+        str3 = str3.replaceAll(" ", ""); //文字の間の半角スペースを空文字に変換
+        String[] fruits2 = str3.split("");//1文字区切りで表示
+        for (String fruit : fruits2) {
+            System.out.println(fruit);
+        }
+        
+        // 二文字区切り
+        int n = 2;
+        for (int i = 0; i < fruits2.length; i += 2) {
+            if (i + 1 < fruits2.length) {
+                System.out.println(fruits2[i] + fruits2[i + 1]);
+            } else {
+                System.out.println(fruits2[i]);
+            }
+        }
+
+        //文字連結。appendを使用する
+        StringBuilder sb = new StringBuilder("apple");
+        System.out.println("sb : " + sb.append("orange"));
+
+        //文字連結。joinを使用する
+        String strarray[] = {"apple", "orange", "melon"};
+        String str4 = String.join(",", strarray);//各要素を“,”で区切る
+        System.out.println(str4);
+
+        //大文字変換
+        System.out.println(str.toUpperCase());
+
+        //小文字変換
+        System.out.println(str.toLowerCase());
+
+        //頭だけ大文字 substringを使用
+        //substring(start Idx,end Idx)
+        str = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        System.out.println(str);
+    }
+}
+
+//n文字区切りで表示
+public class Main {
+    public static void main(String[] args) {
+        String str3 = "apple orange melon";
+        str3 = str3.replaceAll(" ", ""); // 半角スペース削除
+        int splitLength = 2; // 任意の区切り文字数を指定
+
+        String[] fruits2 = splitString(str3, splitLength);
+
+        for (String fruit : fruits2) {
+            System.out.println(fruit);
+        }
+        // n文字目だけ表示
+        for (String fruit : fruits2) {
+            if(fruit.length() == splitLength){
+                fruit = fruit.substring(splitLength - 1);
+                System.out.println(fruit);
+            }
+        }
+    }
+
+    public static String[] splitString(String str, int length) {
+        int arraySize = (int) Math.ceil((double) str.length() / length);
+        String[] result = new String[arraySize];
+
+        for (int i = 0; i < arraySize; i++) {
+            int start = i * length;
+            int end = Math.min(start + length, str.length());
+            result[i] = str.substring(start, end);
+        }
+
+        return result;
+    }
+}
+
+//横書きを縦書きに変換(AtCoderBeginnerContest366のB問題)
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) {
+       int n, m = 0;
+       Scanner sc = new Scanner(System.in);
+       n = sc.nextInt();
+       String[] s = new String[n];
+
+       for(int i = 0; i < n; i++){
+           s[i] = sc.next();
+
+           while(i > 0 && s[i].length() < s[i-1].length()) {
+            s[i]+=' ';//ここだけB問題から変更
+           }
+
+           m=Math.max(m,s[i].length());
+       }
+
+       for(int i = 0; i < m; i++){
+           for(int j = n - 1; j >= 0; j--){
+               if(i < s[j].length()){
+               System.out.print(s[j].charAt(i));
+               }
+           }
+           System.out.println();
+       }
+    }
+}
+/*
+入力
+3
+apple
+orange 
+melon
+
+出力
+moa
+erp
+lap
+onl
+nge
+ e
+*/
+
 //特定の文字が何文字目にあるかカウント
 //sの文字列のn文字目以降で文字cが何番目にあるかチャック
 public static int stringCount(String s, int n, char c) {
