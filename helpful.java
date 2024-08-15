@@ -121,3 +121,83 @@ import java.util.Arrays;
 import java.util.Comparator;
 Integer[] num;
 Arrays.sort(num, Comparator.reverseOrder());
+
+//文字コードを使用して文字を表示
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		char c = sc.next().charAt(0);
+		System.out.println((char)(c+1));//次の文字を表示。(char)(文字コード)で文字を表示できる
+        System.out.println((int)(c));//文字コードを表示
+    }
+}
+/*
+入力
+a
+出力
+b 
+97
+*/
+
+//特定の文字が何文字目にあるかカウント
+//sの文字列のn文字目以降で文字cが何番目にあるかチャック
+public static int stringCount(String s, int n, char c) {
+    int ans = -1;//無ければ-1を返す
+    for (int i = n; i < s.length(); i++) {
+        if (s.charAt(i) == c) {
+            ans = i;
+            break;
+        }
+    }
+    return ans;
+ }
+ /*
+ import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        String t = sc.next();
+        sc.close();
+        int n = 0, ans = 0;
+        for(int i = 0; i < t.length(); i++ ){
+        n = ans;
+        ans = stringCount(s, n, t.charAt(i));
+        System.out.println(ans);
+        ans ++; 
+        }
+    }
+
+   public static int stringCount(String s, int n, char c) {
+    int ans = -1;
+    for (int i = n; i < s.length(); i++) {
+        if (s.charAt(i) == c) {
+            ans = i;
+            break;
+        }
+    }
+    return ans;
+ }
+}
+
+実行結果１
+入力
+ddd
+ddd
+出力
+0
+1
+2
+
+実行結果２
+入力
+atcoder
+toe
+出力
+1
+3
+5
+*/
