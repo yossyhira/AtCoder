@@ -1,4 +1,25 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.*;
+
 public class hoge {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        String[] foo = new String[num];
+        for(int i = 0; i < num; i++){
+            foo[i] = sc.next();
+        }
+         
+        Arrays.sort(foo);
+        System.out.println("辞書順：");
+        for(int i = 0; i < num; i++){
+            System.out.println(foo[i]);
+        }
+    }
+}
+
+/*public class hoge {
     public static void main(String[] args) {
         String str3 = "apple orange melon";
         str3 = str3.replaceAll(" ", ""); // 半角スペース削除
@@ -29,7 +50,7 @@ public class hoge {
 
         return result;
     }
-}
+}*/
 
 /*import java.util.Scanner;
 

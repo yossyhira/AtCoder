@@ -323,6 +323,84 @@ nge
  e
 */
 
+//辞書順にソート(List ver.)
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class hoge {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        ArrayList<String> list = new ArrayList<>();
+        String T;
+        for(int i = 0; i < num; i++){
+            T = sc.next();
+            list.add(T);
+        }
+
+        Collections.sort(list);
+
+        System.out.println("辞書順：");
+        for (String str : list) {
+            System.out.println(str);
+        }
+    }
+}
+
+/*
+入力
+4
+apple
+applo
+appla
+applb
+
+出力
+辞書順：
+appla
+applb
+apple
+applo
+ */
+
+//辞書順にソート(Array ver.)
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.*;
+
+public class hoge {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        String[] foo = new String[num];
+        for(int i = 0; i < num; i++){
+            foo[i] = sc.next();
+        }
+         
+        Arrays.sort(foo);
+        System.out.println("辞書順：");
+        for(int i = 0; i < num; i++){
+            System.out.println(foo[i]);
+        }
+    }
+}
+/*
+入力
+4
+apple
+applo
+appla
+applb
+
+出力
+辞書順：
+appla
+applb
+apple
+applo
+ */
+
 //特定の文字が何文字目にあるかカウント
 //sの文字列のn文字目以降で文字cが何番目にあるかチャック
 public static int stringCount(String s, int n, char c) {
