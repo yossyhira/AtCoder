@@ -1,21 +1,30 @@
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.*;
 
 public class hoge {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt();
-        String[] foo = new String[num];
-        for(int i = 0; i < num; i++){
-            foo[i] = sc.next();
+        Scanner scanner = new Scanner(System.in);
+        int wordCount = scanner.nextInt();
+        String[] words = new String[wordCount];
+        String[] reverseWord = new String[wordCount];
+        for (int i = 0; i < wordCount; i++) {
+            words[i] = scanner.next();
         }
-         
-        Arrays.sort(foo);
-        System.out.println("辞書順：");
-        for(int i = 0; i < num; i++){
-            System.out.println(foo[i]);
+        scanner.close();
+
+        for (int i = 0; i < wordCount; i++) {
+            reverseWord[i] = reverse(words[i]);
         }
+        Arrays.sort(reverseWord);
+        for (int i = 0; i < wordCount; i++) {
+            System.out.println(reverse(reverseWord[i]));
+        }
+
+    }
+
+    public static String reverse(String word){
+        String reverseWord;
+        reverseWord = new StringBuilder(word).reverse().toString();
+        return reverseWord;
     }
 }
 

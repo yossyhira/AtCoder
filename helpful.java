@@ -1,4 +1,5 @@
 //便利な関数とその使い方まとめファイル
+//ctrl+Fでキーワードの文字検索できる
 
 //素数判定関数
 public static boolean isPrime(int num) {
@@ -157,6 +158,7 @@ public class hige {
 
         String str1 = "orange";
         
+        //文字列検索(位置)
         //str1がある最初のIdxを出力。無ければ-1を出力。
         int result = str.indexOf(str1);
         //str1がある最後のIdxを出力。無ければ-1を出力。
@@ -209,7 +211,7 @@ public class hige {
             System.out.println(fruit);
         }
         
-        // 二文字区切り
+        // 二文字区切り(n文字区切りは少し下にあるよ)
         int n = 2;
         for (int i = 0; i < fruits2.length; i += 2) {
             if (i + 1 < fruits2.length) {
@@ -399,6 +401,51 @@ appla
 applb
 apple
 applo
+ */
+//文字を逆順に並び替えて表示
+import java.util.Scanner;
+
+public class hoge {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // 単語数を入力
+        int wordCount = scanner.nextInt();
+
+        // 単語を格納する配列
+        String[] words = new String[wordCount];
+
+        // 単語を入力
+        for (int i = 0; i < wordCount; i++) {
+            words[i] = scanner.next();
+        }
+
+        // 単語を逆順にして出力
+        for (String word : words) {
+            System.out.println(reverse(word));
+        }
+
+        scanner.close();
+    }
+    //逆順にする関数
+    public static String reverse(String word){
+        String reverseWord;
+        reverseWord = new StringBuilder(word).reverse().toString();//StringBuilderのメソッドにあるreverseを使い文字列を逆順にして
+                                                                   //toStringでString型に戻す
+        return reverseWord;
+    }
+}
+/*
+入力
+3
+hoge
+huga
+haga
+
+出力
+egoh
+aguh
+agah
  */
 
 //特定の文字が何文字目にあるかカウント
