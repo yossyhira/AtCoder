@@ -160,7 +160,7 @@ public class hige {
         
         //文字列検索(位置)
         //str1がある最初のIdxを出力。無ければ-1を出力。
-        int result = str.indexOf(str1);
+        int result = str.indexOf(str1);//indexOfの”O”👈大文字
         //str1がある最後のIdxを出力。無ければ-1を出力。
         int result1 = str.lastIndexOf(str1);
 

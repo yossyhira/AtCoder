@@ -3,29 +3,26 @@ import java.util.*;
 public class hoge {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int wordCount = scanner.nextInt();
-        String[] words = new String[wordCount];
-        String[] reverseWord = new String[wordCount];
-        for (int i = 0; i < wordCount; i++) {
-            words[i] = scanner.next();
-        }
-        scanner.close();
+        long num = scanner.nextLong();
 
-        for (int i = 0; i < wordCount; i++) {
-            reverseWord[i] = reverse(words[i]);
-        }
-        Arrays.sort(reverseWord);
-        for (int i = 0; i < wordCount; i++) {
-            System.out.println(reverse(reverseWord[i]));
+        long count = (num / 11)*2;
+
+        int mod = (int)(num % 11);
+
+        while(mod > 0 ){
+            if(mod > 0){
+                mod -= 6;
+                count++;
+            }
+            if(mod > 0){
+                mod -= 5;
+                count++;
+            }
         }
 
+        System.out.println(count);
     }
 
-    public static String reverse(String word){
-        String reverseWord;
-        reverseWord = new StringBuilder(word).reverse().toString();
-        return reverseWord;
-    }
 }
 
 /*public class hoge {
