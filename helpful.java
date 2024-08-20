@@ -161,6 +161,7 @@ public class hige {
         //文字列検索(位置)
         //str1がある最初のIdxを出力。無ければ-1を出力。
         int result = str.indexOf(str1);//indexOfの”O”👈大文字
+        //int result = str.indexOf(str1, 2); strの2要素目以降でstr1があるか判定
         //str1がある最後のIdxを出力。無ければ-1を出力。
         int result1 = str.lastIndexOf(str1);
 
@@ -183,6 +184,17 @@ public class hige {
             ans = str.indexOf("o", ans);
             System.out.println(ans);
         }while(ans != -1 );
+
+        //特定の範囲の文字を抜き出し(特定の範囲の文字削除)
+        str = str.substring(0,5);//要素0~4の5文字分抜き出し
+        /*
+        str = str.substring(0,5);
+        System.out.println(str);
+
+        出力 
+        apple
+         */
+        str = str.substring(0,str.length() - 5);//末尾の5文字を削除
         
         //文字列の先頭にappleがあるか無いかを調べる
           if (str.startsWith("apple")) {
