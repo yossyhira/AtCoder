@@ -142,6 +142,9 @@ b
 97
 */
 
+//重複がないようにする。要素がかぶらないようにする。
+Set<String> set = new HashSet<String>();
+
 //文字列操作のコマンド集
 public class hige {
 
