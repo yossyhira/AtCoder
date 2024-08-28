@@ -2,12 +2,91 @@ import java.util.*;
 
 public class hoge {
     public static void main(String[] args) {
-    String str = "appleorangemelonorangemelon";
-    str = str.substring(0,5);
-    System.out.println(str);
-    }
+        List<String> list = new ArrayList<>();
+ 
+        list.add("a");
+        list.add("b");
+        list.add("c");
 
+        // forEachメソッド　listの全ての要素を出力
+        list.forEach(System.out::println);//printlnで各文字ごとに改行, printでつなげて出力
+                                          // ::はメソッド参照
+        //ラムダ(->)を使いbを飛ばして出力                                  
+        list.forEach(s -> { // forEachメソッド
+            if (s.equals("b")){ 
+                return; // continueだとエラーが出るので代わりにreturnを使う(bを飛ばす)
+            }
+            System.out.println(s);
+        });
+        
+        //addAllメソッド　listの末尾に別のリストを追加
+        List<Integer> list1 = new ArrayList<>();
+ 
+        list1.add(1);
+        list1.add(2);
+        list1.add(3);
+        list1.add(4);
+         
+        List<Integer> list2 = new ArrayList<>();
+         
+        list2.add(5);
+        list2.add(6);
+        list2.add(7);
+        list2.add(8);
+         
+        list1.addAll(list2); //list1にlist2を追加
+        
+        System.out.println(list1); //[1, 2, 3, 4, 5, 6, 7, 8]
+        list1.forEach(s -> System.out.print(s + " "));//[]を無くして出力　1 2 3 4 5 6 7 8
+        System.out.println(); 
+
+        //getメソッド　要素0に何があるのか調べる
+        System.out.println(list1.get(0)); // 1
+
+        //indexOfメソッド　1がどの要素にあるのか調べる
+        System.out.println(list1.indexOf(1)); // 1
+
+        //setメソッド　listの値を書き換え
+        list1.set(0, 3); //list1の要素0を３に書き換え
+        
+        System.out.println(list1); //[3, 2, 3, 4, 5, 6, 7, 8]
+
+        
+        //subListメソッド　部分的に配列を抜き出し
+        List<Integer> sbList = list1.subList(1, 3); //要素1から3未満まで(1~2)を抜き出し
+        System.out.println(sbList);//[2, 3]
+
+        //subListを使い指定範囲削除
+        list1.subList(1, 3).clear();
+        System.out.println(list1); //[2, 3]を削除して[3, 4, 5, 6, 7, 8]
+
+        //removeメソッド　指定した要素を削除
+        list1.remove(0); 
+        System.out.println(list1);//[4, 5, 6, 7, 8]
+
+        //addメソッド　先頭に追加
+        //list1.add(追加したい場所, 追加するもの);　追加したい場所を指定しないと末尾に追加
+        list1.add(0, 3);
+        System.out.println(list1);//[3, 4, 5, 6, 7, 8]
+
+        // 配列からListへの変換
+        String[] array1 = {"s", "a", "m", "u", "r", "a", "i"};
+        List<String> list3 = Arrays.asList(array1);
+         
+        System.out.println(list3);
+        
+        // Listから配列への変換
+        List<String> list4 = new ArrayList<>(Arrays.asList("s", "a", "m", "u", "r", "a", "i"));
+        String[] array2 = list4.toArray(new String[list4.size()]);
+        
+        for(String s: array2) {
+            System.out.println(s);
+        }
+
+
+    }
 }
+
 
 /*public class hoge {
     public static void main(String[] args) {
