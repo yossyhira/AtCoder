@@ -532,7 +532,8 @@ public class hoge {
         list1.forEach(s -> System.out.print(s + " "));//[]を無くして出力　1 2 3 4 5 6 7 8
         System.out.println(); 
 
-        //getメソッド　要素0に何があるのか調べる
+        //getメソッド　要素0に何があるのか調べる.
+        //配列のhoge[0]と同じ意味
         System.out.println(list1.get(0)); // 1
 
         //indexOfメソッド　1がどの要素にあるのか調べる
@@ -573,6 +574,45 @@ public class hoge {
         
         for(String s: array2) {
             System.out.println(s);
+        }
+    }
+}
+
+///AtCoderBeginnerContest370/java/c.javaのコード
+import java.util.*;
+
+public class c {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String S = sc.next();
+        String T = sc.next();
+        sc.close();
+
+        ArrayList<String> hoge = new ArrayList<>();//List宣言
+        ArrayList<String> ans = new ArrayList<>();
+
+        while(!S.equals(T)){
+            char[] s = S.toCharArray();//文字列を一文字ずつ分解して配列に保存
+            char[] t = T.toCharArray();
+            for(int i = 0; i < S.length(); i++){
+                if(s[i] != t[i]){
+                    char x = s[i];
+                    s[i] = t[i];
+                    String A = new String(s);//配列を文字列に変換
+                    hoge.add(A);
+                    s[i] = x;
+                }
+            }
+            Collections.sort(hoge);//List辞書順にソート
+            S = hoge.get(0);
+            ans.add(hoge.get(0));
+            hoge.clear();//Listの初期化
+        }
+
+        System.out.println(ans.size());
+
+        for (int i = 0; i < ans.size(); i++) {
+            System.out.println(ans.get(i));
         }
     }
 }
