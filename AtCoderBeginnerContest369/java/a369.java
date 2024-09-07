@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class a {
+public class a369 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int numA = sc.nextInt();
