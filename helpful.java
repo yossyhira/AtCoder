@@ -617,6 +617,32 @@ public class c {
     }
 }
 
+//部分文字列がその文字列に何個含まれるか
+int Count = 0;
+String str = "hogeABChugahugaABC"
+int index = str.indexOf("ABC");
+//含まなければ　-1　を返す
+while (index != -1) {
+    Count++;
+    index = Str.indexOf("ABC", index + 1);
+}
+
+//文字操作で先頭から最後まで検索したいときに
+//先頭以下や最後以上の数字にならないようにする
+//先頭なら0と検索したいIdx最「大」値, 最後なら文字.length()とIdxの最「小」値
+//下記は AtCoderBeginnerContest372/java/c2.java 参照
+int start = Math.max(0, Idx - 2);
+int end = Math.min(n, Idx + 2);
+
+//文字列。配列版substring。char配列から指定した範囲の文字で文字列作成
+char[] s = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd'};
+String str = new String(s, 2, 3);//2, 3, 4で lloが出力
+String str = new String(s);//これはただchar配列を文字列にするだけ。出力: Hello World
+
+//文字列を配列に変換。一文字ずつ分割
+char[] s = Str.toCharArray();
+
+
 
 //特定の文字が何文字目にあるかカウント
 //sの文字列のn文字目以降で文字cが何番目にあるかチャック
