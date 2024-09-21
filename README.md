@@ -25,6 +25,10 @@ AtCoderで作成したプログラム集
 
 * [AtCoderBeginnerContest370](https://atcoder.jp/contests/abc370)
 
+* [AtCoderBeginnerContest371](https://atcoder.jp/contests/abc371)
+
+* [AtCoderBeginnerContest372](https://atcoder.jp/contests/abc372)
+
 * [AtCoderRegularContest003](https://atcoder.jp/contests/arc003)
 
 
