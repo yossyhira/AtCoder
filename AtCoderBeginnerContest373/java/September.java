@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class a {
+public class September {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int count = 0;
