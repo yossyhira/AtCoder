@@ -639,7 +639,7 @@ char[] s = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd'};
 String str = new String(s, 2, 3);//2, 3, 4で lloが出力
 String str = new String(s);//これはただchar配列を文字列にするだけ。出力: Hello World
 
-//文字列を配列に変換。一文字ずつ分割
+//文字を配列に変換。一文字ずつ分割
 char[] s = Str.toCharArray();
 
 
