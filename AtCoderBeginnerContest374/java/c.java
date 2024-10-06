@@ -10,22 +10,24 @@ public class c {
             num[i] = sc.nextInt();
         }
         sc.close();
-        int ans = 0;
 
-while(1){
+        long ans = Long.MAX_VALUE;
+        int hoge = (int)Math.pow(2,Idx);
     
-        me = num[i];
-        for (int j = 0; j < Idx; j++) {   
-         if(j == i){
-            continue;
-         }else{
-            other += num[j]
-         }
+        for (int i = 0; i < hoge; i++) {
+            long A = 0;
+            long B = 0; 
+            for (int j = 0; j < Idx; j++) {
+                if((i & (1 << j)) != 0){
+                    A += num[j];
+                }else{
+                    B += num[j];
+                }
+            }
+
+            long maxNum = Math.max(A, B);
+            ans = Math.min(ans, maxNum);  
         }
-}
-
-
-
-        System.out.println(num[0]);
+        System.out.println(ans);
     }
 }

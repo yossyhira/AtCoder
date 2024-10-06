@@ -71,7 +71,7 @@ System.out.println(ans);
 
 //階乗(10^9+7で割った余りを表示) nとansがlong型なので注意
 public static long factorial(long n){
-    long mod = (long)Math.pow(10,9)+7;
+    long mod = (long)Math.pow(10,9)+7;//Math.pow()はdouble型
     long ans = 1;
     for(int i = 1; i <= n; i++)ans =(ans*i) % mod;//オーバーフローを防ぐため毎回余りを求める
     return ans;
@@ -656,6 +656,14 @@ public static int stringCount(String s, int n, char c) {
     }
     return ans;
  }
+
+ //型の最大値・最小値指定方法
+ int = Integer.MIN_VALUE //最小
+ int = Integer.MAX_VALUE //最大
+ long = Long.MIN_VALUE
+ long = Long.MAX_VALUE
+
+
  /*
  import java.util.Scanner;
 
