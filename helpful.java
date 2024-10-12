@@ -20,7 +20,7 @@ public static boolean isPrime(int num) {
         }
     }
 */
-
+//
 //桁和
 public static int digsum(int n) {
         int res = 0;
