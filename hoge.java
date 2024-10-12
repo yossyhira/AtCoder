@@ -1,17 +1,39 @@
-import java.util.*;
+import java.util.Arrays;
 
 public class hoge {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        double numA = sc.nextDouble();
-        // 入力処理を行う
-        sc.close();
+    private static void permutation(int[] seed) {
+        int[] perm = new int[seed.length];
+        boolean[] used = new boolean[seed.length];
+        buildPerm(seed, perm, used, 0);
+    }
 
-        System.out.println(numA);
+    private static void buildPerm(int[] seed, int[] perm, boolean[] used, int index) {
+        if (index == seed.length) {
+            procPerm(perm);
+            return;
+        }
 
+        for (int i = 0; i < seed.length; i++) {
+            if (used[i])
+                continue;
+            perm[index] = seed[i];
+            used[i] = true;
+            buildPerm(seed, perm, used, index + 1);
+            used[i] = false;
+        }
+    }
 
+    private static void procPerm(int[] perm) {
+        System.out.println(perm[0]);
+    }
+
+    public static void main(String[] args) throws Exception {
+        permutation(new int[] { 1, 2, 3 });
     }
 }
+
+
+
 
 
 /*public class hoge {

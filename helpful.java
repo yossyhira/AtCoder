@@ -642,6 +642,57 @@ String str = new String(s);//これはただchar配列を文字列にするだ�
 //文字を配列に変換。一文字ずつ分割
 char[] s = Str.toCharArray();
 
+//bit全探索ビット全探索
+//2^Idx N = Idx
+for (int i = 0; i < (1 << Idx); i++) {
+    //long A = 0;
+    //long B = 0; 
+    for (int j = 0; j < Idx; j++) {
+        if((i & (1 << j)) != 0){
+            //A += num[j]; //1があったらAチーム
+        }else{
+           // B += num[j];//0ならBチーム
+        }
+    }
+    //long maxNum = Math.max(A, B);
+    //ans = Math.min(ans, maxNum);  
+}
+
+//順列全探索　階乗の組み合わせ探索
+import java.util.Arrays;
+
+public class hoge {
+    private static void permutation(int[] seed) {
+        int[] perm = new int[seed.length];
+        boolean[] used = new boolean[seed.length];
+        buildPerm(seed, perm, used, 0);
+    }
+
+    private static void buildPerm(int[] seed, int[] perm, boolean[] used, int index) {
+        if (index == seed.length) {
+            procPerm(perm);
+            return;
+        }
+
+        for (int i = 0; i < seed.length; i++) {
+            if (used[i])
+                continue;
+            perm[index] = seed[i];
+            used[i] = true;
+            buildPerm(seed, perm, used, index + 1);
+            used[i] = false;
+        }
+    }
+
+    private static void procPerm(int[] perm) {
+        System.out.println(perm[0]);//ここに追加
+    }
+
+    public static void main(String[] args) throws Exception {
+        permutation(new int[] { 1, 2, 3 });//3!計算
+    }
+}
+
 
 
 //特定の文字が何文字目にあるかカウント

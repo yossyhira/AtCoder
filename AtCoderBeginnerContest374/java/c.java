@@ -12,9 +12,9 @@ public class c {
         sc.close();
 
         long ans = Long.MAX_VALUE;
-        int hoge = (int)Math.pow(2,Idx);
+        
     
-        for (int i = 0; i < hoge; i++) {
+        for (int i = 0; i < (1 << Idx); i++) {
             long A = 0;
             long B = 0; 
             for (int j = 0; j < Idx; j++) {
