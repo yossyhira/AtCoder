@@ -693,6 +693,12 @@ public class hoge {
     }
 }
 
+//輪・円問題(atcoder/AtCoderBeginnerContest376/java/b2.java)
+//基本数直線で考えるとよい。配列はやめた方がいい。
+//循環するときは割った余りで場所を求められる
+//now:今の場所 j:進む距離　N:円の大きさ
+(now + j) % N//時計周り
+(now - j + N) % N//反時計
 
 
 //特定の文字が何文字目にあるかカウント
