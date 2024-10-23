@@ -648,7 +648,9 @@ for (int i = 0; i < (1 << Idx); i++) {
     //long A = 0;
     //long B = 0; 
     for (int j = 0; j < Idx; j++) {
+        //j番目の数字や物を選ぶ
         if((i & (1 << j)) != 0){
+            //選んだ後の処理を記述
             //A += num[j]; //1があったらAチーム
         }else{
            // B += num[j];//0ならBチーム
