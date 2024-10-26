@@ -142,9 +142,6 @@ b
 97
 */
 
-//重複がないようにする。要素がかぶらないようにする。
-Set<String> set = new HashSet<String>();
-
 //文字列操作のコマンド集
 public class hige {
 
@@ -639,7 +636,7 @@ char[] s = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd'};
 String str = new String(s, 2, 3);//2, 3, 4で lloが出力
 String str = new String(s);//これはただchar配列を文字列にするだけ。出力: Hello World
 
-//文字を配列に変換。一文字ずつ分割
+//文字を配列に変換。一文字ずつ分割.文字列を配列
 char[] s = Str.toCharArray();
 
 //bit全探索ビット全探索
@@ -702,6 +699,23 @@ public class hoge {
 //now:今の場所 j:進む距離　N:円の大きさ
 (now + j) % N//時計周り
 (now - j + N) % N//反時計
+
+//重複がないようにする。要素がかぶらないようにする。
+Set<String> set = new HashSet<String>();
+
+//配列の最大オーバーするときの既にあるかチェックするときは文字列として考える。(atcoder/AtCoderBeginnerContest377/java/c2.java)
+Set<String> used = new HashSet<>();
+//もし[g][r]があればfalseなければ、trueを出して[g][r]を追加
+if(used.add(g + "," + r))
+
+//グリッド入力（＃#とか・･のやつ）(atcoder/AtCoderBeginnerContest377/java/b.java)
+Scanner sc = new Scanner(System.in);
+char[][] n = new char[8][8];//8*8のグリッド
+for (int i = 0; i < 8; i++) {
+    hoge = sc.next();
+    n[i]= hoge.toCharArray();
+}
+sc.close();
 
 
 //特定の文字が何文字目にあるかカウント
