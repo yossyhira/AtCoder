@@ -705,8 +705,49 @@ Set<String> set = new HashSet<String>();
 
 //配列の最大オーバーするときの既にあるかチェックするときは文字列として考える。(atcoder/AtCoderBeginnerContest377/java/c2.java)
 Set<String> used = new HashSet<>();
+//使用済みの座標を追加(下のCPPのJAVAの方がいいかも)
 //もし[g][r]があればfalseなければ、trueを出して[g][r]を追加
 if(used.add(g + "," + r))
+
+//上よりもこっちの方がいいかも！！　cppのset pareをjavaで実装
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+class Pair {
+    int first;
+    int second;
+
+    public Pair(int first, int second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pair pair = (Pair) o;
+        return first == pair.first && second == pair.second;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(first, second);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Set<Pair> badCell = new HashSet<>();
+        badCell.add(new Pair(1, 2));//追加
+        badCell.add(new Pair(3, 4));
+
+        System.out.println(badCell.contains(new Pair(1, 2))); // new Pair(1, 2)があればtrue
+    }
+}
+//出力
+true
 
 //グリッド入力（＃#とか・･のやつ）(atcoder/AtCoderBeginnerContest377/java/b.java)
 Scanner sc = new Scanner(System.in);
