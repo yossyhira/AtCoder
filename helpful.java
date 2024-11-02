@@ -844,6 +844,7 @@ for(Entry<String, Integer> entry : list_entries) {
     System.out.println(entry.getKey() + " : " + entry.getValue());
 }
 
+
 //ここから降順の処理
 // 6. 比較関数Comparatorを使用してMap.Entryの値を比較する（降順）
 Collections.sort(list_entries, new Comparator<Entry<String, Integer>>() {
