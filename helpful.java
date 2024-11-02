@@ -717,6 +717,165 @@ for (int i = 0; i < 8; i++) {
 }
 sc.close();
 
+//map
+//二つの物の関係を記録したいときに使う
+//keyのときどんな値なのか
+
+//宣言
+//Map<key, 値>
+Map<Integer, Integer> indexMap = new HashMap<>();//int,intの組み合わせの場合
+
+//key,値追加
+//既にkeyがある場合は値を上書き保存
+indexMap.put(key, 値);
+
+//keyがmapの中に既にあるかないか
+//返り値 true/false
+indexMap.containsKey(num)
+
+//keyに対応している値を取得
+indexMap.get(key)
+
+//宣言と同時に値を追加したい
+Map<String, String> map = new HashMap<String, String>() {
+    {
+        put("samurai", "侍");
+        put("engineer", "エンジニア");
+    }
+};
+
+//中身を表示
+for (Map.Entry<String, String> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + " : " + entry.getValue());
+}
+//出力
+samurai : 侍
+engineer : エンジニア
+
+//mapをlistに変換
+// Mapの宣言
+Map<String, String> map = new HashMap<>();
+
+// MAPにデータを格納
+map.put("key1", "apple");
+map.put("key2", "orange");
+map.put("key3", "melon");
+
+// Listを宣言し、valuesメソッドを使用してMapの"値"を取得する
+List<String> list = new ArrayList<>(map.values());
+//全ての"key"をlistに変換
+//List<String> list = new ArrayList<>(map.keySet());
+
+// 要素番号を指定してListの値を取得する
+System.out.println(list.get(0));
+//出力
+apple
+
+//昇順ソート
+//treemapは追加されたら自動でソートしてくれる
+//今までのhushmapは追加された順に登録
+//TreeMapオブジェクトの生成
+Map<String, String> treeMap = new TreeMap<>();
+
+//TreeMapオブジェクトにデータを追加 
+treeMap.put("B","Brazil");
+treeMap.put("A","America");
+treeMap.put("C","China");
+treeMap.put("E","England");
+treeMap.put("D","Denmark");
+
+System.out.println("TreeMapの場合");
+
+for (String nKey : treeMap.keySet()){
+    System.out.println(treeMap.get(nKey));
+}
+
+//keyの昇順ソート
+// Mapの宣言
+Map<Integer, String> mMap = new HashMap<Integer, String>();
+
+// Mapにデータを格納
+mMap.put( 1, "apple");
+mMap.put( 2, "orange");
+mMap.put( 4, "pineapple");
+mMap.put( 5, "strawberry");
+mMap.put( 3, "melon");
+
+// キーでソートする
+Object[] mapkey = mMap.keySet().toArray();
+Arrays.sort(mapkey);
+
+for (Integer nKey : mMap.keySet())
+{
+    System.out.println(mMap.get(nKey));
+}
+//出力
+apple
+orange
+melon
+pineapple
+strawberry
+
+//key昇順・降順(comparator使用ver.)
+Map<String, Integer> mMap = new HashMap<String, Integer>();
+        
+// 1. Mapにデータを格納
+mMap.put( "apple", 1);
+mMap.put( "orange", 2);
+mMap.put( "pineapple", 4);
+mMap.put( "strawberry", 5);
+mMap.put( "melon", 3);
+
+// 2.Map.Entryのリストを作成する
+List<Entry<String, Integer>> list_entries = new ArrayList<Entry<String, Integer>>(mMap.entrySet());
+
+//ここから昇順の処理
+// 3.比較関数Comparatorを使用してMap.Entryの値を比較する(昇順)
+Collections.sort(list_entries, new Comparator<Entry<String, Integer>>() {
+    public int compare(Entry<String, Integer> obj1, Entry<String, Integer> obj2) {
+        // 4. 昇順
+        return obj1.getValue().compareTo(obj2.getValue());
+    }
+});
+
+System.out.println("昇順でのソート");
+// 5. ループで要素順に値を取得する
+for(Entry<String, Integer> entry : list_entries) {
+    System.out.println(entry.getKey() + " : " + entry.getValue());
+}
+
+//ここから降順の処理
+// 6. 比較関数Comparatorを使用してMap.Entryの値を比較する（降順）
+Collections.sort(list_entries, new Comparator<Entry<String, Integer>>() {
+    //compareを使用して値を比較する
+    public int compare(Entry<String, Integer> obj1, Entry<String, Integer> obj2)
+    {
+        //降順
+        return obj2.getValue().compareTo(obj1.getValue());
+    }
+});
+
+System.out.println("降順でのソート");
+// 7. ループで要素順に値を取得する
+for(Entry<String, Integer> entry : list_entries) {
+    System.out.println(entry.getKey() + " : " + entry.getValue());
+}
+//出力
+昇順でのソート
+apple : 1
+orange : 2
+melon : 3
+pineapple : 4
+strawberry : 5
+降順でのソート
+strawberry : 5
+pineapple : 4
+melon : 3
+orange : 2
+apple : 1
+
+ 
+
 
 //特定の文字が何文字目にあるかカウント
 //sの文字列のn文字目以降で文字cが何番目にあるかチャック

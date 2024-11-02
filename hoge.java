@@ -1,35 +1,24 @@
-import java.util.Arrays;
+import java.util.*;
 
 public class hoge {
-    private static void permutation(int[] seed) {
-        int[] perm = new int[seed.length];
-        boolean[] used = new boolean[seed.length];
-        buildPerm(seed, perm, used, 0);
-    }
-
-    private static void buildPerm(int[] seed, int[] perm, boolean[] used, int index) {
-        if (index == seed.length) {
-            procPerm(perm);
-            return;
-        }
-
-        for (int i = 0; i < seed.length; i++) {
-            if (used[i])
-                continue;
-            perm[index] = seed[i];
-            used[i] = true;
-            buildPerm(seed, perm, used, index + 1);
-            used[i] = false;
-        }
-    }
-
-    private static void procPerm(int[] perm) {
-        System.out.println(perm[0]);
-    }
-
-    public static void main(String[] args) throws Exception {
-        permutation(new int[] { 1, 2, 3 });
-    }
+    public static void main(String[] args) {
+		// Mapの宣言
+        Map<String, String> map = new HashMap<>();
+        
+        // MAPにデータを格納
+        map.put("key1", "apple");
+        map.put("key2", "orange");
+        map.put("key3", "melon");
+        
+        // Listを宣言し、valuesメソッドを使用してMapの値を取得する
+        //List<String> list = new ArrayList<>(map.values());
+        List<String> list = new ArrayList<>(map.keySet());
+        
+        // 要素番号を指定してListの値を取得する
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
+	}
 }
 
 
