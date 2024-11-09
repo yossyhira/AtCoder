@@ -3,13 +3,17 @@ import java.util.*;
 public class a {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int numA = sc.nextInt();
-        int numB = sc.nextInt();
-        int numC = sc.nextInt();
         String text = sc.next();
-        // 入力処理を行う
         sc.close();
+        char[] s = text.toCharArray();
+        System.out.print(s[1]);
+        System.out.print(s[2]);
+        System.out.print(s[0]);
+        System.out.print(" ");
+        System.out.print(s[2]);
+        System.out.print(s[0]);
+        System.out.println(s[1]);
 
-        System.out.println((numA+numB+numC)+" "+text);
+        
     }
 }
