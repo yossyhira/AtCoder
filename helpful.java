@@ -604,6 +604,61 @@ for (int i = 1; i <= n; i++) {
     }
 }
 
+// listの二次元配列？みたいなやつ(AtCoder/AtCoderBeginnerContest289/java/c.java)
+import java.util.*;
+
+public class c {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // NとMを読み込み
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+
+        // 二次元リストを初期化
+        List<List<Integer>> groups = new ArrayList<>();
+
+        // M 個のグループを読み込む
+        for (int i = 0; i < M; i++) {
+            int C = sc.nextInt(); // このグループの要素数
+
+            // グループの要素を格納するリストを作成
+            List<Integer> group = new ArrayList<>();
+            for (int j = 0; j < C; j++) {
+                group.add(sc.nextInt()); // 各要素を追加
+            }
+
+            // グループを二次元リストに追加
+            groups.add(group);
+        }
+        System.out.println("=========================確認===========================");
+       for (int i = 0; i < groups.size(); i++) {
+        for (int j = 0; j < groups.get(i).size(); j++) {
+            System.out.print(groups.get(i).get(j)+" ");
+        }
+        System.out.println();
+       }
+
+
+        sc.close();
+    }
+}
+/*
+入力
+3 3
+2　
+1 2　<= これを入れる
+2
+1 3　<= これを入れる
+1
+2　<= これを入れる
+
+出力
+1 2 
+1 3 
+2 
+*/
+
 ///AtCoderBeginnerContest370/java/c.javaのコード
 import java.util.*;
 
@@ -668,7 +723,8 @@ String str = new String(s);//これはただchar配列を文字列にするだ�
 //文字を配列に変換。一文字ずつ分割.文字列を配列
 char[] s = Str.toCharArray();
 
-//bit全探索ビット全探索
+//bit全探索ビット全探索（AtCoder/AtCoderBeginnerContest374/java/c.java）
+//他の類似問題（AtCoder/AtCoderBeginnerContest289/java/c.java）
 //2^Idx N = Idx
 for (int i = 0; i < (1 << Idx); i++) {
     //long A = 0;
@@ -676,12 +732,13 @@ for (int i = 0; i < (1 << Idx); i++) {
     for (int j = 0; j < Idx; j++) {
         //j番目の数字や物を選ぶ
         if((i & (1 << j)) != 0){
-            //選んだ後の処理を記述
+            //一つの組み合わせの中で選ぶ「一つ」を選んだ後の処理を記述
             //A += num[j]; //1があったらAチーム
         }else{
            // B += num[j];//0ならBチーム
         }
     }
+    //一つの組み合わせを「全て」選びきった後の処理
     //long maxNum = Math.max(A, B);
     //ans = Math.min(ans, maxNum);  
 }
