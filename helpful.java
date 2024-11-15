@@ -509,6 +509,7 @@ public class hoge {
         });
         
         //addAllメソッド　listの末尾に別のリストを追加
+        //list宣言
         List<Integer> list1 = new ArrayList<>();
  
         list1.add(1);
@@ -564,6 +565,13 @@ public class hoge {
         List<String> list3 = Arrays.asList(array1);
          
         System.out.println(list3);
+
+        //listの内容を頭からすべて出力
+        for(int n : list1){
+            System.out.print(n + " ");// 1 2 3 4 
+        }
+        System.out.println();
+
         
         // Listから配列への変換
         List<String> list4 = new ArrayList<>(Arrays.asList("s", "a", "m", "u", "r", "a", "i"));
@@ -572,6 +580,27 @@ public class hoge {
         for(String s: array2) {
             System.out.println(s);
         }
+    }
+}
+
+//listの内容を末尾から出力(AtCoder/AtCoderBeginnerContest289/java/b.java)
+List<Integer> waitNum = new ArrayList<>();
+
+for (int i = 1; i <= n; i++) {
+    if(h.add(i)){
+        System.out.print(i + " ");
+        //現在の総要素数を入れる
+        int roop = waitNum.size();
+        for (int j = 0; j < roop ; j++) {
+            //末尾のインデックスを取得
+            int size = waitNum.size() - 1;
+            //末尾の値を表示
+            System.out.print(waitNum.get(size) + " ");
+            //最後のインデックスの要素を削除
+            waitNum.remove(size);
+        }
+    }else{
+        waitNum.add(i);
     }
 }
 
