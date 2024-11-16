@@ -723,6 +723,10 @@ String str = new String(s);//これはただchar配列を文字列にするだ�
 //文字を配列に変換。一文字ずつ分割.文字列を配列
 char[] s = Str.toCharArray();
 
+//文字列の中から一文字だけ表示
+String text = sc.next();
+System.out.println(text.charAt(0));
+
 //bit全探索ビット全探索（AtCoder/AtCoderBeginnerContest374/java/c.java）
 //他の類似問題（AtCoder/AtCoderBeginnerContest289/java/c.java）
 //2^Idx N = Idx
