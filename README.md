@@ -9,6 +9,8 @@ AtCoderで作成したプログラム集
 
 * [AtCoderBeginnerContest053](https://atcoder.jp/contests/abc053)
 
+* [AtCoderBeginnerContest289](https://atcoder.jp/contests/abc289)
+
 * [AtCoderBeginnerContest363](https://atcoder.jp/contests/abc363)
 
 * [AtCoderBeginnerContest364](https://atcoder.jp/contests/abc364)
@@ -40,6 +42,10 @@ AtCoderで作成したプログラム集
 * [AtCoderBeginnerContest377](https://atcoder.jp/contests/abc377)
 
 * [AtCoderBeginnerContest378](https://atcoder.jp/contests/abc378)
+
+* [AtCoderBeginnerContest379](https://atcoder.jp/contests/abc379)
+
+* [AtCoderBeginnerContest380](https://atcoder.jp/contests/abc380)
 
 * [AtCoderRegularContest003](https://atcoder.jp/contests/arc003)
 
