@@ -890,7 +890,7 @@ class Pair {
     }
 }
 
-public class Main {
+public class Main { //<=Mainをファイル名に変えてね
     public static void main(String[] args) {
         Set<Pair> badCell = new HashSet<>();
         badCell.add(new Pair(1, 2));//追加
