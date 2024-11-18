@@ -274,7 +274,7 @@ public class hige {
          //大文字小文字の区別あり
         System.out.println(str.equals("HELLO JAVA!")); // false
 
-        //指定した文字を置換
+        //指定した文字を置換(一文字だけの置換なら下の方にあるStringBuilderの.setCharAtを使うとよい)
         String str = "Hello Java!";
         //aをoに置換 replace(char, char);
         System.out.println(str.replace('a', 'o'));  // Hello Jovo!
@@ -290,6 +290,94 @@ public class hige {
          //エラー：System.out.println(str.replace(' ', ''));　charは空文字('')対応してない
         System.out.println(str.replaceAll(" ", ""));// HelloJava!
     }
+}
+
+//StringBuilderの使い方
+//文字列の挿入や削除などに便利
+//同じ変数で使いまわせる
+{
+// 1. フツーに宣言、初期容量は16文字
+StringBuilder sb1 = new StringBuilder();
+
+// 2. 初期容量 capacity 文字で宣言
+// 80.0 など実数を入れるとコンパイルエラーになります、指定できる数字はintのみ
+StringBuilder sb2 = new StringBuilder(int capacity);
+
+// 3. strで初期化する
+StringBuilder sb3 = new StringBuilder(String str);
+
+// 4. 宣言して即座に出力
+System.out.println(new StringBuilder("Hello Java!"));
+
+//文字列の指定した位置に指定した文字列を挿入
+StringBuilder sb = new StringBuilder("Hello Java!");
+//System.out.println(sb.insert(10, "Script"));  // Hello JavaScript!
+String word = "Script";
+System.out.println(sb.insert(10, word)); // Hello JavaScript!
+System.out.println(sb);  // Hello JavaScript!
+
+//指定した区間の文字削除
+StringBuilder sb = new StringBuilder("Hello Java");
+System.out.println(sb.delete(2, 4));  // Heo Java!
+System.out.println(sb);  // Heo Java!
+// length() と合わせて使えば、全部の文字を削除できます
+System.out.println(sb.delete(0, sb.length()));  // (何も出力されない)
+
+//文字列を逆順にする 回文判定に使えそう
+StringBuilder sb = new StringBuilder("Hello Java!");
+System.out.println(sb.reverse());  // !avaJ olleH
+System.out.println(sb);  // !avaJ olleH
+
+//文字列の指定した場所の文字(一文字)を置換(挿入ではなく置換)
+StringBuilder sb = new StringBuilder("Hello Java!");
+sb.setCharAt(6, 'j');//jを小文字にする
+System.out.println(sb);  // Hello java!
+
+/*
+文字列の指定した場所の“文字列”を置換
+replace(start, end, String)で
+startは初めの文字の位置,
+endは置換したい最後の文字の位置 + 1に注意
+また、Javaは4文字で置換させたい文字列pythonは6文字と長さが違っても問題ない
+*/
+StringBuilder sb = new StringBuilder("Hello Java!");
+System.out.println(sb.replace(6, 10, "python"));  // Hello python!
+System.out.println(sb);  // Hello python!
+
+//StringBuilderをString型に変更
+StringBuilder sb = new StringBuilder("Hello Java!");
+System.out.println( sb.toString());  // Hello Java!
+
+//文字列の部分抜き出し
+//Stringのsubstring()と同じ
+StringBuilder sb = new StringBuilder("Hello Java!");
+System.out.println( sb.substring(0,5));  // Hello
+}
+
+//回文判定
+import java.util.*;
+
+public class hoge {
+    public static boolean rotateString(String base) {
+        StringBuilder sb = new StringBuilder(base);
+        String reverse = sb.reverse().toString();
+        if(base.equals(reverse)){
+            return true;
+        }else{
+            return false;
+        }
+}
+    public static void main(String[] args) {
+       Scanner sc = new Scanner(System.in);
+       String text = sc.next();
+
+       if(rotateString(text)){
+        System.out.println("回文です");
+       }else{
+        System.out.println("回文ではないです");
+       }
+
+	}
 }
 
 //n文字区切りで表示
