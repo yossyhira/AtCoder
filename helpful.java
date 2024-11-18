@@ -289,6 +289,11 @@ public class hige {
          //全ての半角削除 replaceAll(string, string);
          //エラー：System.out.println(str.replace(' ', ''));　charは空文字('')対応してない
         System.out.println(str.replaceAll(" ", ""));// HelloJava!
+
+        //指定した回数文字列を生成(AtCoder/AtCoderBeginnerContest380/java/c.java)
+        String text = "1";
+        String one = text.repeat(5);
+        System.out.println(one);//11111
     }
 }
 
