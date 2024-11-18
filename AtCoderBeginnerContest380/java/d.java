@@ -7,16 +7,16 @@ public class d {
         int q = sc.nextInt();
 
         for (int i = 0; i < q; i++) {
-            long num = sc.nextInt(); // 各クエリで取得
+            long num = sc.nextLong(); // num を long 型に変更
 
             int len = text.length();
-            int roop = num / len;
-            int mod = num % len;
-            int moji = roop % 7;
+            long roop = num / len;  // roop を long 型に変更
+            long mod = num % len;  // mod を long 型に変更
+            long moji = roop % 7;  // moji を long 型に変更
 
             char c;
             if (mod != 0) {
-                c = text.charAt(mod - 1);
+                c = text.charAt((int)(mod - 1)); // インデックスは int 型にキャスト
             } else {
                 c = text.charAt(len - 1);
             }
