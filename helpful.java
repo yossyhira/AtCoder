@@ -252,6 +252,43 @@ public class hige {
         //substring(start Idx,end Idx)
         str = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
         System.out.println(str);
+
+        //一文字だけ取り出す
+        System.out.println(str3.charAt(0));
+        //str3 = "apple orange melon";
+        //出力：a
+
+        //後ろに文字を追加
+        String str = "Hello ";
+        System.out.println(str.concat("Java!"));  // Hello Java!
+         //元のやつには追加されてない(Java特有のVMという仮想マシンのせい)
+        System.out.println(str);  // Hello 
+         //一度新しい変数に入れる必要あり
+        String strConcat = str.concat("Java!");
+        System.out.println(strConcat);  // Hello Java!
+
+        //strが等しいか判別
+        String str = "Hello Java!";
+         //大文字小文字の区別なし
+        System.out.println(str.equalsIgnoreCase("HELLO JAVA!"));  // true
+         //大文字小文字の区別あり
+        System.out.println(str.equals("HELLO JAVA!")); // false
+
+        //指定した文字を置換
+        String str = "Hello Java!";
+        //aをoに置換 replace(char, char);
+        System.out.println(str.replace('a', 'o'));  // Hello Jovo!
+
+        //両端の半角空白を全削除
+        String str = " Hello Java! ";
+        System.out.println(str.trim());           // Hello Java!
+        System.out.println(str.trim().length());  // 11
+         //後ろに文字列を追加のときと同様に元の文字列に変化なし
+        System.out.println(str);           //  Hello Java! 
+        System.out.println(str.length());  // 13
+         //全ての半角削除 replaceAll(string, string);
+         //エラー：System.out.println(str.replace(' ', ''));　charは空文字('')対応してない
+        System.out.println(str.replaceAll(" ", ""));// HelloJava!
     }
 }
 
