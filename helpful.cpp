@@ -1,18 +1,28 @@
 //順列全探索
 #include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
 
 int main() {
 
-    vector<int> p(9);//9!の全探索
-    rep(i, 9) p[i] = i;
+    vector<int> p(3);//3!の全探索
+    rep(i, 3) p[i] = i;
 
     int cnt = 0, tot = 0;
     do {
-        
+        rep(i,3) cout << p[i];
+        cout<<'\n';
     } while (next_permutation(p.begin(), p.end()));
     return 0;
 }
+/*出力
+012
+021
+102
+120
+201
+210
+*/
 
 //2分探索(376のC)
 #include <bits/stdc++.h>
