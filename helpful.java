@@ -616,6 +616,17 @@ public class hoge {
 5 1 2 3 4
  */
 
+//配列のコピー配列コピー(AtCoder/AtCoderBeginnerContest383/java/b.java)
+ char[][] n = new char[H][W];
+for (int i = 0; i < H; i++) {
+    String hoge = sc.next();
+    n[i]= hoge.toCharArray();
+}
+char[][] array = new char[H][W]; // コピー先の配列を作成
+for (int j = 0; j < H; j++) {
+    array[j] = n[j].clone(); // 1次元配列をコピー
+}
+
 //list使い方
 import java.util.*;
 
