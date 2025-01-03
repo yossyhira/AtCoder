@@ -61,3 +61,49 @@ int main() {
   else cout << ac << endl;
   return 0;
 }
+
+//文字列操作
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+   string s1 = "Testtest";
+   
+   //一文字取り出し
+   char c = s1[3]; //3文字目取り出し
+   cout << "一文字取り出し : " << c << endl; //t
+
+   //文字列追加
+   s1 += "abc";         // "abc"   （文字列の追加）	
+   s1.append("d");    // "d"  （文字列の追加）
+   cout << "文字列追加 : " << s1 << endl; //Testtestabcd
+
+   //文字列削除
+   s1.erase(11); //dを削除
+   cout << "文字列削除 : " << s1 << endl; //Testtestabc
+   s1.erase(8,3); //abc 削除 8文字目から3文字分削除
+   cout << "文字列削除 : " << s1 << endl; //Testtest
+   
+   //文字列切り抜き(元の文字列(s1)は変わらない)
+   string s1_cut = s1.substr(4); //4文字目以降を抽出
+   cout << "文字列切り抜き : " << s1_cut << endl; //test
+   s1_cut = s1.substr(4, 3); //4文字目から3文字分抜き出し
+   cout << "文字列切り抜き : " << s1_cut << endl; //tes
+
+   //文字列を指定した位置に追加
+   s1.insert(4, "add"); //4文字目から指定した文字(add)を追加
+   cout << "指定位置に文字列追加 : " << s1 << endl; //Testaddtest
+   
+   //文字列検索(無い場合は[-1]が返ってくる)　　＊厳密には18446744073709551615が返るけど-1でOK(詳しく：https://qiita.com/yakigac/items/8797cc256d6dcbd5e36a)
+   int s1_place = s1.find("add");//何文字目から指定した文字列が始まるか
+   cout << "指定した文字列の位置 : " << s1_place << endl; //4
+   
+   //文字列置換
+   string s1_coppy = s1;
+   s1.replace(4, 3, "test"); //4文字目から3文字分を削除して文字列(長さは3で無くてよい)を挿入
+   cout << "指定位置の文字列を置き換え : " << s1 << endl; //Teettesttest
+    //以下とやってること同じ
+   s1_coppy.erase(4,3); //削除
+   s1_coppy.insert(4, "test"); //追加
+   cout << "指定位置の文字列を置き換え : " << s1_coppy << endl; //Teettesttest
+}
