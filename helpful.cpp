@@ -221,7 +221,113 @@ int main() {
     istringstream(num_text) >> num;
     cout << num << endl; //123456789
 
-
-
     return 0;
+}
+
+//vectorの使い方
+//(https://qiita.com/ysuzuki19/items/df872d91c9c89cc31aee)
+//宣言
+//一次元配列
+vector<int> num(3); //サイズ3, 0で初期化
+vector<int> num(3, 100); //サイズ3, 100で初期化
+vector<int> num_copy = num; // 配列コピー
+copy(v1.begin(), v1.end(), v2.begin()); //配列コピー(上と同じ)
+
+//追加
+vector<int> num;//サイズ宣言しない。push_back使う。
+
+for (int i = 0; i < 3; i++) {
+    int hoge;
+    cin >> hoge;
+    num.push_back(hoge);
+}
+
+//二次元配列
+vector<vector<Type>> num(3, vector<Type>(5));//サイズを3*5, 0で初期化
+
+//サイズ変更
+//一次元
+num.resize(10);//サイズを10に変更, 増やした箇所は0で初期化, 既に値が場所はそのまま
+//二次元
+num.resize(n, vector<Type>(n));//n*nにサイズ変更
+
+//num2という配列の末尾にnumを追加
+copy(num.begin(), num.end(), front_inserter(num2));//末尾に追加
+
+//ソート
+sort(num.begin(), num.end());//昇順　12345
+sort(num.begin(), num.end(), greater<int>()); //降順　54321
+
+//要素削除
+num.erase(num.begin()); //先頭削除
+num.erase(num.end() - 1); //末尾削除
+num.pop_back();//末尾削除
+num.erase(num.begin()+i); //i番目の要素削除
+
+// 5を探す
+//イテレータを使う(https://atcoder.jp/contests/apg4b/tasks/APG4b_ai)
+//簡単にいうと、要素の値が何か(例：num[1])を指すもの。そして、どの場所(1番目)にあったかも覚えてる
+auto it = find(num.begin(), num.end(), 5);
+cout << *it << endl;
+int ans = (it != num.end()) ? distance(num.begin(), it) : -1; // 見つからなければ-1を返す
+
+//途中に追加
+// v1の1番目にv2を追加
+vector<int> v1{10, 9, 8};
+vector<int> v2{7, 6, 5};
+v1.insert(v1.begin() + 1, v2.begin(), v2.end()); //10 7 6 5 9 8
+
+
+
+
+//グリッド
+int h = 8, w = 8;// 8x8のグリッド
+vector<vector<char>> n(h, vector<char>(w));
+for (int i = 0; i < h; i++) {
+    string hoge;
+    cin >> hoge; // 入力を1行受け取る
+    for (int j = 0; j < w; j++) {
+        n[i][j] = hoge[j]; // 文字を1つずつ格納
+    }
+}
+
+//pair
+// 得点と名前の組を格納する配列(AtCoder/cpp/384c.cpp)
+//宣言
+vector<pair<int, string>> standings;
+//追加
+standings.push_back({solved_point, name});
+
+// 昇順にソート
+sort(standings.begin(), standings.end(), [](const auto& a, const auto& b) {
+    return a.first < b.first;//第1引数
+    return a.second < b.second;//第2引数
+});
+// 降順にソート
+sort(standings.begin(), standings.end(), [](const auto& a, const auto& b) {
+    return a.first  > b.first;//第1引数
+    return a.second >  b.second;//第2引数
+});
+
+// 昇順に安定ソート(同じ値同士は元の並び順維持したまま)
+stable_sort(standings.begin(), standings.end(), [](const auto& a, const auto& b) {
+    return a.first < b.first;//第一引数
+    return a.second < b.second;//第二引数
+});
+// 降順に安定ソート(同じ値同士は元の並び順維持したまま)
+stable_sort(standings.begin(), standings.end(), [](const auto& a, const auto& b) {
+    return a.first > b.first;//第一引数
+    return a.second > b.second;//第二引数
+});
+
+//出力
+//全て出力
+for (const auto& entry : score) {
+        cout << entry.first<<" "<<entry.second << endl;
+}
+//分かりやすく丁寧に出力(結果は上と同じ)
+for (int i = 0; i < N; i++) {
+    int a, b;
+    tie(a, b) = p.at(i);  
+    cout << a << " " << b << endl;
 }
