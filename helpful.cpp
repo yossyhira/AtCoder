@@ -76,10 +76,13 @@ int main() {
    //文字列追加
    s1 += "abc";         // "abc"   （文字列の追加）	
    s1.append("d");    // "d"  （文字列の追加）
-   cout << "文字列追加 : " << s1 << endl; //Testtestabcd
+   s1.push_back('e'); //末尾に一文字追加(引数はChar)
+   cout << "文字列追加 : " << s1 << endl; //Testtestabcde
 
    //文字列削除
-   s1.erase(11); //dを削除
+   s1.pop_back(); //末尾の1文字(e)削除
+   cout << "文字列削除 : " << s1 << endl; //Testtestabcd
+   s1.erase(11); //11文字目(d)を削除
    cout << "文字列削除 : " << s1 << endl; //Testtestabc
    s1.erase(8,3); //abc 削除 8文字目から3文字分削除
    cout << "文字列削除 : " << s1 << endl; //Testtest
@@ -106,4 +109,119 @@ int main() {
    s1_coppy.erase(4,3); //削除
    s1_coppy.insert(4, "test"); //追加
    cout << "指定位置の文字列を置き換え : " << s1_coppy << endl; //Teettesttest
+   
+   //文字列反転
+   reverse(s1.begin(), s1.end());
+   cout << s1 << endl; //tsettsettseT
+
+   //文字列をソート
+   string s2 = "482tTest";
+   //降順
+   sort(s2.begin(), s2.end());
+   cout << s2 << endl; //248Testt 数字1-9▶英大文字A-Z▶英小文字a-z
+   //昇順
+   sort(s2.begin(), s2.end(), greater<char>());
+   cout << s2 << endl; //ttseT842  英小文字z-a▶英大文字Z-A▶数字9-1
+   /*
+   //これでも昇順できる。事前に降順に並び替える必要ある
+   reverse(s2.begin(), s2.end());
+   */
+}
+
+//文字列比較
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+   string s1 = "test";
+
+    //文字列が等しいか比較
+    if(s1 == "test" ){
+        cout << "test" << endl;
+    }
+    //文字が等しいか比較
+    if(s1[0] == 't' ){
+        cout << "t" << endl;
+    }
+
+    //文字が英小文字かどうか判定
+    if(s1[0] >= 'a' && s1[0] <= 'z'){
+        cout << "small" << endl;
+
+    //文字が英大文字かどうか判定
+    }else if(s1[0] >= 'A' && s1[0] <= 'Z'){
+        cout << "large" << endl;
+
+    //文字が数字かどうか判定
+    }else if(s1[0] >= '0'){
+        cout << "number" << endl;
+    }
+
+   char c;
+   cin >> c;
+/*
+   //文字が英小文字かどうか判定
+    if(c >= 'a' && c <= 'z'){
+    cout << "small" << endl;
+
+    //文字が英大文字かどうか判定
+    }else if(c >= 'A' && c <= 'Z'){
+    cout << "large" << endl;
+
+    //文字が数字かどうか判定
+    }else if(c >= '0'){
+    cout << "number" << endl;
+    }
+*/
+    //アルファベットか判定
+    if(isalpha(c)){
+        cout << "alpha" << endl;
+
+        //文字が英小文字かどうか判定
+        if(islower(c)){
+            cout << "small" << endl;
+            
+            //大文字にする
+            c += 'A' - 'a';
+            if(isupper(c)){
+                cout <<"large : " << c << endl;
+            }
+
+        //文字が英大文字かどうか判定
+        }else if(isupper(c)){
+            cout << "large" << endl;
+
+            //小文字にする
+            c -= 'A' - 'a';
+            if(islower(c)){
+                cout << "small : " << c << endl;
+            }
+        }
+    //数字か判定
+    }else if (isdigit(c)){
+        cout << "number" << endl;
+        
+        //文字を数字にする
+        int num = c - '0';
+        cout << "int : " << num << endl;
+        
+        /*
+        二桁の数字化
+        char c2;
+        cin >> c2;
+        int num = (c - '0') * 10;
+        int num2 = c2 - '0';
+        cout << "int : " << num + num2 << endl;
+        */
+    }
+
+    //文字列を数字にする
+    string num_text = "123456789";
+    int num = 0;    
+    istringstream(num_text) >> num;
+    cout << num << endl; //123456789
+
+
+
+    return 0;
 }
