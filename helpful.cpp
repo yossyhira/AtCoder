@@ -142,7 +142,7 @@ int main() {
    cout << "文字列削除 : " << s1 << endl; //Testtestabcd
    s1.erase(11); //11文字目(d)を削除
    cout << "文字列削除 : " << s1 << endl; //Testtestabc
-   s1.erase(8,3); //abc 削除 8文字目から3文字分削除
+   s1.erase(8,3); //abc 削除 0始まりで、8文字目から3文字分削除
    cout << "文字列削除 : " << s1 << endl; //Testtest
    
    //文字列切り抜き(元の文字列(s1)は変わらない)
