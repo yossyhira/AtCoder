@@ -134,7 +134,7 @@ int main() {
    //文字列追加
    s1 += "abc";         // "abc"   （文字列の追加）	
    s1.append("d");    // "d"  （文字列の追加）
-   s1.push_back('e'); //末尾に一文字追加(引数はChar)
+   s1.push_back('e'); //末尾に一"文字"追加(引数はChar)文字列じゃ無いよ！！！！！
    cout << "文字列追加 : " << s1 << endl; //Testtestabcde
 
    //文字列削除
