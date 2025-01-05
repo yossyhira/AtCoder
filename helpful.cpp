@@ -303,13 +303,13 @@ for (int i = 0; i < 3; i++) {
 }
 
 //二次元配列
-vector<vector<Type>> num(3, vector<Type>(5));//サイズを3*5, 0で初期化
+vector<vector<int>> num(3, vector<int>(5));//サイズを3*5, 0で初期化
 
 //サイズ変更
 //一次元
 num.resize(10);//サイズを10に変更, 増やした箇所は0で初期化, 既に値が場所はそのまま
 //二次元
-num.resize(n, vector<Type>(n));//n*nにサイズ変更
+num.resize(n, vector<int>(n));//n*nにサイズ変更
 
 //num2という配列の末尾にnumを追加
 copy(num.begin(), num.end(), front_inserter(num2));//末尾に追加
