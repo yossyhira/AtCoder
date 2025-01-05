@@ -580,3 +580,173 @@ for (int i = 0; i < n; i++) {
 */
 //宣言
 queue<int> que;
+
+//グリッド問題(スタートからゴールまでの最短距離)
+//例（AtCoder/AtCoderBeginnerContest387/cpp/d.cpp）<- 縦横交互の時は2で割って奇数偶数で判定するといい
+//問題(https://qiita.com/drken/items/6a95b57d2e374a3d3292)
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <string>
+using namespace std;
+
+/* 4 方向への隣接頂点への移動を表すベクトル */
+//(1, 0) (0, 1) (-1, 0), (0, -1)の4通り(斜めは無し)
+const int dx[4] = { 1, 0, -1, 0 };
+const int dy[4] = { 0, 1, 0, -1 };
+
+
+int main() {
+
+    /* 入力受け取り */
+    int height, width;
+    cin >> height >> width;
+
+    //stringで1次元の配列だけど2次元のようにも扱える
+    //string a[0] = "....#" -> a[0][0] = '.' になる
+    vector<string> field(height);
+    for (int h = 0; h < height; ++h) cin >> field[h];
+
+    //一度マップを全探索してスタートとゴールを探す
+    //高さ(縦)x、幅(横)yで取る。
+    int sx, sy, gx, gy;
+    for (int h = 0; h < height; ++h) {
+        for (int w = 0; w < width; ++w) {
+            if (field[h][w] == 'S') {
+                sx = h;
+                sy = w;
+            }
+            if (field[h][w] == 'G') {
+                gx = h;
+                gy = w;
+            }
+        }
+    }
+
+    /* 幅優先探索の初期設定 */
+    //全て-1で初期化
+    vector<vector<int>> dist(height, vector<int>(width, -1));
+
+    //スタートの座標を0ステップ目に指定
+    dist[sx][sy] = 0;
+
+    //キューを宣言。キューに 既に発見済み(探索はまだ)でステップ数が分かって、そのマスからいける場所を探したいやつを入れる。
+    //pairで座標情報を持てるようにする
+    queue<pair<int, int>> que;
+
+    //スタートの座標をキューにいれる。
+    que.push(make_pair(sx, sy));
+
+    /* 幅優先探索 */
+    //キューが空(いけるマスが無くなる)になるまで繰り返す
+    while (!que.empty()) {
+
+        //これから探索する座標(この座標からいける座標を探索)
+        pair<int, int> current_pos = que.front();
+
+        //x座標を取り出す
+        int x = current_pos.first;
+
+        //y座標を取り出す
+        int y = current_pos.second;
+
+        //先頭を削除
+        que.pop();
+
+        //移動方法記述
+        //移動できるか試す
+        //冒頭で宣言した4通りの移動方法を試す
+        for (int direction = 0; direction < 4; ++direction) {
+            //xの移動
+            int next_x = x + dx[direction];
+            //yの移動
+            int next_y = y + dy[direction];
+
+            //高さ(縦)x、幅(横)yで取ったので、xが高さ・yが幅の範囲内か確認
+            if (next_x < 0 || next_x >= height || next_y < 0 || next_y >= width) continue;
+            //壁か確認
+            if (field[next_x][next_y] == '#') continue;
+
+            //探索済みか確認(-1なら探索してない)
+            if (dist[next_x][next_y] == -1) {
+                //発見済みにする(ステップ数を登録)
+                dist[next_x][next_y] = dist[x][y] + 1; //発見した箇所は、絶対に今の座標の隣なので＋１する
+
+                //発見したので、あとでいけるマスを探索するようにキューに登録
+                que.push(make_pair(next_x, next_y));
+            }
+        }
+    }
+
+    /* 最短距離を出力 */
+    //ゴールの座標の距離を出力
+    cout << dist[gx][gy] << endl;
+
+    return 0;
+}
+
+//グラフの問題(各頂点までの距離)
+//問題(https://qiita.com/drken/items/996d80bcae64649a6580)
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+//可変長の配列
+using Graph = vector<vector<int>>;
+//(https://qiita.com/drken/items/4a7869c5e304883f539b#2-%E8%A8%88%E7%AE%97%E6%A9%9F%E4%B8%8A%E3%81%A7%E3%81%AE%E3%82%B0%E3%83%A9%E3%83%95%E3%81%AE%E8%A1%A8%E3%81%97%E6%96%B9)
+
+int main() {
+    // 頂点数と辺数
+    int N, M; cin >> N >> M;
+
+    // グラフ入力受取 (ここでは無向グラフを想定)
+    Graph G(N);
+    for (int i = 0; i < M; ++i) {
+        int a, b;
+        cin >> a >> b;
+        G[a].push_back(b);
+        G[b].push_back(a);
+    }
+
+    // BFS のためのデータ構造
+    vector<int> dist(N, -1); // 全頂点を「未訪問」に(-1)初期化
+    queue<int> que; 
+
+    // 初期条件 (頂点 0 を初期ノードとする)
+    //dist[v] はスタート頂点から頂点 v まで最短何ステップで到達できるかを表す
+    int start = 0;
+    dist[start] = 0; //スタートは0ステップ
+    //その時点での橙色頂点 (発見済みだが未訪問な頂点) を格納するキュー
+    que.push(start); // スタートを橙色(自分からいける場所を見たい)頂点にする
+
+    // BFS 開始 (キューが空になるまで探索を行う)
+    while (!que.empty()) {
+        int v = que.front(); // キューから先頭頂点を取り出す
+        que.pop(); //先頭削除
+
+        // 自分（v） から辿れる頂点をすべて調べる
+        for (int nv : G[v]) {
+            if (dist[nv] != -1) continue; // すでに発見済み(ステップ数が分かってる)の頂点は探索しない
+
+            // 新たな白色頂点 nv について距離情報を更新してキューに追加する
+            //distは各頂点の最短ステップ数
+            dist[nv] = dist[v] + 1; //自分がいる所の次なので自分の場所から1ステップ増やす
+            que.push(nv);//発見した(そこまでのステップ数が分かった)ので
+                         //自分からいける場所を後で調べる
+        }
+        /*
+        for (int i = 0; i < G[v].size(); i++) {
+            int nv = G[v][i];
+            if (dist[nv] != -1) continue; // すでに発見済みの頂点は探索しない
+
+            // 新たな白色頂点 nv について距離情報を更新してキューに追加する
+            dist[nv] = dist[v] + 1;
+            que.push(nv);
+        }
+        */
+    }
+
+    // 結果出力 (各頂点の頂点 0 からの距離を見る)
+    for (int v = 0; v < N; ++v) cout << v << ": " << dist[v] << endl;
+}
+
