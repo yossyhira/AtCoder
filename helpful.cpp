@@ -551,3 +551,15 @@ vector<pair<int, int>> vec(st.begin(), st.end());
 set<int> st(vec.begin(), vec.end());
 //vecをsetにする
 set<pair<int, int>> st(vec.begin(), vec.end());
+
+/////////////////////////////////////////////////////////////////////////////
+//数字を各桁ごとに配列に入れる
+int a;
+cin >> a;
+string s = to_string(a);
+int n = s.size();
+vector<int> num;
+for (int i = 0; i < n; i++) {
+    int digit = s[i] - '0';
+    num.push_back(digit); //数字を配列
+}
