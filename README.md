@@ -59,6 +59,8 @@ AtCoderで作成したプログラム集
 
 * [AtCoderBeginnerContest387](https://atcoder.jp/contests/abc387)
 
+* [AtCoderBeginnerContest388](https://atcoder.jp/contests/abc388)
+
 * [AtCoderRegularContest003](https://atcoder.jp/contests/arc003)
 
 
