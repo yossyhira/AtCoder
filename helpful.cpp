@@ -355,6 +355,9 @@ for (int i = 0; i < h; i++) {
 vector<pair<int, string>> standings;
 //追加
 standings.push_back({solved_point, name});
+//特定の場所に追加
+s[Idx].second = 10;
+s[Idx].first = 10;
 
 // 昇順にソート
 sort(standings.begin(), standings.end(), [](const auto& a, const auto& b) {
