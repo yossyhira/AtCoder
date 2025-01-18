@@ -4,8 +4,10 @@ using namespace std;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    int a, b, c;
     string text;
-    cin >> a >> b >> c >> text;
-    cout << << endl;
+    cin >>text;
+    
+    int a =  text.at(0) - '0';
+    int c =  text.at(2) - '0';
+    cout << a * c << endl;
 }
