@@ -3,7 +3,8 @@ AtCoderで作成したプログラム集
 
 [my account](https://atcoder.jp/users/yossyhira)
 
-2024/8/10 灰 
+2024/8/10 入灰 
+2025/1/25 入茶 
 
 問題は以下を参照
 
