@@ -62,21 +62,29 @@ int main() {
   }*/
 
   const int INF = 1001001001;
+  //各段が消えるタイミング(消えなければ無限時間なるようにする)
   vector<int> d(n,INF);
   {
+    //各段目に何番のブロックがあるか記録
     vector<vector<int>> blocks(n);
+    //各段のブロック番号を追加　例blocks[0][1,4,5] -> 0段目に1,4,5がある
     rep(i,n) blocks[r[i]].push_back(i);
     rep(i,n) {
+      //その段が消えなければコンティニュー
       if (blocks[i].size() != w) continue;
       int mx = 0;
+      // その段の全てのブロックの最大値を取得
+      //揃う秒数
       for (int j : blocks[i]) mx = max(mx, y[j]-1);
+     
+      //消えるのに追加で1秒
       d[i] = mx+1;
     }
   }
-  // rep(i,n) cout << r[i] << ' '; cout << endl;
-  // rep(i,n) cout << d[i] << ' '; cout << endl;
+  
+  
 
-  /*int q;
+  int q;
   cin >> q;
   rep(qi,q) {
     int t, a;
@@ -84,6 +92,6 @@ int main() {
     a--;
     if (d[r[a]] > t) cout << "Yes\n";
     else cout << "No\n";
-  }*/
+  }
   return 0;
 }
