@@ -283,6 +283,16 @@ int main() {
     return 0;
 }
 
+//部分文字列の回文判定
+//(AtCoder/AtCoderBeginnerContest363/cpp/c.cpp)
+//(https://atcoder.jp/contests/abc363/tasks/abc363_c)
+for (int i = 0; i < (N - K + 1); i++) {
+    bool flag = true;
+    for (int j = 0; j < K; j++) {
+        if(NewText[i + j] != NewText[i + K - 1 - j]) flag = false;
+    }
+    if(flag)ok = false;
+}
 /////////////////////////////////////////////////////////////////////////////
 //vectorの使い方
 //(https://qiita.com/ysuzuki19/items/df872d91c9c89cc31aee)
