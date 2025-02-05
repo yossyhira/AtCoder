@@ -369,7 +369,7 @@ standings.push_back({solved_point, name});
 s[Idx].second = 10;
 s[Idx].first = 10;
 
-// 昇順にソート
+// 昇順にソートO(nlogn)
 sort(standings.begin(), standings.end(), [](const auto& a, const auto& b) {
     return a.first < b.first;//第1引数
     return a.second < b.second;//第2引数
@@ -380,7 +380,7 @@ sort(standings.begin(), standings.end(), [](const auto& a, const auto& b) {
     return a.second >  b.second;//第2引数
 });
 
-// 昇順に安定ソート(同じ値同士は元の並び順維持したまま)
+// 昇順に安定ソート(同じ値同士は元の並び順維持したまま)o(n*(logn)^2)
 stable_sort(standings.begin(), standings.end(), [](const auto& a, const auto& b) {
     return a.first < b.first;//第一引数
     return a.second < b.second;//第二引数
@@ -402,6 +402,61 @@ for (int i = 0; i < N; i++) {
     tie(a, b) = p.at(i);  
     cout << a << " " << b << endl;
 }
+////////////////////////////////////////////////////////////////////////////////////////////
+//tuple使い方(AtCoder/cpp/354c.cpp)(https://atcoder.jp/contests/abc354/tasks/abc354_c)
+//宣言
+vector<tuple<int, int, int>> card;
+//入力
+for (int i = 0; i < n; i++) {
+    int a, c;
+    cin >> a >> c;
+    card.push_back({a, c, i+1});
+}
+//要素数が分かっている時
+vector<tuple<int, int, int>> card(n);
+for (int i = 0; i < n; i++) {
+    int a, c;
+    cin >> a >> c;
+    card[i] = {a, c, i + 1}; // 直接代入
+}
+
+//出力
+for (int i = 0; i < card.size(); i++) {
+    int x, y, z;
+    tie(x, y, z) = card[i];
+    cout << x << " " << y << " " << z << endl;
+}
+
+//特定の場所の値を変更
+get<1>(card[Idx]) = 10;  // pairのsecond 相当の要素を変更
+get<0>(card[Idx]) = 10;  // pairのfirst 相当の要素を変更
+
+//ソート(O(nlogn))
+//昇順
+sort(card.begin(), card.end(), [](const auto &a, const auto &b) {
+    return get<0>(a) < get<0>(b);//第一
+    return get<1>(a) < get<0>(b);//第二
+    return get<2>(a) < get<0>(b);//第三
+});
+//降順
+sort(card.begin(), card.end(), [](const auto &a, const auto &b) {
+    return get<0>(a) > get<0>(b);//第一
+    return get<1>(a) > get<0>(b);//第二
+    return get<2>(a) > get<0>(b);//第三
+});
+//安定ソート(o(n*(logn)^2))
+//昇順
+stable_sort(card.begin(), card.end(), [](const auto &a, const auto &b) {
+    return get<0>(a) < get<0>(b);//第一
+    return get<1>(a) < get<0>(b);//第二
+    return get<2>(a) < get<0>(b);//第三
+});
+//降順
+stable_sort(card.begin(), card.end(), [](const auto &a, const auto &b) {
+    return get<0>(a) > get<0>(b);//第一
+    return get<1>(a) > get<0>(b);//第二
+    return get<2>(a) > get<0>(b);//第三
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 //setの使い方(重複しない＆昇順に自動で並び替え)
