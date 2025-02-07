@@ -9,14 +9,14 @@ using Graph = vector<vector<int>>;
 vector<bool> seen;
 vector<ll> score;
 
-void dfs(const Graph &G, int v, int s) {
+void dfs(const Graph &G, int child, int parent) {
     //vを探索済みにする
-    seen[v] = true;
-    score[v] += ll(s); 
+    seen[child] = true;
+    score[child] += score[parent]; 
     //vからいける場所を探索
-    for (auto next_v : G[v]) { 
-        if (seen[next_v]) continue;//探索済みならコンティニュー
-        dfs(G, next_v, s);
+    for (auto next_child : G[child]) { 
+        if (seen[next_child]) continue;//探索済みならコンティニュー
+        dfs(G, next_child, child);
     }
 }
 
@@ -25,24 +25,30 @@ int main() {
     int N, Q; 
     cin >> N >> Q;
     // グラフ入力受取 (ここでは無向グラフを想定)
-    Graph G(N);
+    Graph G(N+1);
+    G[0].push_back(1);
+
+    seen.assign(N+1, false); // 全頂点を「未訪問」に初期化
+    seen[0] = true;
+
     for (int i = 0; i < N - 1; ++i) {
         int a, b;
         cin >> a >> b;
-        a --;
-        b --;
         G[a].push_back(b);
+        G[b].push_back(a);
     }
-    score.assign(N, 0);
+    score.assign(N+1, 0);
     for (int i = 0; i < Q; i++) {
         int root, s;
         cin >> root >> s;
-        root --;
-        seen.assign(N, false); // 全頂点を「未訪問」に初期化
-        dfs(G, root, s);
+        score[root] += ll(s);
     }
 
-    for(ll s : score) cout << s << " ";
+    dfs(G, 1, 0);
+
+    for (int i = 1; i < score.size(); i++) {
+        cout << score[i] << " ";
+    }
     cout << endl;
     return 0;
 }
