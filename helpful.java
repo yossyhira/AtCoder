@@ -872,6 +872,13 @@ System.out.println(text.charAt(0));
 //他の類似問題（AtCoder/AtCoderBeginnerContest289/java/c.java）
 //2^Idx N = Idx
 for (int i = 0; i < (1 << Idx); i++) {
+    for (int j = 0; j < Idx; j++) {
+        if((i & (1 << j)) != 0){
+        }
+    }
+}
+
+for (int i = 0; i < (1 << Idx); i++) {
     //long A = 0;
     //long B = 0; 
     for (int j = 0; j < Idx; j++) {

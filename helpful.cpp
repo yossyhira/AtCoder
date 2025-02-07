@@ -168,9 +168,10 @@ int main() {
    s1_coppy.insert(4, "test"); //追加
    cout << "指定位置の文字列を置き換え : " << s1_coppy << endl; //Teettesttest
    
-   //文字列反転
+   //文字列反転 O(N)
    reverse(s1.begin(), s1.end());
    cout << s1 << endl; //tsettsettseT
+   reverse(text.begin(), text.begin()+4);//tseTtesttest 0~3文字目(4文字分)まで逆にする
 
    //文字列をソート
    string s2 = "482tTest";
@@ -184,6 +185,10 @@ int main() {
    //これでも昇順できる。事前に降順に並び替える必要ある
    reverse(s2.begin(), s2.end());
    */
+
+   //特定の文字をカウント
+   int c; //変数名をcountにすると下の関数名と同じ名前になるのでエラーなる
+    c = count(text.begin(), text.end(), 'g');
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -283,7 +288,7 @@ int main() {
     return 0;
 }
 
-//部分文字列の回文判定
+//部分文字列の回文判定(Kは部分文字列に含まれる回文の長さ)
 //(AtCoder/AtCoderBeginnerContest363/cpp/c.cpp)
 //(https://atcoder.jp/contests/abc363/tasks/abc363_c)
 for (int i = 0; i < (N - K + 1); i++) {
@@ -325,8 +330,15 @@ num.resize(n, vector<int>(n));//n*nにサイズ変更
 copy(num.begin(), num.end(), front_inserter(num2));//末尾に追加
 
 //ソート
+//num = 4 1 3 2 5
 sort(num.begin(), num.end());//昇順　12345
+sort(num.begin() + 1, num.end());//1文字目から最後まで昇順　4 1 2 3 5 ＊ 配列と同じで頭は0文字目とする
 sort(num.begin(), num.end(), greater<int>()); //降順　54321
+
+//逆順
+//num = 3 5 8 
+reverse(num.begin() + 1, num.end());//1文字目から最後まで逆　3 8 5　＊ 配列と同じで頭は0文字目とする
+reverse(num.begin(), num.end());//全て逆 8 5 3
 
 //要素削除
 num.erase(num.begin()); //先頭削除
@@ -340,6 +352,11 @@ num.erase(num.begin()+i); //i番目の要素削除
 auto it = find(num.begin(), num.end(), 5);
 cout << *it << endl;
 int ans = (it != num.end()) ? distance(num.begin(), it) : -1; // 見つからなければ-1を返す
+
+//特定の数字をカウント
+//O(N)
+int c; //変数名をcountにすると下の関数名と同じ名前になるのでエラーなる
+count(num.begin(), num.end(), 3);//numに3がいくつあるかカウント
 
 //途中に追加
 // v1の1番目にv2を追加
@@ -529,6 +546,11 @@ cout << "2番目の要素は" << *ite << std::endl;
 int ans = *ite;
 cout << "2番目の要素は" << ans << std::endl;
 
+//二分探索
+//集合 set の中で x 以上である最小の要素を指すイテレーターを返す。
+auto itr2 = set.lower_bound(20);
+if (itr2 == set.end()) cout << "End" << endl;
+else cout << (*itr2) << endl;
 
 //指定した値がどの要素にあるか取得(要素は0始まり)
 // 5を探す
@@ -619,6 +641,27 @@ vector<pair<int, int>> vec(st.begin(), st.end());
 set<int> st(vec.begin(), vec.end());
 //vecをsetにする
 set<pair<int, int>> st(vec.begin(), vec.end());
+
+//map使い方//////////////////////////////////////////////////////////////////
+//宣言
+// int 型の番地に int 型の変数を記録する場合（2^31 要素の int 型配列と同じような感じ）
+map<int, int> M1;
+
+// int 型の番地に string 型の変数を記録する場合（2^31 要素の string 型配列と同じような感じ）
+map<int, string> M2;
+
+// string 型の番地に double 型の変数を記録する場合
+map<string, double> M3;
+
+//入力
+map<string, int> Map;
+Map["qiita"] = 777;
+Map["algorithm"] = 1111;
+Map["competitive_programming"] = 1073741824;
+
+//出力
+cout << Map["algorithm"] << endl; // 1111 と出力される
+cout << Map["tourist"] << endl; // まだ何も書き込まれていないので、0 と出力される
 
 /////////////////////////////////////////////////////////////////////////////
 //数字を各桁ごとに配列に入れる
@@ -991,4 +1034,108 @@ int main() {
   }
   return 0;
 }
+
+//最大公約数と最小公倍数/////////////////////////////////////////////////////
+//(https://qiita.com/e869120/items/518297c6816adb67f9a5)
+//gcd -> 最大公約数と最小公倍数
+//O(log a)
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    // 例 1: 2 つの整数 a, b を入力し、a と b の最大公約数と最小公倍数を出力する
+    int a, b;
+    cin >> a >> b;
+    cout << __gcd(a, b) << endl;//最大公約数
+    cout << a / __gcd(a, b) * b << endl;//最小公倍数
+    return 0;
+}
+
+//bitビット///////////////////////////////////////////////////////////
+//__builtin_popcount(x);int型 の整数 x を二進数で表したとき、1 のビットの個数を返す関数
+//__builtin_popcountll(x); long long型 の整数 x を二進数で表したとき、1 のビットの個数を返す関数
+//O(log x)
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int x;
+    cin >> x;
+    int c = 0;
+    c = __builtin_popcount(x);//int
+    //ll x;
+    //cin >> x;
+    //ll c = 0;
+    //c = __builtin_popcountll(x);//long long
+    cout << c << endl;
+    return 0;
+}
+
+//bitset////////////////////////////////////////
+#include <iostream>
+#include <bitset>
+#include <string>
+using namespace std;
+
+// 汎用的なbitset出力関数
+void out(const bitset<2000>& bs) {
+    bool flag = false;
+    for (int i = 1999; i >= 0; i--) {
+        if (bs[i] == 1) flag = true; // 頭の余計な0をスキップ
+        if (flag) cout << bs[i];
+    }
+    if (!flag) cout << "0"; // 全部0なら "0" を出力
+    cout << endl;
+}
+
+int main() {
+    int A, B;
+    cin >> A >> B;
+    
+    bitset<2000> A1(A);
+    bitset<2000> B1(B);
+    bitset<2000> OR  = (A1 | B1);  // OR 計算
+    bitset<2000> AND = (A1 & B1);  // AND 計算
+    bitset<2000> XOR = (A1 ^ B1);  // XOR 計算
+    bitset<2000> NOT = (~A1);      // NOT 計算
+    bitset<2000> LSHIFT = (A1 << 1); // 左シフト
+    bitset<2000> RSHIFT = (A1 >> 1); // 右シフト
+
+    cout << "OR   : "; out(OR);
+    cout << "AND  : "; out(AND);
+    cout << "XOR  : "; out(XOR);
+    cout << "NOT  : "; out(NOT);
+    cout << "LSHFT: "; out(LSHIFT);
+    cout << "RSHFT: "; out(RSHIFT);
+
+    return 0;
+}
+
+//配列にする
+#include <iostream>
+#include <vector>
+#include <bitset>
+using namespace std;
+
+int main() {
+    int N = 3; // 行数
+    vector<bitset<2000>> bits(N); // 2000ビットのbitsetをN個持つベクター
+
+    // 適当に値を代入
+    bits[0] = bitset<2000>(5);  // 000...0000101 (5 = 101)
+    bits[1] = bitset<2000>(10); // 000...0001010 (10 = 1010)
+    bits[2] = bitset<2000>(15); // 000...0001111 (15 = 1111)
+
+    // 出力
+    for (int i = 0; i < N; i++) {
+        cout << "bits[" << i << "] = " << bits[i] << endl;
+    }
+
+    return 0;
+}
+
 
