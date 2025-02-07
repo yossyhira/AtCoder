@@ -10,13 +10,14 @@ vector<bool> seen;
 vector<ll> score;
 
 void dfs(const Graph &G, int child, int parent) {
-    //vを探索済みにする
+    //子を探索済みにする
     seen[child] = true;
+    //親までのスコアを自分のスコアと合算
     score[child] += score[parent]; 
-    //vからいける場所を探索
+    //子からいける場所を探索
     for (auto next_child : G[child]) { 
         if (seen[next_child]) continue;//探索済みならコンティニュー
-        dfs(G, next_child, child);
+        dfs(G, next_child, child);//子供を親にして新たな子を探す
     }
 }
 
@@ -26,6 +27,7 @@ int main() {
     cin >> N >> Q;
     // グラフ入力受取 (ここでは無向グラフを想定)
     Graph G(N+1);
+    //あえて0を根にする
     G[0].push_back(1);
 
     seen.assign(N+1, false); // 全頂点を「未訪問」に初期化
@@ -41,11 +43,12 @@ int main() {
     for (int i = 0; i < Q; i++) {
         int root, s;
         cin >> root >> s;
+        //自分だけのスコアを記録
         score[root] += ll(s);
     }
-
+    //0が1の親の役割をしてくれる
     dfs(G, 1, 0);
-
+    //1始まりなので注意
     for (int i = 1; i < score.size(); i++) {
         cout << score[i] << " ";
     }

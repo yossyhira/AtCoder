@@ -995,6 +995,130 @@ int main() {
     // 結果出力 (各頂点の頂点 0 からの距離を見る)
     for (int v = 0; v < N; ++v) cout << v << ": " << dist[v] << endl;
 }
+///dfs 深さ優先探索///////////////////////////////////////////////////////////////////////////////
+//グリッド系
+//(https://qiita.com/drken/items/4a7869c5e304883f539b)
+//AtCoder/dfs/grid.cpp
+//ゴールまで行けるかいけないか判定。
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+using namespace std;
+
+// 四方向への移動ベクトル
+const int dx[4] = {1, 0, -1, 0};
+const int dy[4] = {0, 1, 0, -1};
+
+// 入力
+int H, W;
+vector<string> field;
+
+// 探索
+bool seen[510][510]; // seen[h][w] := マス (h, w) が検知済みかどうか
+void dfs(int h, int w) {
+    seen[h][w] = true;
+
+    // 四方向を探索
+    for (int dir = 0; dir < 4; ++dir) {
+        int nh = h + dx[dir];
+        int nw = w + dy[dir];
+
+        // 場外アウトしたり、移動先が壁の場合はスルー
+        if (nh < 0 || nh >= H || nw < 0 || nw >= W) continue;
+        if (field[nh][nw] == '#') continue;
+
+        // 移動先が探索済みの場合
+        if (seen[nh][nw]) continue;
+
+        // 再帰的に探索
+        dfs(nh, nw);
+    }
+}
+
+int main() {
+    // 入力受け取り
+    cin >> H >> W;
+    field.resize(H);
+    for (int h = 0; h < H; ++h) cin >> field[h];
+
+    // s と g のマスを特定する
+    int sh, sw, gh, gw;
+    for (int h = 0; h < H; ++h) {
+        for (int w = 0; w < W; ++w) {
+            if (field[h][w] == 's') sh = h, sw = w;
+            if (field[h][w] == 'g') gh = h, gw = w;
+        }
+    }
+
+    // 探索開始
+    memset(seen, 0, sizeof(seen)); // seen 配列全体を false に初期化
+    dfs(sh, sw);
+
+    // 結果
+    if (seen[gh][gw]) cout << "Yes" << endl;
+    else cout << "No" << endl;
+}
+
+//木構造/////////////////////////
+//AtCoder/dfs/1.cpp
+//(https://qiita.com/drken/items/4a7869c5e304883f539b)
+//O(N+M)
+//行きがけ順、帰りがけ順
+#include <iostream>
+#include <vector>
+using namespace std;
+using Graph = vector<vector<int>>;
+
+vector<bool> seen;
+vector<int> first_order; // 行きがけ順
+vector<int> last_order; // 帰りがけ順
+
+void dfs(const Graph &G, int v, int& first_ptr, int& last_ptr) {
+    // 行きがけ順をインクリメントしながらメモ
+    //first_ptr++というのは、値を追加した後に1足すという意味。
+    //++first_ptrにすると追加する前に1足す
+    first_order[v] = first_ptr++;
+    
+    //vを探索済みにする
+    seen[v] = true; 
+
+    //vからいける場所を探索
+    for (auto next_v : G[v]) { 
+        if (seen[next_v]) continue;//探索済みならコンティニュー
+        dfs(G, next_v, first_ptr, last_ptr);
+    }
+
+    // 帰りがけ順をインクリメントしながらメモ
+    //全部行き終わったら値を追加
+    last_order[v] = last_ptr++;
+}
+
+int main() {
+    // 頂点数と辺数
+    int N, M; cin >> N >> M;
+
+    // グラフ入力受取 (ここでは無向グラフを想定)
+    Graph G(N);
+    for (int i = 0; i < M; ++i) {
+        int a, b;
+        cin >> a >> b;
+        G[a].push_back(b);
+        G[b].push_back(a);
+    }
+
+    // 頂点 0 をスタートとした探索
+    seen.assign(N, false); // 全頂点を「未訪問」に初期化
+    first_order.resize(N);
+    last_order.resize(N);
+    int first_ptr = 0, last_ptr = 0;
+    dfs(G, 0, first_ptr, last_ptr);
+
+    // 各頂点 v の行きがけ順、帰りがけ順を出力
+    for (int v = 0; v < N; ++v)
+        cout << v << ": " << first_order[v] << ", " << last_order[v] << endl;
+}
+
 
 //二分探索、upper_bound(より大きい)、lower_bound(以上)////////////////////////////
 //問題(AtCoder/cpp/371sunuke.cpp)
