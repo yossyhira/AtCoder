@@ -1263,3 +1263,38 @@ int main() {
 }
 
 
+//約数列挙////////////////
+//ソートなしO(root(N))
+//ソートするとO(root(N)logN)
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> getDivisors(int N) {
+    vector<int> divisors;
+    for (int i = 1; i * i <= N; ++i) {
+        if (N % i == 0) {
+            divisors.push_back(i);
+            if (i != N / i) {
+                divisors.push_back(N / i);
+            }
+        }
+    }
+    //sort(divisors.begin(), divisors.end());
+    return divisors;
+}
+
+int main() {
+    int N;
+    cin >> N;
+    
+    vector<int> divisors = getDivisors(N);
+    for (int d : divisors) {
+        cout << d << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
