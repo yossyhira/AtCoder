@@ -5,9 +5,8 @@ using ll = long long;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    int a;
+    int a, b, c;
     string text;
-    cin >> a;
-    text = a + '0';
-    cout << text << endl;
+    cin >> a >> b >> c >> text;
+    cout << << endl;
 }
