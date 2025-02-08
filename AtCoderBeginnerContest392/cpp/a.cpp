@@ -8,5 +8,5 @@ int main() {
     int a, b, c;
     string text;
     cin >> a >> b >> c >> text;
-    cout << << endl;
+    cout << a<< endl;
 }

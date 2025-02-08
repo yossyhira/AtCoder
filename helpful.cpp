@@ -284,6 +284,11 @@ int main() {
     int num = 0;    
     istringstream(num_text) >> num;
     cout << num << endl; //123456789
+    
+    //数字を文字列に
+    string text = to_string(num);
+    cout << text << endl; //123456789
+
 
     return 0;
 }
