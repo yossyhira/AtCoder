@@ -1005,11 +1005,9 @@ int main() {
 //(https://qiita.com/drken/items/4a7869c5e304883f539b)
 //AtCoder/dfs/grid.cpp
 //ゴールまで行けるかいけないか判定。
-#include <iostream>
-#include <vector>
-#include <string>
-#include <cstring>
+#include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 
 // 四方向への移動ベクトル
 const int dx[4] = {1, 0, -1, 0};
@@ -1039,6 +1037,10 @@ void dfs(int h, int w) {
         // 再帰的に探索
         dfs(nh, nw);
     }
+    //いろいろな動きのパターンを調べたいとき(同じ動線でも動くマス順番が変わると答えも変わる場合など)
+    //今回はゴールに一度でもいければ良いのでいらない
+    //これは(AtCoder/dfs/378d.cpp)(https://atcoder.jp/contests/abc378/tasks/abc378_d)
+    //seen[h][w] = false;
 }
 
 int main() {
@@ -1070,9 +1072,9 @@ int main() {
 //(https://qiita.com/drken/items/4a7869c5e304883f539b)
 //O(N+M)
 //行きがけ順、帰りがけ順
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 using Graph = vector<vector<int>>;
 
 vector<bool> seen;
