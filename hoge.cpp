@@ -6,8 +6,7 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     int a;
-    string text;
     cin >> a;
-    text = a + '0';
-    cout << text << endl;
+    cout << 4*a*a << endl;
+    cout << 4*ll(a)*ll(a) << endl;
 }
