@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-
+    //並び替えたい配列を作成
     vector<int> p(3);//3!の全探索
     rep(i, 3) p[i] = i;
 
@@ -1304,4 +1304,171 @@ int main() {
     cout << endl;
 
     return 0;
+}
+
+//累積和////////////////////////////////////////////////////////////
+//一次元
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
+    vector<int> num(n+1, 0);
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        num[i+1] = num[i] + x;
+    }
+
+    //確認
+    for (int i = 0; i < n + 1; i++) {
+        cout << num[i] << " ";
+    }
+    cout << endl;
+    
+    //クエリ
+    int q;
+    cin >> q;
+    for (int i = 0; i < q; i++) {
+        int Lx, Rx;
+        cin >> Lx >> Rx;
+        Lx --;
+        cout << num[Rx] - num[Lx] << endl;
+    }
+    return 0;
+}
+/*
+//入力
+5  
+1 1 1 1 1
+
+//確認
+0 1 2 3 4 5 
+
+//クエリ
+1
+3 5　//入力の3~5個目の和
+3
+*/
+//二次元(https://qiita.com/drken/items/56a6b68edef8fc605821)
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    // 入力: H × W のグリッド
+    int H, W; cin >> H >> W;
+    vector<vector<int> > a(H, vector<int>(W));
+    for (int i = 0; i < H; ++i) for (int j = 0; j < W; ++j) cin >> a[i][j];
+
+    // 二次元累積和
+    vector<vector<int> > s(H+1, vector<int>(W+1, 0));
+    for (int i = 0; i < H; ++i)
+        for (int j = 0; j < W; ++j)
+            //求めたいマス s[i+1][j+1]の　上＋左-上下の累積の重なりs[i][j]を引く＋最後に求めたいマスの値a[i][j]を足す
+            //求めたいマス s[i+1][j+1]の左上s[i][j]基準なので
+            //求めたいマス s[i+1][j+1]の 上：s[i][j+1]　左：s[i+1][j]になる
+            //最後に求めたいマスの値a[i][j]を足す 
+            //👆配列sは外側に無駄な0があるのでs[i+1][j+1]とa[i][j]同じ場所を表している
+            s[i+1][j+1] = s[i][j+1] + s[i+1][j] - s[i][j] + a[i][j];
+
+    //確認
+    for (int i = 0; i < H+1; ++i){
+        for (int j = 0; j < W+1; ++j){
+            cout << s[i][j] << " ";
+        }
+        cout << endl;
+    }
+        
+    // クエリ [x1, x2) × [y1, y2) の長方形区域の和
+    int Q; cin >> Q;
+    for (int q = 0; q < Q; ++q) {
+        int x1, x2, y1, y2;
+        cin >> x1 >> x2 >> y1 >> y2;
+        x1 --; y1 --;
+        //最大値 s[x2][y2]の累積から縦横の余分な累積　s[x1][y2]　s[x2][y1]を引いて
+        //重なり部分のs[x1][y1]を余計に引いたので足す
+        cout << s[x2][y2] - s[x1][y2] - s[x2][y1] + s[x1][y1] << endl;
+    }
+}
+/*
+//入力
+5 5
+1 1 1 1 1
+1 1 1 1 1
+1 1 1 1 1
+1 1 1 1 1
+1 1 1 1 1
+
+//確認
+0 0 0 0 0 0 
+0 1 2 3 4 5 
+0 2 4 6 8 10 
+0 3 6 9 12 15 
+0 4 8 12 16 20 
+0 5 10 15 20 25 
+
+//クエリ
+1
+5 5 1 5　//入力の5行目から5行目までの1列目から5列目までの和
+5
+*/
+
+//三次元///
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    
+    // 3D配列の初期化
+    vector<vector<vector<int>>> a(n, vector<vector<int>>(n, vector<int>(n, 0)));
+    
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            for (int k = 0; k < n; ++k) {
+                cin >> a[i][j][k];
+            }
+        }
+    }
+
+    // 累積和の計算
+    vector<vector<vector<long long>>> sum(n + 1, vector<vector<long long>>(n + 1, vector<long long>(n + 1, 0)));
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            for (int k = 0; k < n; ++k) {
+                sum[i + 1][j + 1][k + 1] =
+                    sum[i][j + 1][k + 1] + sum[i + 1][j][k + 1] +
+                    sum[i + 1][j + 1][k] - sum[i][j][k + 1] - sum[i][j + 1][k] -
+                    sum[i + 1][j][k] + sum[i][j][k] + a[i][j][k];
+            }
+        }
+    }
+
+    int q;
+    cin >> q;
+    for (int i = 0; i < q; ++i) {
+        int lx, rx, ly, ry, lz, rz;
+        cin >> lx >> rx >> ly >> ry >> lz >> rz;
+
+        lx--, ly--, lz--;
+        //lxなどで0が与えられても-1となりエラーならないように
+        // 境界をはみ出さないように max(0, lx) で補正
+        long long result = sum[rx][ry][rz]
+                         - sum[max(0, lx)][ry][rz]
+                         - sum[rx][max(0, ly)][rz]
+                         - sum[rx][ry][max(0, lz)]
+                         + sum[max(0, lx)][max(0, ly)][rz]
+                         + sum[max(0, lx)][ry][max(0, lz)]
+                         + sum[rx][max(0, ly)][max(0, lz)]
+                         - sum[max(0, lx)][max(0, ly)][max(0, lz)];
+        
+        cout << result << "\n";
+    }
 }
