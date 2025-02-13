@@ -39,7 +39,7 @@ int main() {
             //j = 1 + 1 のときj+2だから2つ前の1,2をみる
             int cost = 0;
             cost = abs(h[i + k] - h[(i + k) - (j + 1)]);
-           
+           //最小値以外は使わないのですべての場合をまとめて考える
             dp[i+k] = min(dp[i + k], dp[(i+k) - (j + 1)] + cost);
         }
         
