@@ -42,7 +42,7 @@ int main() {
             if (j - weight[i] >= 0 && dp[i][j - weight[i]] != INF) {
                 dp[i+1][j] = max(dp[i+1][j], dp[i][j - weight[i]] + value);
             }
-
+            //最大価値を記録
             if (dp[i+1][j] != INF) ans = max(ans, dp[i+1][j]);
         }
     }
