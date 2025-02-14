@@ -35,7 +35,7 @@ int main() {
     
     ans = Foward[num]; //0番目除外
     ans = min(ans, ll(Back[num])); //最後除外
-    for (int i = 1; i < k-1; i++) {
+    for (int i = 1; i < k-2; i++) {
         ll subAns;
         if((i % 2) != 0){
             int Idx = (i / 2) - 1;
@@ -44,9 +44,11 @@ int main() {
            int Idx = i / 2;
            subAns = ll(Foward[Idx] + (Back[num] - Back[((i + 1)/ 2)]));
         }
+
         ans = min(ans, subAns);
         
     }
+    ans = min(ans, ll(Foward[((k - 2) / 2) - 1] + (a[(k-2)+1] - a[(k-2)-1])));
     cout << ans << endl;
     return 0;
 
