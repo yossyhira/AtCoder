@@ -23,7 +23,7 @@ int main() {
         socks.push_back({num, a[i-1], a[i]});
     }
 
-    sort(socks.begin(), socks.end(), [](const auto &a, const auto &b) {
+    stable_sort(socks.begin(), socks.end(), [](const auto &a, const auto &b) {
         return get<0>(a) < get<0>(b);//第一
     });
 
