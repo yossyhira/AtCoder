@@ -17,10 +17,10 @@ int main() {
         return 0;
     }
     int num = k / 2;
-    ll ans = 0;
+    int ans = 0;
     if((k % 2) == 0){
         for (int i = 1; i <= num; i++) {
-            ans += ll(a[((i - 1)*2) + 1] - a[(i - 1)*2]);
+            ans += a[((i - 1)*2) + 1] - a[(i - 1)*2];
         }cout << ans << endl;
         return 0;
     }
@@ -34,21 +34,24 @@ int main() {
     }
     
     ans = Foward[num]; //0番目除外
-    ans = min(ans, ll(Back[num])); //最後除外
+    //cout << ans << endl;
+    ans = min(ans, Back[num]); //最後除外
+    //cout << Back[num] << endl;
     for (int i = 1; i < k-2; i++) {
-        ll subAns;
+        int subAns = 0;
         if((i % 2) != 0){
-            int Idx = (i / 2) - 1;
-            subAns = ll(Foward[Idx] + (a[i+1] - a[i-1]) + (Back[num] - Back[((i + 2)/ 2)]));
+            int Idx = (i / 2);
+            subAns = Foward[Idx] + (a[i+1] - a[i-1]) + (Back[num] - Back[((i + 2)/ 2)]);
         }else{
-           int Idx = i / 2;
-           subAns = ll(Foward[Idx] + (Back[num] - Back[((i + 1)/ 2)]));
+           int Idx = (i / 2);
+           subAns = Foward[Idx] + (Back[num] - Back[((i + 1)/ 2)]);
         }
-
+        //cout << i << "回目　"<< subAns << endl;
         ans = min(ans, subAns);
         
     }
-    ans = min(ans, ll(Foward[((k - 2) / 2) - 1] + (a[(k-2)+1] - a[(k-2)-1])));
+    ans = min(ans, Foward[((k - 2) / 2)] + (a[(k-2)+1] - a[(k-2)-1]));
+    //cout <<  Foward[((k - 2) / 2)] + (a[(k-2)+1] - a[(k-2)-1]) << endl;
     cout << ans << endl;
     return 0;
 
