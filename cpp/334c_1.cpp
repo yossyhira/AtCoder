@@ -33,11 +33,11 @@ int main() {
         Back[i] = Back[i - 1] + (a[i * 2] - a[((i - 1)*2) + 1]);
     }
     
-    ans = Foward[num]; //0番目除外
+    ans = Foward[num]; //最後除外
     //cout << ans << endl;
-    ans = min(ans, Back[num]); //最後除外
+    ans = min(ans, Back[num]); //0番目除外
     //cout << Back[num] << endl;
-    for (int i = 1; i < k-2; i++) {
+    for (int i = 1; i < k-1; i++) {
         int subAns = 0;
         if((i % 2) != 0){
             int Idx = (i / 2);
@@ -50,7 +50,7 @@ int main() {
         ans = min(ans, subAns);
         
     }
-    ans = min(ans, Foward[((k - 2) / 2)] + (a[(k-2)+1] - a[(k-2)-1]));
+    //ans = min(ans, Foward[((k - 2) / 2)] + (a[(k-2)+1] - a[(k-2)-1]));
     //cout <<  Foward[((k - 2) / 2)] + (a[(k-2)+1] - a[(k-2)-1]) << endl;
     cout << ans << endl;
     return 0;
