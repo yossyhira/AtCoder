@@ -2,8 +2,8 @@
 #define rep(i, n) for (int i = 0; i < (n); ++i)
 using namespace std;
 using ll = long long;
-long double dist(int sx, int sy, int gx, int gy) {
-    return sqrtl((long double)((sx - gx) * (sx - gx) + (sy - gy) * (sy - gy)));
+double dist(int sx, int sy, int gx, int gy) {
+    return sqrt((double)((sx - gx) * (sx - gx) + (sy - gy) * (sy - gy)));
 }
 
 int main() {
@@ -20,11 +20,11 @@ int main() {
     }
     vector<int> p(n);//3!の全探索
     rep(i, n) p[i] = i;
-    long double ans = 100010001000.0;
+    double ans = 100010001000.0;
     do {
         for (int i = 0; i < (1 << n); i++) {
             int befX = 0, befY = 0;
-            long double subans = 0.0;
+            double subans = 0.0;
             for (int j = 0; j < n; j++) {
                 if((i & (1 << j)) != 0){
                     int sx, sy;
@@ -33,7 +33,7 @@ int main() {
                     int gx, gy;
                     tie(gx, gy) = cut[p[j]].at(1);
                     //subans += dist(sx, sy, gx, gy) / t; 
-                    subans += (dist(befX, befY, sx, sy) / ((long double)s)) + (dist(sx, sy, gx, gy) / ((long double)t));
+                    subans += (dist(befX, befY, sx, sy) / ((double)s)) + (dist(sx, sy, gx, gy) / ((double)t));
                     befX = gx;
                     befY = gy;
 
@@ -44,7 +44,7 @@ int main() {
                     int gx, gy;
                     tie(gx, gy) = cut[p[j]].at(0); 
                     //subans += dist(sx, sy, gx, gy) / t;
-                    subans += (dist(befX, befY, sx, sy) / ((long double)s)) + (dist(sx, sy, gx, gy) / ((long double)t));
+                    subans += (dist(befX, befY, sx, sy) / ((double)s)) + (dist(sx, sy, gx, gy) / ((double)t));
                     befX = gx;
                     befY = gy;
                 }
@@ -53,7 +53,7 @@ int main() {
         }
     } while (next_permutation(p.begin(), p.end()));
     
-    printf("%.10Lf\n",ans);
+    printf("%.10f\n",ans);
     return 0;
     //cout << << endl;
 }
