@@ -648,6 +648,7 @@ set<int> st(vec.begin(), vec.end());
 set<pair<int, int>> st(vec.begin(), vec.end());
 
 //map使い方//////////////////////////////////////////////////////////////////
+//(https://qiita.com/_EnumHack/items/f462042ec99a31881a81)
 //宣言
 // int 型の番地に int 型の変数を記録する場合（2^31 要素の int 型配列と同じような感じ）
 map<int, int> M1;
@@ -667,6 +668,13 @@ Map["competitive_programming"] = 1073741824;
 //出力
 cout << Map["algorithm"] << endl; // 1111 と出力される
 cout << Map["tourist"] << endl; // まだ何も書き込まれていないので、0 と出力される
+
+//pairをキー
+map<pair<int, int>, int> M1;//(AtCoder/AtCoderBeginnerContest393/cpp/c.cpp)
+//入力
+M1[{a, b}] = 1;
+//キーがあるか確認
+if(M1.count({a, b}))//あればtureなければfalse
 
 /////////////////////////////////////////////////////////////////////////////
 //数字を各桁ごとに配列に入れる
@@ -1663,4 +1671,40 @@ int main() {
     //重さがweightMax以内のときの最大価値は[n][weightMax]番目になる
     cout << dp[n][weightMax] << endl;
     return 0;
+}
+
+//数直線の一か所に何かを集める系
+//ここでは1を一か所に集めていく
+//(AtCoder/AtCoderBeginnerContest393/cpp/d.cpp)
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    string text;
+    cin >> n >> text;
+    vector<int> one;
+    int oneCount = 0;
+    for (int i = 0; i < text.size(); i++) {
+        if(text.at(i) == '1'){
+            oneCount ++;
+            one.push_back(i);
+        }
+    }
+    //一か所に集めるのは中央値が最適
+    int point = oneCount / 2;
+    ll ans = 0;
+    for (int i = 0; i < point; i++) {
+        ans += ll(one.at(point) - one.at(i) - i - 1);//前にある1の個数も考慮(-i)して、移動回数は数直線の距離-1
+        //cout << ans << endl;
+    }
+    int count = 0;
+    for (int i = point+1; i < one.size(); i++) {
+        ans += ll(one.at(i) - one.at(point) - count - 1);//前にある1の個数も考慮(-count)して、移動回数は数直線の距離-1
+        count ++;
+    }
+    cout << ans << endl;
 }
