@@ -5,6 +5,7 @@ using namespace std;
 
 int main() {
     //並び替えたい配列を作成
+    //pairを使ったり複雑な並び替えはこっち
     vector<int> p(3);//3!の全探索
     rep(i, 3) p[i] = i;
 
