@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-
+int addNum(int a){
+    return (a * (a + 1)) / 2;
+}
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    double a;
+    int a;
     cin >> a;
-    cout << a/2 << endl;
+   int sum = addNum(a);
+    cout << sum << endl;
 }

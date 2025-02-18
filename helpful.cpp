@@ -8,11 +8,10 @@ int main() {
     //pairを使ったり複雑な並び替えはこっち
     //(AtCoder/cpp/374d.cpp)
     vector<int> p(3);//3!の全探索
-    rep(i, 3) p[i] = i;
+    for (int i = 0; i < 3; i++) p[i] = i;
 
-    int cnt = 0, tot = 0;
     do {
-        rep(i,3) cout << p[i];
+        for (int i = 0; i < 3; i++) cout << p[i];
         cout<<'\n';
     } while (next_permutation(p.begin(), p.end()));
     return 0;
@@ -1710,7 +1709,10 @@ int main() {
     }
     cout << ans << endl;
 }
-
+//longの計算///////////////////////////////////////////////////////////
+long = long + int;//できる(intを暗黙の型変換してくれる)
+long = int + int;//int + int でintの範囲外になるとオーバーフローする
+long = (long)int + int;//できる(intを暗黙の型変換してくれる)
 //double小数点の計算//////////////////////////////////////////////////////////////////////////////////////////
 //精度は小数点以下ではなく、「すべて」の桁数
 /*
@@ -1725,9 +1727,26 @@ int main() {
 | 用途             | 通常の浮動小数点計算         | 高精度計算、大きな値の扱い     |
 */
 
+double = double + int;//できる(intを暗黙の型変換してくれる)
+double = int + int;//int + int でintの範囲外になるとオーバーフローする
+double = (double)int + int;//できる(intを暗黙の型変換してくれる)
+
 //ユーグリッド距離・三平方の定理
 double dist(int sx, int sy, int gx, int gy) {
     return sqrt((double)((sx - gx) * (sx - gx) + (sy - gy) * (sy - gy)));
 }
 //出力
 printf("%.10f\n",ans);
+
+//その値までの総和/////////////////////////////////////////////////////////////////////////////////////////////////////
+int addNum(int a){
+    return (a * (a + 1)) / 2;
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int a; 
+    cin >> a; //10
+   int sum = addNum(a);
+    cout << sum << endl; //55
+}
