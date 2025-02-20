@@ -11,7 +11,7 @@ struct Edge {
 int main() {
   int n, m;
   cin >> n >> m;
-  vector<int> a(n); //頂点の場所
+  vector<int> a(n); //頂点のコスト
   for(int i = 0; i < n; i ++) cin >> a[i];
 
   vector<vector<Edge>> g(n);
