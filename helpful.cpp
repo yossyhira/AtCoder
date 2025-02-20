@@ -947,6 +947,7 @@ int main() {
 
 //グラフの問題(各頂点までの距離)//////////////////////////////////
 //問題(https://qiita.com/drken/items/996d80bcae64649a6580)
+//類似問題(AtCoder/dfs/376d.cpp)
 #include <iostream>
 #include <vector>
 #include <queue>
