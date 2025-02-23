@@ -388,6 +388,15 @@ for (int i = 0; i < h; i++) {
 vector<pair<int, string>> standings;
 //追加
 standings.push_back({solved_point, name});
+
+//一つ目・二つ目それぞれ別で入力もできる
+vector<pair<int, int>> x(m);
+for (int i = 0; i < m ; i++) {
+    cin >> x[i].first;
+}
+for (int i = 0; i < m ; i++) {
+    cin >> x[i].second;
+}
 //特定の場所に追加
 s[Idx].second = 10;
 s[Idx].first = 10;
