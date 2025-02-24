@@ -1134,11 +1134,27 @@ int main() {
     }
 
     // 頂点 0 をスタートとした探索
+    //assignはresize + 変数初期化
     seen.assign(N, false); // 全頂点を「未訪問」に初期化
+    //resize
     first_order.resize(N);
     last_order.resize(N);
     int first_ptr = 0, last_ptr = 0;
     dfs(G, 0, first_ptr, last_ptr);
+
+    /*
+    (AtCoder/dfs/373d.cpp)
+    //グラフが一つにまとまってない時は以下を繰り返す
+    // 訪問済みか一つずつみて未訪問であれば探索(この時に一つのグラフ内で探索したやつは訪問済みに置き換わる)
+    //一つのグラフが探索完了したのにまだ未探索なものは別のグラフにあるので新たな始点として探索
+    for (int i = 0; i < N; i++) {
+        if(seen[i] == false){
+            //始点の値はなんでもよいので適当に0とした
+            ans[i] = 0;
+            dfs(G, i);
+        }
+    }
+    */
 
     // 各頂点 v の行きがけ順、帰りがけ順を出力
     for (int v = 0; v < N; ++v)
