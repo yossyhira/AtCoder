@@ -1935,12 +1935,13 @@ int main() {
   //ラムダ式ではauto f = [&](auto f)で引数に自分を呼び出すことで再帰になる
   auto f = [&](auto f, vector<int> a) {
     if (a.size() == n) {
+      //ここの計算量はO(a.size())になる
       ans.push_back(a); 
       return;
     }
 
     int l = 1; //最初の一回用に1を入れる
-    if (a.size() > 0) l = a.back()+10;
+    if (a.size() > 0) l = a.back()+10;//それ以降は前の値＋10する
     a.push_back(l);
 
     //末尾がm以下の時( 10 * (n - a.size()))で最後の答えをしる
