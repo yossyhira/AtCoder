@@ -5,29 +5,23 @@ using ll = long long;
 int n, m;
 vector<vector<int>> ans;
 
-void printAns(const vector<int>& current) {
-    //cout << 1 << endl;
-    ans.push_back(current);
-}
-
+//ここの引数でvector<int> currentを宣言すると前の回までの状態の配列を引き継げる
+//つまり、末尾を毎回消す必要ない
 void solve(int num, int cnt, vector<int> current) {
     current.push_back(num);
-    if (cnt >= n) {
-        printAns(current);
+    
+    //目標のサイズnになったら
+    if(current.size() == n){
+        //配列に配列を入れると二次元配列にしてくれる
+        ans.push_back(current);
         return;
     }
-    if(num + 10 > m){
-        if(current.size() == n){
-            printAns(current);
-
-        }
-        return;
-    }
-    for (int i = num + 10; i <= m; i++) {
-        if(i > m){
-            printAns(current);
-            return; 
-        }
+    
+    for (int i = num + 10; i <= m ; i++) {
+        //10 * (n - 1)であと何回10足されるか計算する
+        //つまり、i + 10 * (n - (current.size() + 1))で最終的な値を計算できる。
+        //最終的な値が目標値mを超えたら探索しない(枝刈り)
+        if((i + 10 * (n - (current.size() + 1))) > m) return;
         solve(i, cnt + 1, current);
     }
 }
@@ -38,7 +32,12 @@ int main() {
 
     cin >> n >> m;
 
-    for (int i = 1; i <= n; i++) {
+    for (int i = 1; i <= m; i++) {
+        //10 * (n - 1)であと何回10足されるか計算する
+        //つまり、i + 10 * (n - 1)で最終的な値を計算できる。
+        //最終的な値が目標値mを超えたら探索しない(枝刈り)
+        if(i + 10 * (n - 1) > m) break;
+        //ここでからの配列を入れる
         solve(i, 0, {});
     }
     cout << ans.size() << endl;
