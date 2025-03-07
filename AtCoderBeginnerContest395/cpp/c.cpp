@@ -16,15 +16,17 @@ int main() {
     M[num[r]] = 1;
     const int INF = 1e9;
     int Ans = INF;
-    while(r <= n){
+    while(r < n){
         r++;
         if(M.count(num[r])){
             M[num[r]] ++;
             if(M[num[r]] == 2){
-                int subAns = r - l + 1;
+                while(M[num[r]] == 2){
+                    M[num[l]] --;
+                    l ++;
+                }
+                int subAns = r - (l - 1) + 1;
                 Ans = min(Ans, subAns);
-                M[num[l]] --;
-                l++;
             }
         }else{
             M[num[r]] ++;
