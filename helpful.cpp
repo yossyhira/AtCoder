@@ -1189,7 +1189,14 @@ int main() {
     cout << pos << endl;
     return s[pos];
   };
-
+  /*
+  // 探す値がlong long ver
+  auto f = [&](ll r) {
+        int pos = upper_bound(b.begin(), b.end(), r) - b.begin(); //lower_bound(x.begin(), x.end(), r) - x.begin();
+        cout << pos << endl;
+        return s[pos];
+    };
+  */
   int q;
   cin >> q;
   rep(qi,q) {
