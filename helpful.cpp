@@ -2143,3 +2143,14 @@ int main() {
 
     return 0;
 }
+
+//入力がNに比例して徐々に減っていく系/////////////////////////////////////////////////////
+//三角(AtCoder/cpp/371c.cpp)
+for (int i = 0; i < N ; i++) {
+    for (int j = 0; j < N; j++) {
+         if(j > i){
+            cin >> cost[i][j];
+            //cost[j][i] = cost[i][j];
+         }
+    }
+ }

@@ -16,8 +16,10 @@ int main() {
         cin >> a >> b;
         a --;
         b --;
+        //ここではあくまでa,bは頂点番号ではなく、
+        //何個目同士の頂点がつながってるかを記録
         G[a][b] = true;
-        G[b][a] = false;
+        G[b][a] = true;
     }
     Graph H(N, vector<bool> (N, false));
     int m_h;
@@ -27,16 +29,20 @@ int main() {
         cin >> a >> b;
         a --;
         b --;
+        //ここではあくまでa,bは頂点番号ではなく、
+        //何個目同士の頂点がつながってるかを記録
         H[a][b] = true;
-        H[b][a] = false;
+        H[b][a] = true;
     }
     
     vector<vector<int>> cost(N, vector<int> (N, 0));
     for (int i = 0; i < N ; i++) {
-        for (int j = 0; j < (N - (i + 1)); j++) {
-            cin >> cost[i][j];
-            cost[j][i] = cost[i][j];
-        }
+       for (int j = 0; j < N; j++) {
+            if(j > i){
+                cin >> cost[i][j];
+                //cost[j][i] = cost[i][j];
+            }
+       }
     }
     
     vector<int> p(N);//3!の全探索
@@ -48,11 +54,16 @@ int main() {
         //cout << "next" << endl;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if(H[i][j] != G[p[i]][p[j]]){
+                //Hを並べ替え(頂点番号を割り当てる)
+                if(G[i][j] != H[p[i]][p[j]]){
                     //cout << p[i] << " " << p[j] << endl;
                     //cout << cost[p[i]][p[j]] << endl;
-                    subAns += cost[i][j];
+                    subAns += cost[p[i]][p[j]];
                 }
+                //Gを並べ替え(頂点番号を割り当てる)
+                /*if(H[i][j] != G[p[i]][p[j]]){
+                    subAns += cost[i][j];
+                }*/
             }
         }
         ans = min(ans, subAns);
