@@ -2154,3 +2154,23 @@ for (int i = 0; i < N ; i++) {
          }
     }
  }
+
+//座標回転////////////////////////////////////////////////////////////////////////
+//(AtCoder/cpp/375c.cpp)
+//回転の関数
+//0回転
+void zero(int i, int j){
+    ans[i][j] = s[i][j];
+}
+//1回転
+void one(int i, int j){
+    ans[j][(n - 1 - i)] = s[i][j];
+}
+//2回転
+void two(int i, int j){
+    ans[(n - 1 - i)][(n - 1 - j)] = s[i][j];
+}
+//3回転
+void three(int i, int j){
+    ans[(n - 1 - j)][i] = s[i][j];
+}
