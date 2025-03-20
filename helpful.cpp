@@ -381,6 +381,16 @@ for (int i = 0; i < h; i++) {
     }
 }
 
+//[0][0]から縦に出力
+//(AtCoder/cpp/254c.cpp)
+vector<int> test;
+for (int i = 0; i < ((n/k) + 1); i++) {
+    for (int j = 0; j < k; j++) {
+        if(sep[j].size() > i){
+            test.push_back(sep[j][i]);
+        }
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //pairの使いかた
 // 得点と名前の組を格納する配列(AtCoder/cpp/384c.cpp)
