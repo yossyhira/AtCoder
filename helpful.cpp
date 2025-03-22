@@ -679,13 +679,13 @@ map<int, string> M2;
 // string 型の番地に double 型の変数を記録する場合
 map<string, double> M3;
 
-//入力
+//入力 : O(log N)
 map<string, int> Map;
 Map["qiita"] = 777;
 Map["algorithm"] = 1111;
 Map["competitive_programming"] = 1073741824;
 
-//出力
+//出力 : O(log N)
 cout << Map["algorithm"] << endl; // 1111 と出力される
 cout << Map["tourist"] << endl; // まだ何も書き込まれていないので、0 と出力される
 
@@ -693,7 +693,8 @@ cout << Map["tourist"] << endl; // まだ何も書き込まれていないので
 map<pair<int, int>, int> M1;//(AtCoder/AtCoderBeginnerContest393/cpp/c.cpp)
 //入力
 M1[{a, b}] = 1;
-//キーがあるか確認
+//キーがあるか確認 : O(log N)
+if(M1.count(a))//あればtureなければfalse
 if(M1.count({a, b}))//あればtureなければfalse
 
 /////////////////////////////////////////////////////////////////////////////
@@ -1029,6 +1030,42 @@ int main() {
     // 結果出力 (各頂点の頂点 0 からの距離を見る)
     for (int v = 0; v < N; ++v) cout << v << ": " << dist[v] << endl;
 }
+
+//dequeの使い方/////////////////////////////////////////////////////////////////////////////////////////////////
+//(AtCoder/cpp/237d.cpp)
+// 挿入・削除の計算量比較
+//
+//| 操作                   | `vector`                     | `deque`  |
+//|------------------------|-----------------------------|----------|
+//| `push_back()`          | **O(1)** (アモルタイズド)    | **O(1)** |
+//| `push_front()`         | **O(N)** (全要素を移動)     | **O(1)** |
+//| `pop_back()`          | **O(1)**                     | **O(1)** |
+//| `pop_front()`         | **O(N)** (全要素を移動)     | **O(1)** |
+//| `insert(pos, val)`    | **O(N)**                     | **O(N)** |
+//| `erase(pos)`          | **O(N)**                     | **O(N)** |
+//| `operator[]` (ランダムアクセス) | **O(1)**             | **O(1)** |
+
+//dequeは先頭と末尾に要素を追加していきたいときに使える。
+//ほとんどvectorと同じだが、dequeは先頭に値を追加する時の計算量がO(1)で済む
+
+//宣言
+deque<int> deq;
+
+//先頭追加
+deq.push_front(5);
+
+//末尾追加
+deq.push_back(5);
+
+//特定の要素の値を変更 : O(1)
+deq[0] = 0; 
+
+//出力
+for(int x : deq){
+    cout << x << " ";
+}
+cout << endl;
+
 ///dfs 深さ優先探索///////////////////////////////////////////////////////////////////////////////
 //グリッド系
 //(https://qiita.com/drken/items/4a7869c5e304883f539b)
