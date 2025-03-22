@@ -669,6 +669,14 @@ set<pair<int, int>> st(vec.begin(), vec.end());
 
 //map使い方//////////////////////////////////////////////////////////////////
 //(https://qiita.com/_EnumHack/items/f462042ec99a31881a81)
+//テンプレ
+map<int, int> M1;
+if(M1.count(x)){
+    M1[x] ++;
+}else{
+    M1[x] = 1;
+}
+
 //宣言
 // int 型の番地に int 型の変数を記録する場合（2^31 要素の int 型配列と同じような感じ）
 map<int, int> M1;
