@@ -1041,6 +1041,7 @@ int main() {
 
 //dequeの使い方/////////////////////////////////////////////////////////////////////////////////////////////////
 //(AtCoder/cpp/237d.cpp)
+// (AtCoder/cpp/372d.cpp) <= define関数あり
 // 挿入・削除の計算量比較
 //
 //| 操作                   | `vector`                     | `deque`  |
@@ -1264,7 +1265,7 @@ int main() {
     cout << s[i] << " ";
   }
   cout << endl;
-
+  //retunない時もvoidはいらない(AtCoder/cpp/372d.cpp)
   auto f = [&](int r) {
     int pos = upper_bound(x.begin(), x.end(), r) - x.begin(); //lower_bound(x.begin(), x.end(), r) - x.begin();
     cout << pos << endl;
