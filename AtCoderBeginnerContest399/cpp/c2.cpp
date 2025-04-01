@@ -20,6 +20,13 @@ int main() {
     }
     uf.merge(a,b);
   }
+  vector<vector<int>> num = uf.groups();
+  for (int i = 0; i < num.size(); i++) {
+    for (int j = 0; j < num[i].size(); j++) {
+      cout << num[i][j] << " ";
+    }
+    cout << endl;
+  }
   cout << ans << endl;
   return 0;
 }
