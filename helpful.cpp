@@ -1821,10 +1821,11 @@ int main() {
   const ll INF = 1e18;
   vector<ll> dist(n, INF); //各頂点までのコストを格納(確定済みと未確定のやつが入ってる)
   //最短距離の候補を入れる
+  //pair<コスト, 頂点>
   priority_queue<P, vector<P>, greater<P>> q;//小さい順(昇順)に取り出す
   //priority_queue<P> q;//大きい順(降順)に取り出す
   dist[0] = a[0]; //最初の距離はa[0]
-  q.emplace(a[0], 0); //最初の頂点は0
+  q.emplace(a[0], 0); //(コスト, 頂点)最初の頂点は0
 
   int count = 0;
   while (!q.empty()) {
