@@ -1,76 +1,70 @@
+//01BFS(普通のBFSとダイクストラの概念を混ぜた感じ)
 #include <bits/stdc++.h>
 using namespace std;
-#define fi first
-#define se second
-#define pb push_back
-//#define eb emplace_back
-//#define em emplace
-//#define pob pop_back
-//using ld = long double;
-using ll = long long;
-using P = pair<int, int>;
-using LP = pair<ll, ll>;
-const ll LINF = 1001002003004005006ll;
-const int INF = 1001001001;
-#define yes cout<<"Yes"<<endl
-#define no cout<<"No"<<endl
-#define yn {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}// if(a==b)YN;
-#define dame cout<<-1<<endl
-#define chmax(x,y) x = max(x,y)
-#define chmin(x,y) x = min(x,y)
-// 四方向への移動ベクトル
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
+#define rep(i,n) for (int i = 0; i < (n); ++i)
 
-// 入力
-int H, W;
-vector<string> field;
-
-ll min = LINF;
-bool ok = false;
-
-// 探索
-bool seen[510][510]; // seen[h][w] := マス (h, w) が検知済みかどうか
-void dfs(int h, int w, int cnt) {
-    seen[h][w] = true;
-
-    // 四方向を探索
-    for (int dir = 0; dir < 4; ++dir) {
-        int nh = h + dx[dir];
-        int nw = w + dy[dir];
-
-        // 場外アウトしたり、移動先が壁の場合はスルー
-        if (nh < 0 || nh >= H || nw < 0 || nw >= W) continue;
-        if (field[nh][nw] == '#') cnt ++;
-
-        // 移動先が探索済みの場合
-        if (seen[nh][nw]) continue;
-
-        // 再帰的に探索
-        dfs(nh, nw, cnt);
-    }
-    //いろいろな動きのパターンを調べたいとき(同じ動線でも動くマス順番が変わると答えも変わる場合など)
-    //今回はゴールに一度でもいければ良いのでいらない
-    //これは(AtCoder/dfs/378d.cpp)(https://atcoder.jp/contests/abc378/tasks/abc378_d)
-    seen[h][w] = false;
-}
+int di[] = {-1,0,1,0};
+int dj[] = {0,-1,0,1};
 
 int main() {
-    // 入力受け取り
-    cin >> H >> W;
-    field.resize(H);
-    for (int h = 0; h < H; ++h) cin >> field[h];
+  int h, w;
+  cin >> h >> w;
+  vector<string> s(h);
+  rep(i,h) cin >> s[i];
 
-    // s と g のマスを特定する
-    int sh, sw, gh, gw;
-    cin >> sh >> sw >> gh >> gw;
+  int si, sj, ti, tj;
+  cin >> si >> sj >> ti >> tj;
+  --si; --sj; --ti; --tj;
 
+  const int INF = 1001001001;
+  vector<vector<int>> dist(h,vector<int>(w, INF));
+  vector<vector<bool>> used(h,vector<bool>(w));
+  deque<pair<int,int>> q;
 
-    // 探索開始
-    memset(seen, 0, sizeof(seen)); // seen 配列全体を false に初期化
-    dfs(sh, sw, 0);
+  // i, j : 座標
+  // d : その頂点までの総距離（コスト）
+  // cost : その辺単体の重み(dequeの前か後のどっちに入れるのか判別に使う)
+  auto push = [&](int i, int j, int d, int cost) {
+    //最短距離更新するかどうか
+    if (dist[i][j] <= d) return;
+    dist[i][j] = d;
+    //コストが0なら前，1なら後ろに追加
+    if (cost == 0) q.emplace_front(i,j);
+    else q.emplace_back(i,j);
+  };
+  push(si,sj,0,0);
 
-    // 結果
-    if (seen[gh][gw]) cout << "Yes" << endl;
-    else cout << "No" << endl;
+  while (q.size()) {
+    //最短距離で取り出しているので，見てなければ距離確定
+    int i, j;
+    tie(i, j) = q.front(); q.pop_front();
+    if (used[i][j]) continue;
+    //その座標を見たにする
+    used[i][j] = true;
+    //その座標の距離
+    int d = dist[i][j];
+
+    //普通の道(コスト0)
+    rep(v,4) {
+      int ni = i+di[v], nj = j+dj[v];
+      if (ni < 0 || nj < 0 || ni >= h || nj >= w) continue;
+      if (s[ni][nj] == '.') push(ni,nj,d,0);
+    }
+    //壁の道(コスト1)
+    //普通の道でも壁とみなして移動する
+    //普通の道の方はif (used[i][j]) continue;かコスト0なのでpush関数のif (dist[i][j] <= d) return;ではじいてくれる
+    rep(v,4) {
+      int ni = i, nj = j;
+      //壁の2マス分同じ方向に移動
+      rep(k,2) {
+        ni += di[v]; nj += dj[v];
+        if (ni < 0 || nj < 0 || ni >= h || nj >= w) break;
+        push(ni,nj,d+1,1);
+      }
+    }
+  }
+
+  int ans = dist[ti][tj];
+  cout << ans << endl;
+  return 0;
 }
