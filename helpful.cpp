@@ -1384,6 +1384,8 @@ int main() {
 //__builtin_popcount(x);int型 の整数 x を二進数で表したとき、1 のビットの個数を返す関数
 //__builtin_popcountll(x); long long型 の整数 x を二進数で表したとき、1 のビットの個数を返す関数
 //O(log x)
+//0Idxで1,2,4,7,8,11,13,14...に1が立ってるやつはこれかも
+//(AtCoder/saiki/380d2.cpp)
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
