@@ -22,17 +22,20 @@ const int INF = 1001001001;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    int n >> m;
+    int n, m;
     cin >> n >> m;
-    vector<P> num;
+    vector<int> num(n, 0);
     for (int i = 0; i < m; i++) {
         int x, y;
         cin >> x >> y;
-        num.pb({x, y});
+        x --; y --;
+        num[(x+y)%n] ++;
     }
-
     ll ans = ll(m - 1) * m / 2;
-    
+    //cout << ans << endl;
+    for (int i = 0; i < n; i++) {
+        ans -= ll(num[i] - 1) * num[i] / 2;  
+    }
     cout << ans << endl;
     return 0;
 }
