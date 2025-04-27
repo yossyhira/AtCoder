@@ -512,16 +512,16 @@ cin >> Idx;
 for (int i = 0; i < Idx; i++) {
     int num = 0;
     cin >> num;
-    set.insert(num);//追加
+    set.insert(num);//追加//O(logN)
 }
 //追加出来たか確認
 //result の型は std::pair<std::set<int>::iterator, bool>
 //イテレータ（result.first）: 挿入した要素、または既存の要素を指すイテレータ
 //ブール値（result.second）: 挿入が成功した場合は true、失敗（既に存在していた場合）は false
 set<int> set;
-auto result1 = set.insert(5); // 5 を挿入
+auto result1 = set.insert(5); // 5 を挿入//O(logN)
 cout << "挿入成功した？: " << result1.second << "\n"; // true
-auto result2 = set.insert(5); // 再び 5 を挿入
+auto result2 = set.insert(5); // 再び 5 を挿入//O(logN)
 cout << "挿入成功した？: " << result2.second << "\n"; // false
 
 //出力1
@@ -535,12 +535,13 @@ for (auto ite = set.begin(); ite != set.end(); ite++) {
 
 //削除
 //2という値を削除
-set.erase(2);
+set.erase(2);//O(logN)
 
-//全要素削除
+//全要素削除O(N)
 set.clear();
 
 //値が存在するか確認
+//全部O(logN)
 if (set.contains(3)) {
     // 「3」が存在するときの処理
     //c++のコンパイラが20以降
