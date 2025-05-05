@@ -28,15 +28,39 @@ int main() {
     for (int i = 0; i < n; i++) {
         cin >> money[i];
     }
-    vector<vector<int>> zoo(m);
+    vector<vector<int>> animal(m);
     for (int i = 0; i < m; i++) {
         int num;
         cin >> num;
         for (int j = 0; j < num; j++) {
             int x;
             cin >> x;
-            zoo[i].pb(x);
+            x --;
+            animal[i].pb(x);
         }
     }
-    
+    vector<vector<int>> zoo(n);
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < animal[i].size(); j++) {
+            zoo[animal[i][j]].pb(i);
+        }
+    }
+    ll ans = LINF;
+    for (int i = 0; i < (1 << n*2); i++) {
+        vector<int> look(m, 0);
+        int look_sum = 0;
+        ll money_sum = 0;
+        for (int j = 0; j < n*2; j++) {
+            if((i & (1 << j)) != 0){
+                int x = j / 2;
+                money_sum += ll(money[x]);
+                for (int k = 0; k < zoo[x].size(); k++) {
+                    if(look[zoo[x][k]] == 0 || look[zoo[x][k]] == 1) look_sum ++;
+                    look[zoo[x][k]] ++;
+                }
+            }
+        }
+        if(look_sum == 2*m) chmin(ans, money_sum);
+    }
+    cout << ans << endl;
 }
