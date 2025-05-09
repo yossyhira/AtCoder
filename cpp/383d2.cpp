@@ -83,18 +83,16 @@ int main() {
   auto primes = sieve.primes;
 
   int ans = 0;
-  for (int p1 : primes) {
-    for (int p2 : primes) {
-      if (p2 >= p1) break;
-      if ((ll)p1*p1*p2*p2 > n) break;
-      ans++;
-    }
+  for(auto p1: primes)for(auto p2:primes){
+    if(p1 <= p2) continue;
+    if((ll)p1*p1*p2*p2 <= n)ans++;
+    else break;
   }
-  for (int p : primes) {
-    ll x = 1;
-    rep(i,8) x *= p;
-    if (x > n) break;
-    ans++;
+  for(auto p1: primes){
+    ll num = 1;
+    for (int i = 0; i < 8; i++) num *= (ll)p1;
+    if(num <= n) ans++;
+    else break;
   }
   cout << ans << endl;
   return 0;
