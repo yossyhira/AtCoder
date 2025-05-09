@@ -2357,6 +2357,7 @@ int main() {
 
 //素因数分解・エラストテネスのふるい///////////////////////////////////////////////////////
 //(AtCoder/eratosthenes/prime.cpp)
+//計算量 : O(n log log n)
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -2367,6 +2368,10 @@ struct Sieve {
   /*
   f = 各値の最小の素因数(素数ならその数自身)
   prime = 素数と判定したものを追加
+
+  メイン文でこの配列の中身を見れる
+    auto primes = sieve.primes;
+    auto f = sieve.f;
   */
   vector<int> f, primes;
   //ここが肝
@@ -2430,7 +2435,29 @@ struct Sieve {
 int main() {
   int n;
   cin >> n;
+  //宣言
+  //nまでの素因数分解を宣言と同時に行う
+  //計算量 : O(n log log n)
   Sieve sieve(n);
+
+  cout << "primes使い方" << endl;
+  //primes使い方
+  //nまでの素数列挙
+  auto primes = sieve.primes;
+  for (int i = 0; i < primes.size(); i++) {
+    cout << primes[i] << " ";
+  }
+  cout << endl;
+  
+  cout << "f 使い方" << endl;
+  //f使い方
+  //nまでの各数字の最小の素因数を出力
+  auto f = sieve.f;
+  for (int i = 0; i < f.size(); i++) {
+    cout << i << " : " <<f[i] << endl;
+  }
+ 
+
   cout << "isprime使い方" << endl;
   //isprime使い方(引数は"0"以上)
   //引数が素数かどうかをboolで判定
