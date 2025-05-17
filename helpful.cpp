@@ -706,17 +706,7 @@ M1[{a, b}] = 1;
 if(M1.count(a))//あればtureなければfalse
 if(M1.count({a, b}))//あればtureなければfalse
 
-/////////////////////////////////////////////////////////////////////////////
-//数字を各桁ごとに配列に入れる
-int a;
-cin >> a;
-string s = to_string(a);
-int n = s.size();
-vector<int> num;
-for (int i = 0; i < n; i++) {
-    int digit = s[i] - '0';
-    num.push_back(digit); //数字を配列
-}
+
 //木構造/////////////////////////////////////////////////////////////////////
 //単純無向グラフとかは何個かグラフ分かれてる
 //グラフが一つだけのときは単純”連結”無向グラフ
@@ -2496,4 +2486,67 @@ int main() {
   }
 
   return 0;
+}
+
+//事前にオーバーフロー判定//////////////////////////////////////////////////
+//long long ver. intはlonglongにすればよし
+//a+bの足し算
+bool willOverflow(long long a, long long b) {
+    if (b > 0) {
+        return a > LLONG_MAX - b;
+    } else {
+        return a < LLONG_MIN - b;
+    }
+}
+//使い方
+if (willOverflow(ans, num)) {
+    ans = 1;
+    continue;
+}  
+
+//a*bの掛け算
+bool willOverflow(long long a, long long b) {
+    if (a == 0 || b == 0) return false;
+    if (a > 0) {
+        if (b > 0) {
+            return a > LLONG_MAX / b;
+        } else {
+            return b < LLONG_MIN / a;
+        }
+    } else {
+        if (b > 0) {
+            return a < LLONG_MIN / b;
+        } else {
+            return a != 0 && b < LLONG_MAX / a;
+        }
+    }
+}
+
+//使い方////////////
+//(AtCoder/AtCoderBeginnerContest406/cpp/b.cpp)
+if (willOverflow(ans, num)) {
+    ans = 1;
+    continue;
+} 
+//桁操作・数字操作/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+//数字を各桁ごとに配列に入れる
+int a;
+cin >> a;
+string s = to_string(a);
+int n = s.size();
+vector<int> num;
+for (int i = 0; i < n; i++) {
+    int digit = s[i] - '0';
+    num.push_back(digit); //数字を配列
+}
+//桁数取得///////////////////////////////////////////////////////////////////
+int digits = 0;
+ll subans = ans;
+if(subans == 0) digits = 1;
+else{
+    while (subans != 0) {
+        subans /= 10;
+        digits++;
+    }
 }
