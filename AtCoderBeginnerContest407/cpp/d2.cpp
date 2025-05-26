@@ -34,9 +34,10 @@ int main() {
     bool one = false;
     int acnt = 0;
     for (int i = 0; i < (1 << (h*w)); i++) {
+        if( __builtin_popcount(i) % 2 != 0) continue;
         vector<vector<int>> bit_field(h+1,vector<int>(w+1, 0));
         vector<vector<bool>> used(h+1,vector<bool>(w+1, false));
-        int hcnt = 0, wcnt = 0;
+        int hcnt = 0, wcnt = 0, onecnt = 0;
         bool out = false;
         ll subans = 0;
         for (int j = 0; j < (h*w); j++) {
@@ -53,33 +54,11 @@ int main() {
         }
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
-                if(!used[i][j]&& bit_field[i][j] == 1){
-                    if(bit_field[i + 1][j] == 1&& bit_field[i][j + 1] == 1) out = true;
-                    if(bit_field[i + 1][j] == 0 && bit_field[i][j + 1] == 0) out = true;
-
-                    //if(used[i + 1][j] && used[i][j + 1]) out = true;
-                    //if(used[i + 1][j]&& bit_field[i][j + 1] == 0) out = true;
-                    if(bit_field[i + 1][j] == 0 && used[i][j + 1]) out = true;
-
-                    if(bit_field[i + 1][j] == 1) used[i + 1][j] = true;
-                    if(bit_field[i][j+1] == 1) used[i][j+1] = true;
-                }else if(bit_field[i][j] == 0){
-                    subans ^= (ll)field[i][j];
-                }
+               
             }
         }
 
         if(!out) chmax(ans, subans);
-        if(subans == 131067) acnt ++;
-        if(acnt == 6 && subans == 131067){
-            one = true;
-            for (int i = 0; i < h; i++) {
-                for (int j = 0; j < w; j++) {
-                    cout << bit_field[i][j] <<" ";
-                }
-                cout << endl;
-            }
-        }
     }
     cout << ans << endl;
 }
