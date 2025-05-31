@@ -53,16 +53,21 @@ int main() {
         }
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
+                bool yoko = false;
                 if(!used[i][j]&& bit_field[i][j] == 1){
-                    if(bit_field[i + 1][j] == 1&& bit_field[i][j + 1] == 1) out = true;
+                    if((bit_field[i + 1][j] == 1&& bit_field[i][j + 1] == 1) || bit_field[i][j + 1] == 1){
+                        yoko = true;
+                    } 
                     if(bit_field[i + 1][j] == 0 && bit_field[i][j + 1] == 0) out = true;
 
                     //if(used[i + 1][j] && used[i][j + 1]) out = true;
                     //if(used[i + 1][j]&& bit_field[i][j + 1] == 0) out = true;
                     if(bit_field[i + 1][j] == 0 && used[i][j + 1]) out = true;
 
-                    if(bit_field[i + 1][j] == 1) used[i + 1][j] = true;
-                    if(bit_field[i][j+1] == 1) used[i][j+1] = true;
+                    if(yoko) used[i][j+1] = true;
+                    else used[i + 1][j] = true;
+                    /*if(!yoko && bit_field[i + 1][j] == 1) used[i + 1][j] = true;
+                    if(bit_field[i][j+1] == 1) used[i][j+1] = true;*/
                 }else if(bit_field[i][j] == 0){
                     subans ^= (ll)field[i][j];
                 }
@@ -70,8 +75,8 @@ int main() {
         }
 
         if(!out) chmax(ans, subans);
-        if(subans == 131067) acnt ++;
-        if(acnt == 6 && subans == 131067){
+        //if(subans == 131067) acnt ++;
+        /*if(acnt == 6 && subans == 131067){
             one = true;
             for (int i = 0; i < h; i++) {
                 for (int j = 0; j < w; j++) {
@@ -79,7 +84,7 @@ int main() {
                 }
                 cout << endl;
             }
-        }
+        }*/
     }
     cout << ans << endl;
 }

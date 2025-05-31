@@ -347,9 +347,9 @@ reverse(num.begin() + 1, num.end());//1文字目から最後まで逆　3 8 5　
 reverse(num.begin(), num.end());//全て逆 8 5 3
 
 //要素削除
-num.erase(num.begin()); //先頭削除
+num.erase(num.begin()); //先頭削除 <- O(N)
 num.erase(num.end() - 1); //末尾削除
-num.pop_back();//末尾削除
+num.pop_back();//末尾削除 ← O(1)
 num.erase(num.begin()+i); //i番目の要素削除
 
 // 5を探す
@@ -1333,7 +1333,7 @@ int main() {
     cout << s[i] << " ";
   }
   cout << endl;
-  //retunない時もvoidはいらない(AtCoder/cpp/372d.cpp)
+  //再帰出ない時は，retunない時もvoidはいらない(AtCoder/cpp/372d.cpp)
   auto f = [&](int r) {
     int pos = upper_bound(x.begin(), x.end(), r) - x.begin(); //lower_bound(x.begin(), x.end(), r) - x.begin();
     cout << pos << endl;
@@ -2183,6 +2183,13 @@ int main() {
   //ここで配列を宣言すると前状態の配列を引き継げる
   //末尾を毎回消す必要ない
   //ラムダ式ではauto f = [&](auto f)で引数に自分を呼び出すことで再帰になる
+  // 再帰の中にreturn;があれば -> void いらない.
+
+  //returnないときは，以下みたいにvoid書く
+  // auto f = [&}(auto f) -> void{
+  //
+  //};
+  
   auto f = [&](auto f, vector<int> a) {
     if (a.size() == n) {
       ans.push_back(a); 
