@@ -1061,6 +1061,8 @@ int main() {
     for (int i = 0; i < M; ++i) {
         int a, b;
         cin >> a >> b;
+        a--;
+        b--;
         G[a].push_back(b);
         G[b].push_back(a);
     }
@@ -1253,6 +1255,8 @@ int main() {
     for (int i = 0; i < M; ++i) {
         int a, b;
         cin >> a >> b;
+        a --;
+        b --;
         G[a].push_back(b);
         G[b].push_back(a);
     }
