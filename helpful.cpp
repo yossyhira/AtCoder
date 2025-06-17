@@ -1109,6 +1109,118 @@ int main() {
     for (int v = 0; v < N; ++v) cout << v << ": " << dist[v] << endl;
 }
 
+//頂点倍化BFS///////////////////////////////////////////////////////////////////////////////////////////////////
+//(AtCoder/AtCoderBeginnerContest410/cpp/d.cpp)
+//辺の重みが小さいときに使える？？
+//XORなので重みの最大値が総XORの最大値と同値になる！！！！
+#include <bits/stdc++.h>
+using namespace std;
+#define fi first
+#define se second
+#define pb push_back
+//#define eb emplace_back
+//#define em emplace
+//#define pob pop_back
+//using ld = long double;
+using ll = long long;
+using P = pair<int, int>;
+using LP = pair<ll, ll>;
+const ll LINF = 1001002003004005006ll;
+const int INF = 1001001001;
+#define yes cout<<"Yes"<<endl
+#define yesr {cout<<"Yes"<<endl; return 0;}
+#define no cout<<"No"<<endl
+#define nor {cout<<"No"<<endl; return 0;}
+#define yn {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}// if(a==b)YN;
+#define dame cout<<-1<<endl
+#define chmax(x,y) x = max(x,y)
+#define chmin(x,y) x = min(x,y)
+using Graph = vector<vector<int>>;
+
+int main() {
+    // 頂点数と辺数
+    int N, M; cin >> N >> M;
+    //重みの最大値
+    const int w_max = 1024;
+    // グラフ入力受取
+    //各辺＊重みの配列用意
+    //(辺,重み)
+    //(0,0) (0,1) (0,2) (0,3)......(n-1, 1021), (n-1, 1022), (n-1, 1023)
+    //  0     1     2     3  ...... (n-1)*1021   (n-1)*1022   (n-1)*1023  <- 実際の配列番号
+    vector<vector<int>> G(N*w_max);
+    for (int i = 0; i < M; i++) {
+        int a, b, w;
+        cin >> a >> b >> w;
+        a--;
+        b--;
+        //頂点aからbの辺の各重みをとりあえずすべて調べる
+        //XORなので重みの最大値が総XORの最大値と同値になる！！！！
+        //aのあり得る重みの範囲はa*w_max以上 ((a+1)*w_max)未満
+        //例：頂点0なら0*1024=0以上 ((0+1)*w_max)=1024未満  頂点1なら1*1024=1024以上 ((1+1)*w_max)=2048未満
+        for (int j = a*w_max; j < ((a+1)*w_max); j++) {
+            //その頂点の元となる重みをjから算出
+            int j_w = j - (a * w_max);
+            //頂点bの行先の重みをXORを計算
+            int now_w = w ^ j_w;
+            //XORで計算した重みを配列の番号に変換して((b*w_max)+now_w)
+            // 頂点aの重みj_wから行くことができるように配列ｊ番目に追加
+            G[j].push_back((b*w_max)+now_w);
+        }
+    }
+    
+    //ここは普通のBFSと同じ
+    // BFS のためのデータ構造
+    //distのサイズをN*w_maxにすること！！！！！
+    vector<int> dist(N*w_max, -1); // 全頂点を「未訪問」に(-1)初期化
+    queue<int> que; 
+
+    // 初期条件 (頂点 0 を初期ノードとする)
+    //dist[v] はスタート頂点から頂点 v まで最短何ステップで到達できるかを表す
+    int start = 0;
+    dist[start] = 0; //スタートは0ステップ
+    //その時点での橙色頂点 (発見済みだが未訪問な頂点) を格納するキュー
+    que.push(start); // スタートを橙色(自分からいける場所を見たい)頂点にする
+
+    // BFS 開始 (キューが空になるまで探索を行う)
+    while (!que.empty()) {
+        int v = que.front(); // キューから先頭頂点を取り出す
+        que.pop(); //先頭削除
+
+        // 自分（v） から辿れる頂点をすべて調べる
+        for (int nv : G[v]) {
+            if (dist[nv] != -1) continue; // すでに発見済み(ステップ数が分かってる)の頂点は探索しない
+
+            // 新たな白色頂点 nv について距離情報を更新してキューに追加する
+            //distは各頂点の最短ステップ数
+            dist[nv] = dist[v] + 1; //自分がいる所の次なので自分の場所から1ステップ増やす
+            que.push(nv);//発見した(そこまでのステップ数が分かった)ので
+                         //自分からいける場所を後で調べる
+        }
+        /*
+        for (int i = 0; i < G[v].size(); i++) {
+            int nv = G[v][i];
+            if (dist[nv] != -1) continue; // すでに発見済みの頂点は探索しない
+
+            // 新たな白色頂点 nv について距離情報を更新してキューに追加する
+            dist[nv] = dist[v] + 1;
+            que.push(nv);
+        }
+        */
+    }
+
+    // 結果出力
+    //最小のxorなので頂点Nの重みが小さい順にみて，初めに探索済みになったのが答え
+     for (int v = (N-1)*w_max; v < (N*w_max); v++) {
+        if(dist[v] != -1){
+            //元の重みに直して出力すること！！！
+            cout << v-(N-1)*w_max << endl;
+            return 0;
+        }
+     }
+     //頂点Ｎにそもそもいけなければ-1
+     cout << -1 << endl;
+}
+
 //dequeの使い方/////////////////////////////////////////////////////////////////////////////////////////////////
 //(AtCoder/cpp/237d.cpp)
 // (AtCoder/cpp/372d.cpp) <= define関数あり
