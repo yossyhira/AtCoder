@@ -1,65 +1,123 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i,n) for (int i = 0; i < (n); ++i)
+#define fi first
+#define se second
+#define pb push_back
+//#define eb emplace_back
+//#define em emplace
+//#define pob pop_back
+//using ld = long double;
 using ll = long long;
+using P = pair<int, int>;
+using LP = pair<ll, ll>;
+const ll LINF = 1001002003004005006ll;
+const int INF = 1001001001;
+#define yes cout<<"Yes"<<endl
+#define yesr {cout<<"Yes"<<endl; return 0;}
+#define no cout<<"No"<<endl
+#define nor {cout<<"No"<<endl; return 0;}
+#define yn {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}// if(a==b)YN;
+#define dame cout<<-1<<endl
+#define chmax(x,y) x = max(x,y)
+#define chmin(x,y) x = min(x,y)
 
-// Sieve of Eratosthenes
-// https://youtu.be/UTVg7wzMWQc?t=2774
-struct Sieve {
-  int n;
-  vector<int> f, primes;
-  Sieve(int n=1):n(n), f(n+1) {
-    f[0] = f[1] = -1;
-    for (ll i = 2; i <= n; ++i) {
-      if (f[i]) continue;
-      primes.push_back(i);
-      f[i] = i;
-      for (ll j = i*i; j <= n; j += i) {
-        if (!f[j]) f[j] = i;
-      }
+// O(N) solution using prefix sums + hash map
+ll countSumTo412(const vector<ll>& A) {
+    unordered_map<ll, ll> cnt;
+    cnt.reserve(A.size()*2);
+    cnt[0] = 1;
+    ll sum = 0;
+    ll result = 0;
+    for (ll x : A) {
+        sum += x;
+        // count of previous prefix sums equal to sum - 412
+        if (cnt.count(sum - 412)) result += cnt[sum - 412];
+        cnt[sum]++;
     }
-  }
-  bool isPrime(int x) { return f[x] == x;}
-  vector<int> factorList(int x) {
-    vector<int> res;
-    while (x != 1) {
-      res.push_back(f[x]);
-      x /= f[x];
-    }
-    return res;
-  }
-  vector<pair<ll,int>> factor(ll x) {
-    vector<pair<ll,int>> res;
-    for (int p : primes) {
-      int y = 0;
-      while (x%p == 0) x /= p, ++y;
-      if (y != 0) res.emplace_back(p,y);
-    }
-    if (x != 1) res.emplace_back(x,1);
-    return res;
-  }
-};
+    return result;
+}
+
 
 int main() {
-  ll n;
-  cin >> n;
-  Sieve sieve(1e6);
-  auto primes = sieve.primes;
-
-  int ans = 0;
-  for (int p1 : primes) {
-    for (int p2 : primes) {
-      if (p2 >= p1) break;
-      if ((ll)p1*p1*p2*p2 > n) break;
-      ans++;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
+    vector<ll> num(n);
+    for (int i = 0; i < n; i++) {
+      cin >> num[i];
     }
-  }
-  for (int p : primes) {
-    ll x = 1;
-    rep(i,8) x *= p;
-    if (x > n) break;
-    ans++;
-  }
-  cout << ans << endl;
-  return 0;
+    map<int, int> M1;
+    M1[0] = 1;
+    ll sum = 0;
+    ll ans = 0;
+    for (ll x : num) {
+        sum += x;
+        if (M1.count(sum - 412)) ans += M1[sum - 412];
+        M1[sum]++;
+    }
+    cout << ans << endl;
+    return 0;
 }
+
+
+
+/*
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+// O(N) solution using prefix sums + hash map
+ll countSumTo412(const vector<ll>& A) {
+    unordered_map<ll, ll> cnt;
+    cnt.reserve(A.size()*2);
+    cnt[0] = 1;
+    ll sum = 0;
+    ll result = 0;
+    for (ll x : A) {
+        sum += x;
+        // count of previous prefix sums equal to sum - 412
+        if (cnt.count(sum - 412)) result += cnt[sum - 412];
+        cnt[sum]++;
+    }
+    return result;
+}
+
+// O(N^2) brute force for verification
+ll bruteCountSumTo412(const vector<ll>& A) {
+    int N = A.size();
+    ll result = 0;
+    for (int i = 0; i < N; ++i) {
+        ll s = 0;
+        for (int j = i; j < N; ++j) {
+            s += A[j];
+            if (s == 412) result++;
+        }
+    }
+    return result;
+}
+
+int main() {
+    // Test cases
+    vector<vector<ll>> tests = {
+        {412},                            // single element equal
+        {100, 312, 0},                   // one valid
+        {200, 100, 112},                 // none
+        {206, 206, 412, 0, 412},         // multiple
+        {1, 2, 3, 406, 6},               // one at end
+        {},                              // empty, no subarrays
+        vector<ll>(1000, 412),           // many single-element hits
+    };
+
+    for (int t = 0; t < tests.size(); ++t) {
+        ll ans_fast = countSumTo412(tests[t]);
+        ll ans_brute = bruteCountSumTo412(tests[t]);
+        cout << "Test #" << t+1 << ": fast=" << ans_fast
+             << ", brute=" << ans_brute;
+        if (ans_fast == ans_brute) cout << " [OK]";
+        else cout << " [ERROR]";
+        cout << endl;
+    }
+    return 0;
+}
+*/
