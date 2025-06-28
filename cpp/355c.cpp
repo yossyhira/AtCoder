@@ -1,3 +1,4 @@
+//縦横斜め全探索 8方向全探索
 #include <bits/stdc++.h>
 using namespace std;
 #define fi first
