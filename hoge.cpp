@@ -1,5 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<pair<ll, ll>> ab;
+    for(int i = 0; i < n; i++) {
+        ll a, b;
+        cin >> a >> b;
+        ab.emplace_back(a, a + b);
+    }
+
+    vector<int> p(n);
+    iota(p.begin(), p.end(), 0);
+
+    stable_sort(p.begin(), p.end(), [&](int i, int j) {
+        return ab[i].first * ab[j].second > ab[j].first * ab[i].second;
+    });
+
+    for(int i = 0; i < n; i++)
+        cout << p[i] + 1 << " \n"[i == n - 1];
+}
+
+
+/*
+#include <bits/stdc++.h>
+using namespace std;
 #define fi first
 #define se second
 #define pb push_back
