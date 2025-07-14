@@ -282,7 +282,8 @@ int main() {
 
     //文字列を数字にする
     string num_text = "123456789";
-    int num = 0;    
+    int num = 0;
+    //long long もできる    
     istringstream(num_text) >> num;
     cout << num << endl; //123456789
     
