@@ -28,34 +28,35 @@ int main() {
     int m;
     cin >> n >> m;
 
-    vector<LP> num;
+    vector<tuple<ll, ll, ll>> num;
     for (int i = 0; i < m; i++) {
         ll a, b;
         cin >> a >> b;
-        num.pb({a, b});
+        ll d = a - b;
+        num.emplace_back(a, b, d);
     }
+    //sort(ls.begin(), ls.end());
 
     sort(num.begin(), num.end(), [](const auto &a, const auto &b) {
-        return a.fi < b.fi;//第一
+        return get<0>(a) < get<0>(b);//第一
     });
-    sort(num.begin(), num.end(), [](const auto &a, const auto &b) {
-        return (a.se * b.fi) > (b.se * a.fi);
+    stable_sort(num.begin(), num.end(), [](const auto &a, const auto &b) {
+        return get<2>(a) < get<2>(b);//第三
     });
-    num.pb({-1, -1});
+    num.pb({-1, -1, -1});
     int now_idx = 0;
     ll ans = 0;
     while(1){
-        ll a, b;
-        tie(a, b) = num[now_idx];
+        ll a, b, d;
+        tie(a, b, d) = num[now_idx];
         if(a == -1) break;
         if(n < a){
             now_idx++;
             continue;
         }else{
-            n = (n - a) + b;
-            ans ++;
-            cout << ans << "回目 " << a << " "<<b  << " " << n << endl;
-
+            ll x = ((n - a) / d) + 1;
+            ans += x;
+            n = n - (d * x);
         }
     }
     cout << ans << endl;

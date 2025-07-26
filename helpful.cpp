@@ -478,27 +478,27 @@ get<0>(card[Idx]) = 10;  // pairのfirst 相当の要素を変更
 //昇順
 sort(card.begin(), card.end(), [](const auto &a, const auto &b) {
     return get<0>(a) < get<0>(b);//第一
-    return get<1>(a) < get<0>(b);//第二
-    return get<2>(a) < get<0>(b);//第三
+    return get<1>(a) < get<1>(b);//第二
+    return get<2>(a) < get<2>(b);//第三
 });
 //降順
 sort(card.begin(), card.end(), [](const auto &a, const auto &b) {
     return get<0>(a) > get<0>(b);//第一
-    return get<1>(a) > get<0>(b);//第二
-    return get<2>(a) > get<0>(b);//第三
+    return get<1>(a) > get<1>(b);//第二
+    return get<2>(a) > get<2>(b);//第三
 });
 //安定ソート(o(n*(logn)^2))
 //昇順
 stable_sort(card.begin(), card.end(), [](const auto &a, const auto &b) {
     return get<0>(a) < get<0>(b);//第一
-    return get<1>(a) < get<0>(b);//第二
-    return get<2>(a) < get<0>(b);//第三
+    return get<1>(a) < get<1>(b);//第二
+    return get<2>(a) < get<2>(b);//第三
 });
 //降順
 stable_sort(card.begin(), card.end(), [](const auto &a, const auto &b) {
     return get<0>(a) > get<0>(b);//第一
-    return get<1>(a) > get<0>(b);//第二
-    return get<2>(a) > get<0>(b);//第三
+    return get<1>(a) > get<1>(b);//第二
+    return get<2>(a) > get<2>(b);//第三
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////
