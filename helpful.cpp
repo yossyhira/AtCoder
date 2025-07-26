@@ -1452,9 +1452,11 @@ int main() {
   cout << endl;
   //再帰出ない時は，retunない時もvoidはいらない(AtCoder/cpp/372d.cpp)
   //a[] = [0, 1, 2, 3, 3, 4, 5];
-  //f(3) : lowのときは3以上の最初の場所であるposに「3」が帰ってくる upのときは3より大きい最初の場所である「5」が帰ってくる
+  //f(3) : lowのときは3以上の最初の場所であるposに「3」が帰ってくる upのときは3より大きい最初の場所である4のインデックスの「5」が帰ってくる
+  //最初の要素でもうダメなときは0が帰ってくる(最初に一致しても0が返るので-1とか番兵置くとよい)
+  //最後までだめなら最後の要素+1(配列の大きさが帰ってくる)
   auto f = [&](int r) {
-    int pos = upper_bound(x.begin(), x.end(), r) - x.begin(); //lower_bound(x.begin(), x.end(), r) - x.begin();
+    int pos = upper_bound(num.begin(), num.end(), r) - num.begin(); //lower_bound(num.begin(), num.end(), r) - num.begin();
     cout << pos << endl;
     return s[pos];
   };
