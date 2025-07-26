@@ -1,26 +1,43 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define fi first
+#define se second
+#define pb push_back
+//#define eb emplace_back
+//#define em emplace
+//#define pob pop_back
+//using ld = long double;
 using ll = long long;
+using P = pair<int, int>;
+using LP = pair<ll, ll>;
+const ll LINF = 1001002003004005006ll;
+const int INF = 1001001001;
+#define yes cout<<"Yes"<<endl
+#define yesr {cout<<"Yes"<<endl; return 0;}
+#define no cout<<"No"<<endl
+#define nor {cout<<"No"<<endl; return 0;}
+#define yn {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}// if(a==b)YN;
+#define dame cout<<-1<<endl
+#define chmax(x,y) x = max(x,y)
+#define chmin(x,y) x = min(x,y)
 
 int main() {
-    int n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    ll n;
     cin >> n;
-    vector<pair<ll, ll>> ab;
-    for(int i = 0; i < n; i++) {
-        ll a, b;
-        cin >> a >> b;
-        ab.emplace_back(a, a + b);
+
+    const int mx = 1e6;
+    ll ans = 0;
+    for (int i = 1; i <= mx; i++) {
+        ll i2 = pow(i, 2);
+        string txt = to_string(i2);
+        int len = txt.size();
+        ll num = (i * pow(10, len)) + i2;
+        if(n < num) break;
+        ans ++;
     }
-
-    vector<int> p(n);
-    iota(p.begin(), p.end(), 0);
-
-    stable_sort(p.begin(), p.end(), [&](int i, int j) {
-        return ab[i].first * ab[j].second > ab[j].first * ab[i].second;
-    });
-
-    for(int i = 0; i < n; i++)
-        cout << p[i] + 1 << " \n"[i == n - 1];
+    cout << ans << endl;
 }
 
 
