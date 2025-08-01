@@ -340,7 +340,7 @@ copy(num.begin(), num.end(), front_inserter(num2));//末尾に追加
 //num = 4 1 3 2 5
 sort(num.begin(), num.end());//昇順　12345
 sort(num.begin() + 1, num.end());//1文字目から最後まで昇順　4 1 2 3 5 ＊ 配列と同じで頭は0文字目とする
-sort(num.begin(), num.end(), greater<int>()); //降順　54321
+sort(num.begin(), num.end(), greater<int>()); //降順　54321 ll=  greater<ll>()
 
 //逆順
 //num = 3 5 8 
@@ -1451,6 +1451,7 @@ int main() {
   }
   cout << endl;
   //再帰出ない時は，retunない時もvoidはいらない(AtCoder/cpp/372d.cpp)
+  //配列は昇順(0, 1, 2, 3 ....)
   //a[] = [0, 1, 2, 3, 3, 4, 5];
   //f(3) : lowのときは3以上の最初の場所であるposに「3」が帰ってくる upのときは3より大きい最初の場所である4のインデックスの「5」が帰ってくる
   //最初の要素でもうダメなときは0が帰ってくる(最初に一致しても0が返るので-1とか番兵置くとよい)

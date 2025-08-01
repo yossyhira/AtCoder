@@ -24,4 +24,29 @@ const int INF = 1001001001;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+    int t;
+    cin >> t;
+    for (int ti = 0; ti < t; ti++) {
+        int n;
+        cin >> n;
+        string s;
+        cin >> s;
+
+        int mxn = 1 << n;
+        vector<bool> visited(mxn, false);
+        visited[0] = true;
+        for (int i = 0; i < mxn; i++) {
+            if(!visited[i]) continue;
+            for (int j = 0; j < n; j++) {
+                int num = i | (1 << j);
+
+                if(i == num) continue;
+                if(s[num - 1] == '1') continue;
+
+                visited[num] = true;
+            }
+        }
+
+        if(visited[mxn - 1]) yn;
+    }
 }

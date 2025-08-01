@@ -46,7 +46,14 @@ int main() {
         }
         sort(a.begin(), a.end());
         sort(modb.begin(), modb.end());
-
+        for (int i = 0; i < n; i++) {
+            cout << a[i] << " ";
+        }
+        cout << endl;
+        for (int i = 0; i < n; i++) {
+            cout << modb[i] << " ";
+        }
+        cout << endl;
         auto f = [&](ll r, int idx) {
             int pos = lower_bound(a.begin() + idx, a.end(), r) - a.begin();
             return pos;
