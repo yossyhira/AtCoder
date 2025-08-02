@@ -41,7 +41,7 @@ int main() {
             cnt = 0;
             ans ++;
         }
-        if(idx == (n - 1)) break;
+        if(idx == n) break;
     }
     cout << ans + 1 << endl;
 }
