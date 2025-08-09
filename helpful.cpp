@@ -2784,6 +2784,13 @@ int main() {
         return ab[i].first * ab[j].second > ab[j].first * ab[i].second;
     });
     
+    //こっちの方がいいかも？上はpでインデックスを並び替えしてる
+    /*
+    sort(num.begin(), num.end(), [&](const auto &i, const auto &j) {
+        return i.se * j.fi > j.se * i.fi;
+    });
+
+    */
     //空白区切りで最後に改行入れたいとき用 空白改行 改行空白
     //" \n"[i == n - 1]は
     //(i == n - 1) ? '\n' : ' '
