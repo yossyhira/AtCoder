@@ -30,7 +30,8 @@ int main() {
     for (int ti = 0; ti < t; ti++) {
         int n, m, x, y;
         cin >> n >> m >> x >> y;
-        swap(x, y);
+        x --;
+        y --;
         Graph g(n);
         for (int i = 0; i < m; ++i) {
             int a, b;
@@ -40,24 +41,59 @@ int main() {
             g[a].push_back(b);
             g[b].push_back(a);
         }
-        vector<bool> vi(n, false);
         vector<int> ans;
         ans.pb(x);
-        int now = x;
+        vector<bool> vi(n, false);
         vi[x] = true;
+        int look = x;
+        //cout << "koko" << endl;
         while(1){
-            int mn = INF;
-            for (int i = 0; i < g[now].size(); i++) {
-                if(!vi[g[now][i]])chmin(mn, g[now][i]);
+            if(look == y) break;
+            vector<bool> used(n, false); // 全頂点を「未訪問」に(-1)初期化
+            queue<int> que; 
+            
+            // 初期条件 (頂点 0 を初期ノードとする)
+            //used[v] はスタート頂点から頂点 v まで最短何ステップで到達できるかを表す
+            used[y] = true; //スタートは0ステップ
+            //その時点での橙色頂点 (発見済みだが未訪問な頂点) を格納するキュー
+            que.push(y); // スタートを橙色(自分からいける場所を見たい)頂点にする
+            
+            // BFS 開始 (キューが空になるまで探索を行う)
+            while (!que.empty()) {
+                int v = que.front(); // キューから先頭頂点を取り出す
+                que.pop(); //先頭削除
+                
+                // 自分（v） から辿れる頂点をすべて調べる
+                for (int nv : g[v]) {
+                    if (used[nv]) continue;
+                    if (vi[nv]) continue;
+                    if(nv == look) continue;
+                    used[nv] = true; 
+                    que.push(nv);
+                }
             }
-            ans.pb(mn);
-            vi[mn] = true;
-            now = mn;
-            if(mn == y) break;
+            //cout << "koko" << endl;
+            int find = INF;
+            for (int j = 0; j < g[look].size(); j++) {
+                //cout << "koko" << endl;
+                if(vi[g[look][j]]) {
+                    //cout << "ving" << endl;
+                    continue;}
+                //cout << "viok" << endl;
+                if(!used[g[look][j]]) continue;
+                //cout << "usedok" << endl;
+                chmin(find, g[look][j]);
+                //cout << "minok" << endl;
+            }
+            //cout << find << endl;
+            ans.pb(find);
+            vi[find] = true;
+            look = find;
+            //cout << "koko" << endl;
         }
 
-        for(auto a : ans){
-            cout << a + 1<< " ";
+        for(auto num : ans){
+            cout << num + 1 << " ";
         }
         cout << endl;
     }
