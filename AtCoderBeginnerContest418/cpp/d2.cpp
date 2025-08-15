@@ -25,25 +25,15 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     int n;
-    cin >> n;
     string s;
-    cin >> s;
-    /*vector<int> num(n);
+    cin >> n >> s;
+    //その場所まで計算した結果の0,1の組み合わせの総数
+    vector<int> cnt(2, 0);
+    ll ans = 0;
     for (int i = 0; i < n; i++) {
-        num[i] = s[i] - '0';
-    }*/
-    vector<int> sum(n+1, 0);
-    for (int i = 0; i < n; i++) {
-        sum[i+1] = sum[i];
-        if(s[i] == '0') sum[i+1] ++;
+        if(s[i] == '0') swap(cnt[0], cnt[1]);
+        cnt[s[i] - '0'] ++;
+        ans += cnt[1];
     }
-    int odd_cnt = 0, even_cnt = 0;
-    for (int i = 0; i <= n; i++) {
-        if((sum[i] % 2) == 0){
-            even_cnt ++;
-        }else{
-            odd_cnt ++;
-        }
-    }
-    cout << ((ll)even_cnt*(even_cnt - 1)+ (ll)odd_cnt*(odd_cnt - 1)) / 2<< endl;
+    cout << ans << endl;
 }
