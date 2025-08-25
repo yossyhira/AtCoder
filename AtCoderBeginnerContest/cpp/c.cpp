@@ -20,6 +20,7 @@ const int INF = 1001001001;
 #define dame cout<<-1<<endl
 #define chmax(x,y) x = max(x,y)
 #define chmin(x,y) x = min(x,y)
+#define all(x) begin(x), end(x)
 
 int main() {
     ios::sync_with_stdio(false);
