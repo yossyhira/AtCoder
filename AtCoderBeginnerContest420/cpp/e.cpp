@@ -35,10 +35,10 @@ int main() {
         if(x == 1){
             int u, v;
             cin >> u >> v;
-            
+
         }else if(x == 2){
             int u, v;
-            cin >> u >> v;
+            cin >> u;
             
         }else{
             int u;
