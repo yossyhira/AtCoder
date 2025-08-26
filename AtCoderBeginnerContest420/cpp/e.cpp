@@ -37,7 +37,7 @@ int main() {
             cin >> u >> v;
 
         }else if(x == 2){
-            int u, v;
+            int u;
             cin >> u;
             
         }else{
