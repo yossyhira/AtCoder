@@ -2494,6 +2494,7 @@ void three(int i, int j){
 }
 
 //unionfind ユニオンファインド///////////////////////////////////////////////////////////////////
+////ユニオンファインドで頂点に値を乗っけるやつ(AtCoder/unionfind/420e.cpp)
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>
@@ -2518,8 +2519,12 @@ int main() {
       continue;
     }
     //abくっつける
+    //マージはグループのサイズが大きい方に統合される
     uf.merge(a,b);
   }
+  //その頂点を含むグループの親をみる
+  int x = 1;
+  int hoge = uf.leader(x);
   //グループすべて見る
   vector<vector<int>> num = uf.groups();
   for (int i = 0; i < num.size(); i++) {
@@ -2832,6 +2837,7 @@ int main() {
     
     //こっちの方がいいかも？上はpでインデックスを並び替えしてる
     /*
+    //分母：first, 分子：secondにする
     sort(num.begin(), num.end(), [&](const auto &i, const auto &j) {
         return i.se * j.fi > j.se * i.fi;
     });

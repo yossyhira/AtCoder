@@ -1,3 +1,4 @@
+//ユニオンファインドで頂点に値を乗っけるやつ
 #include <bits/stdc++.h>
 #include <atcoder/all>
 using namespace atcoder;
@@ -30,7 +31,9 @@ int main() {
     int n, q;
     cin >> n >> q;
     dsu uf(n);
+    //リーダーのグループの黒頂点の個数
     vector<int> l(n, 0);
+    //その頂点が白か黒か
     vector<int> c(n, 0);
     for (int qi = 0; qi < q; qi++) {
         int x;
@@ -41,8 +44,12 @@ int main() {
             u --; v --;
             int lu = uf.leader(u);
             int lv = uf.leader(v);
+            //仲間でなければくっつける
             if(lu != lv){
+                //マージはグループのサイズが大きい方に統合されるので
+                // リーダーがluかlvどどちらかになる
                 uf.merge(u, v);
+                // lu, lvのどっちがリーダーか分からないのでもう一度リーダー調べる
                 int w=uf.leader(lu);
                 l[w]=l[lu]+l[lv];
             }
@@ -51,6 +58,7 @@ int main() {
             cin >> u;
             u --;
             int lu = uf.leader(u);
+            //白黒反転(XOR)
             c[u] ^= 1;
             if(c[u]) l[lu] ++;
             else l[lu] --;
