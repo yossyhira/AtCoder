@@ -25,5 +25,15 @@ const int INF = 1001001001;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    
+    int n;
+    cin >> n;
+    vector<string> s(n);
+    for (int i = 0; i < n; i++) {
+        cin >> s[i];
+    }
+    int idx;
+    string ans;
+    cin >> idx >> ans;
+    idx --;
+    if(s[idx] == ans) yn;
 }

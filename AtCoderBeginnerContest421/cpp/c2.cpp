@@ -25,25 +25,21 @@ const int INF = 1001001001;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    ll x, y;
-    cin >> x >> y;
-    vector<ll> ans(10);
-    ans[0] = x;
-    ans[1] = y;
-    auto rev = [&](ll c){
-        string text = to_string(c);
-        reverse(text.begin(), text.end());
-        ll num = 0;
-        //long long もできる    
-        istringstream(text) >> num;
-        return num;
-    };
-    auto f = [&](auto f, ll cnt){
-        if(cnt == 10) return;
-        ll a = rev(ans[cnt-1] + ans[cnt - 2]);
-        ans[cnt] = a;
-        f(f, cnt+1);
-    };
-    f(f, 2);
-    cout << ans[9] << endl;
+    int n;
+    string s;
+    cin >> n >> s;
+    priority_queue<int, vector<int>, greater<int>> qa;//小さい順(昇順)に取り出す
+    priority_queue<int, vector<int>, greater<int>> qb;//小さい順(昇順)に取り出す
+    for (int i = 0; i < n*2; i++) {
+        if(s[i] == 'A')qa.emplace(i);
+        else qb.emplace(i);
+    }
+    ll ansa = 0, ansb = 0;
+    for (int i = 0; i < n*2; i += 2) {
+        int x = qa.top(); qa.pop();
+        ansa += (ll)abs(i-x);
+        x = qb.top(); qb.pop();
+        ansb += (ll)abs(i-x);
+    }
+    cout << min(ansa, ansb) << endl;
 }
