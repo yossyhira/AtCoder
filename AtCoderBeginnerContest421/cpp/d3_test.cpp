@@ -25,11 +25,11 @@ const int INF = 1001001001;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+    for (int i = 0; i < 100; i++) {
     ll ans = 0;
     ll befx_s, befy_s;     
     ll befx_t, befy_t;     
     cin >> befx_s >> befy_s >> befx_t >> befy_t;
-    if((befx_s == befx_t)&&(befy_s == befy_t)) ans --;
     ll n, m, l;
     cin >> n >> m >> l;
     vector<pair<char, ll>> s;
@@ -103,12 +103,14 @@ int main() {
     ){
         ll meet = 0;
         if(
+            ((b_x_t != b_x_s) || (b_y_t != b_y_s)) &&
             ((m_t == 'U' && m_s == 'D') ||
             (m_t == 'D' && m_s == 'U'))
         ){
             if(((abs(b_x_t - b_x_s) % 2) == 0)) meet = 1;
         }
         else if( 
+            ((b_x_t != b_x_s) || (b_y_t != b_y_s)) &&
             ((m_t == 'R' && m_s == 'L') ||
             (m_t == 'L' && m_s == 'R'))
         ){
@@ -118,6 +120,7 @@ int main() {
             if((b_x_t == b_x_s) && (b_y_t == b_y_s)) meet = cnt;
         }
         else if(
+            ((b_x_t != b_x_s) || (b_y_t != b_y_s)) &&
             ((m_t == 'U' && m_s == 'R') ||
             (m_t == 'U' && m_s == 'L')  ||
             (m_t == 'D' && m_s == 'R')  ||
@@ -145,7 +148,7 @@ int main() {
             tie(m_s, cnt_s) = s[idx_s];
             ll aftx_s, afty_s;
             ll l_x_s, l_y_s, r_x_s, r_y_s;
-
+            ll move_cnt;
             if(cnt_s <= cnt_t){
                 tie(aftx_s, afty_s) = move(m_s, cnt_s, befx_s, befy_s);
                 tie(l_x_s, l_y_s, r_x_s, r_y_s) = LR(befx_s, befy_s, aftx_s, afty_s);
@@ -157,7 +160,7 @@ int main() {
                     )
                 ){
                     ans += check(
-                                m_t, m_s,
+                        m_t, m_s,
                                 befx_t, befy_t, aftx_t, afty_t,
                                 befx_s, befy_s, aftx_s, afty_s,
                                 cnt_s
@@ -166,6 +169,7 @@ int main() {
                 
                 idx_s ++;
                 cnt_t -= cnt_s;
+                move_cnt = cnt_s;
             }else{
                 tie(aftx_s, afty_s) = move(m_s, cnt_t, befx_s, befy_s);
                 tie(l_x_s, l_y_s, r_x_s, r_y_s) = LR(befx_s, befy_s, aftx_s, afty_s);
@@ -183,16 +187,17 @@ int main() {
                                 );
                 }
                 s[idx_s].se -= cnt_t;
+                move_cnt = cnt_t;
                 cnt_t = 0;
             }
-            befx_s = aftx_s;
-            befy_s = afty_s;
+            tie(befx_s, befy_s) = move(m_s, move_cnt, befx_s, befy_s);
+            tie(befx_t, befy_t) = move(m_t, move_cnt, befx_t, befy_t);
+            tie(l_x_t, l_y_t, r_x_t, r_y_t) = LR(befx_t, befy_t, aftx_t, afty_t);
         }
 
-        befx_t = aftx_t;
-        befy_t = afty_t;
     }
     cout << ans << endl;
+}
 }
 
 /*
