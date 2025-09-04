@@ -138,9 +138,7 @@ int main() {
         char m_t; ll cnt_t;
         tie(m_t, cnt_t) = t[i];
         ll aftx_t, afty_t;
-        tie(aftx_t, afty_t) = move(m_t, cnt_t, befx_t, befy_t);
         ll l_x_t, l_y_t, r_x_t, r_y_t;
-        tie(l_x_t, l_y_t, r_x_t, r_y_t) = LR(befx_t, befy_t, aftx_t, afty_t);
         while(1){
             if(cnt_t == 0) break;
             char m_s; ll cnt_s;
@@ -151,6 +149,8 @@ int main() {
             if(cnt_s <= cnt_t){
                 tie(aftx_s, afty_s) = move(m_s, cnt_s, befx_s, befy_s);
                 tie(l_x_s, l_y_s, r_x_s, r_y_s) = LR(befx_s, befy_s, aftx_s, afty_s);
+                tie(aftx_t, afty_t) = move(m_t, cnt_s, befx_t, befy_t);
+                tie(l_x_t, l_y_t, r_x_t, r_y_t) = LR(befx_t, befy_t, aftx_t, afty_t);
                 //共通区間判定
                 if(
                     tentative_check(
@@ -172,6 +172,8 @@ int main() {
             }else{
                 tie(aftx_s, afty_s) = move(m_s, cnt_t, befx_s, befy_s);
                 tie(l_x_s, l_y_s, r_x_s, r_y_s) = LR(befx_s, befy_s, aftx_s, afty_s);
+                tie(aftx_t, afty_t) = move(m_t, cnt_t, befx_t, befy_t);
+                tie(l_x_t, l_y_t, r_x_t, r_y_t) = LR(befx_t, befy_t, aftx_t, afty_t);
                 if(
                     tentative_check(
                         l_x_t, l_y_t, r_x_t, r_y_t,
@@ -191,7 +193,6 @@ int main() {
             }
             tie(befx_s, befy_s) = move(m_s, move_cnt, befx_s, befy_s);
             tie(befx_t, befy_t) = move(m_t, move_cnt, befx_t, befy_t);
-            tie(l_x_t, l_y_t, r_x_t, r_y_t) = LR(befx_t, befy_t, aftx_t, afty_t);
         }
 
     }

@@ -31,7 +31,7 @@ int main() {
 
     int rd_mx = 5;
     int rd_mn = 0;
-    int qmx = 100;
+    int qmx = 10;
     for (int i = 0; i < 100; i++) {
         
     
