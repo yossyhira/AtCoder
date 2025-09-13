@@ -25,4 +25,21 @@ const int INF = 1001001001;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+    int n, k;
+    cin >> n >> k;
+    vector<int> ans;
+    auto f = [&](auto f, int cnt, int num){
+        if(cnt == n){
+            ans.pb(num);
+            return;
+        }
+        f(f, cnt + 1, num/2);
+        f(f, cnt + 1, num - (num/2));
+    };
+    f(f, 0, k);
+    int u = 1;
+    if (k%ans.size() == 0) u = 0;
+    cout << u << endl;
+    for(auto x : ans) cout << x << " ";
+    cout << endl;
 }
