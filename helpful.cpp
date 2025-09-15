@@ -111,7 +111,7 @@ int main() {
   int ac = INF, wa = 0;
   //×と〇の境界になるまで(差が１)ループ
   while (ac-wa > 1) {
-    int wj = (wa+ac)/2;
+    int wj = (wa+ac)/2; //wa"+"ac注意
     if (judge(wj)) ac = wj; else wa = wj;
   }
 //
