@@ -543,6 +543,15 @@ set.clear();
 
 //値が存在するか確認
 //全部O(logN)
+// std::set::insert(s).second は要素が追加されたかどうかを返す
+if (set.insert(s).second) {
+std::cout << i << std::endl;
+}
+//set.insert(s).secondは以下とやってることおなじ(計算量はset.insert(s).secondの方が軽い)
+//既にあるか調べてなければ追加する
+/*if(!se.count(s)){
+    se.insert(s);
+}*/
 if (set.contains(3)) {
     // 「3」が存在するときの処理
     //c++のコンパイラが20以降
@@ -2349,6 +2358,72 @@ int main() {
    int sum = addNum(a);
     cout << sum << endl; //55
 }
+//掛け算のあまり//////////////////////////////////////////////////////////////////////////////////////////////
+//long long でもオーバーフローするときは各計算おきに毎回mod取ってくるのと同値なる
+//(a*b*c*d*e) % q == ((((a % q) * b % q) * c % q) * d % q);
+long long val = 1;
+val = (val * A[i]) % p;
+val = (val * A[j]) % p;
+        ：
+        ：
+val = (val * A[n]) % p;
+//足し算のあまり
+//a，bがp以下のときはpで割るのではなく，(最大で1回しか割れないときだけ)
+//合計から引いた方が計算速い
+//制約：0 <= a <= b <= p;
+auto f = [&](ll a, ll b){
+    if(p <= (a+b)) return ((a + b) - p);
+    else return a+b;
+};
+
+//事前にオーバーフロー判定//////////////////////////////////////////////////
+//long long ver. intはlonglongにすればよし
+//a+bの足し算
+bool willOverflow(long long a, long long b) {
+    if (b > 0) {
+        return a > LLONG_MAX - b;
+    } else {
+        return a < LLONG_MIN - b;
+    }
+}
+//使い方
+if (willOverflow(ans, num)) {
+    ans = 1;
+    continue;
+}  
+
+//a*bの掛け算
+bool willOverflow(long long a, long long b) {
+    if (a == 0 || b == 0) return false;
+    if (a > 0) {
+        if (b > 0) {
+            return a > LLONG_MAX / b;
+        } else {
+            return b < LLONG_MIN / a;
+        }
+    } else {
+        if (b > 0) {
+            return a < LLONG_MIN / b;
+        } else {
+            return a != 0 && b < LLONG_MAX / a;
+        }
+    }
+}
+
+//使い方////////////
+//(AtCoder/AtCoderBeginnerContest406/cpp/b.cpp)
+if (willOverflow(ans, num)) {
+    ans = 1;
+    continue;
+} 
+//組み合わせ/////////////////////////////////////////////////////////////////////////////////////////////////
+//nCx = n個のデータからx個選ぶ(順番は無視して，同じものを選ぶ)総パターン 
+//(nが大きくてもxによっては定数倍で間に合うこともある)(nこから5個選ぶやつなら1/5!なので1/120計算量落ちる)(AtCoder/tenkei90/55.cpp)
+//nCx = n!/(x!(n-x)!) 
+//(1, 2, 3, 4, 5) から2個 ＝＞ （1, 2）と(2, 1)は同じ選び方として，上の式で計算
+//nPx = n個のデータからx個選ぶ(順番も考慮して，同じものを選ぶ)総パターン 
+//nPx = n!/(n-x)!
+//(1, 2, 3, 4, 5) から2個 ＝＞ （1, 2）と(2, 1)は“違う”選び方として，上の式で計算
 
 //尺取り/////////////////////////////////////////////////////////////////////////////////////////////////////
 //(AtCoder/cpp/384d.cpp)
