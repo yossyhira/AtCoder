@@ -1545,6 +1545,8 @@ int main() {
     int a, b;
     cin >> a >> b;
     cout << __gcd(a, b) << endl;//最大公約数
+    
+    //最小公倍数はオーバーフロー注意 オーバーフロするかもの時は(AtCoder/tenkei90/38.cpp)を参照
     cout << a / __gcd(a, b) * b << endl;//最小公倍数
     return 0;
 }
@@ -2378,6 +2380,7 @@ auto f = [&](ll a, ll b){
 
 //事前にオーバーフロー判定//////////////////////////////////////////////////
 //long long ver. intはlonglongにすればよし
+//オーバーフローするときはtrueを返す
 //a+bの足し算
 bool willOverflow(long long a, long long b) {
     if (b > 0) {
