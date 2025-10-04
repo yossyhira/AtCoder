@@ -39,13 +39,14 @@ int main() {
             }
         }
     }*/
+    //atcoderという部分列(連続ではない)がいくつあるか
     for (int i = 0; i < s.size(); i++) {
         for (int j = 0; j < t.size(); j++) {
-            dp[i + 1][j] = dp[i][j];
+            dp[i + 1][j] = dp[i][j];//基本変わらない(文字一致してないと考えて前の値引継ぎ)
             if(s[i] == t[j]){
-                int add = dp[i][j-1];
-                if(j == 0) add = 1;
-                dp[i + 1][j] = (add + dp[i][j]) % mod;
+                int add = dp[i][j-1]; //一致してたら前の文字までの組み合わせ総数取得
+                if(j == 0) add = 1; //一文字目のときは例外処理で1にする
+                dp[i + 1][j] = (add + dp[i][j]) % mod; //通りの組み合わせは足し算
             }
             
         }
