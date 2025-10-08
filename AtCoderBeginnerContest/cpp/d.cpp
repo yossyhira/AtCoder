@@ -21,7 +21,7 @@ const int INF = 1001001001;
 #define chmax(x,y) x = max(x,y)
 #define chmin(x,y) x = min(x,y)
 #define all(x) begin(x), end(x)
-const int mod = 1e9 + 7;
+const int mod = 1e9 + 7; //ll % modしても自動でmod型変換でllなるからバグらないよ
 
 int main() {
     ios::sync_with_stdio(false);
