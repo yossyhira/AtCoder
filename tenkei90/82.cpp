@@ -39,11 +39,27 @@ int main() {
     int l_lenge = cnt_lenge(l);
     int r_lenge = cnt_lenge(r);
     ll ans = 0;
+
+    auto cnt_ans = [&](ll l, ll r, int len){
+        return (((((((l + r) % mod)*(((r - l) + 1)%mod)) % mod / 2)%mod) * len) % mod);
+
+    };
+    auto f_min = [&](){
+
+    };
+    auto f_max = [&](){
+
+    };
+
     if(l_lenge == r_lenge){
         //合計＊長さ
-        ans = ((((((l + r) % mod)*(((r - l) + 1)%mod)) % mod / 2)%mod) * r_lenge) % mod;
+        ans = cnt_ans(l, r, l_lenge);
     }else{
-
+        /*
+        Ｌ桁の最大値とＲ桁の最小値求めてそれを例外処理
+        Ｌ＋１以上Ｒ未満桁の最大最小求めて上の長さ一致の式で計算
+        最大．最小，長さ一致関数するか～～
+        */
     }
     cout << ans << endl;
 }
