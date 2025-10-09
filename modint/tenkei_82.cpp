@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
+#include <atcoder/modint>
 using namespace std;
+using namespace atcoder;
+
 #define fi first
 #define se second
 #define pb push_back
@@ -22,7 +25,10 @@ const int INF = 1001001001;
 #define chmin(x,y) x = min(x,y)
 #define all(x) begin(x), end(x)
 const ll mod = 1e9 + 7;
-const ll inv2 = (mod + 1) / 2;  // 2 の逆元
+
+// ================= ACL modint =================
+using mint = modint1000000007;
+// =============================================
 
 int main() {
     ios::sync_with_stdio(false);
@@ -40,19 +46,15 @@ int main() {
     int l_lenge = cnt_lenge(l);
     int r_lenge = cnt_lenge(r);
     
-    /*
     auto cnt_ans = [&](ll l, ll r, int len){
-        return ((((( (((l + r) % mod)*(((r - l) + 1)%mod)) % mod) / 2) % mod) * (ll)len) % mod);        
-    };
-    */
-    auto cnt_ans = [&](ll l, ll r, int len){
-        ll a = (l + r) % mod;
-        ll b = ((r - l) + 1) % mod;
-        ll res = a * b % mod;
-        res = res * inv2 % mod;
-        res = res * len % mod;
+        mint L = l;
+        mint R = r;
+        mint n = (R - L + 1);
+        mint res = (L + R) * n / mint(2);
+        res *= mint(len);
         return res;
     };
+     
     auto f_min = [&](int n){
         ll x = 1;
         for (int i = 0; i < (n-1); i++) {
@@ -69,7 +71,7 @@ int main() {
         return x;
     };
     
-    ll ans = 0;
+    mint ans = 0;
     if(l_lenge == r_lenge){
         //合計＊長さ
         ans = cnt_ans(l, r, l_lenge);
@@ -85,11 +87,11 @@ int main() {
         for (int i = (l_lenge + 1); i < r_lenge; i++) {
             ll mn = f_min(i);
             ll mx = f_max(i);
-            ans = ((ans + cnt_ans(mn, mx, i)) % mod);
+            ans = ans + cnt_ans(mn, mx, i);
         }
         
         ll mn_r = f_min(r_lenge);
-        ans = ((ans + cnt_ans(mn_r, r, r_lenge)) % mod);
+        ans = ans + cnt_ans(mn_r, r, r_lenge);
     }
-    cout << ans << endl;
+    cout << ans.val() << endl; // ← mint の値は .val() で出力
 }
