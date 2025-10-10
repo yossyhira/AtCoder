@@ -352,6 +352,10 @@ num.erase(num.begin()); //先頭削除 <- O(N)
 num.erase(num.end() - 1); //末尾削除
 num.pop_back();//末尾削除 ← O(1)
 num.erase(num.begin()+i); //i番目の要素削除
+//全部削除
+num.clear() //1回だけならこっちの方が速いかもO(n)で.size()が0，でもメモリが残るので.pb()のときにメモリ確保不要で空にする前使ってたメモリ内は高速に追加可能
+vector<int>().swap(num);  //何回も中身消すならこっちかもO(1) numを完全に空にしてメモリも解放
+
 
 // 5を探す
 //イテレータを使う(https://atcoder.jp/contests/apg4b/tasks/APG4b_ai)
@@ -399,6 +403,8 @@ for (int i = 0; i < ((n/k) + 1); i++) {
 vector<pair<int, string>> standings;
 //追加
 standings.push_back({solved_point, name});
+//こっちのほうが速い
+standings.emplace_back(solved_point, name);
 
 //一つ目・二つ目それぞれ別で入力もできる
 vector<pair<int, int>> x(m);
