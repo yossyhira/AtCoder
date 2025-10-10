@@ -12,6 +12,49 @@ using P = pair<int, int>;
 using LP = pair<ll, ll>;
 const ll LINF = 1001002003004005006ll;
 const int INF = 1001001001;
+#define yes cout<<"YES"<<endl
+#define yesr {cout<<"Yes"<<endl; return 0;}
+#define no cout<<"NO"<<endl
+#define nor {cout<<"No"<<endl; return 0;}
+#define yn {cout<<"YES"<<endl;}else{cout<<"NO"<<endl;}// if(a==b)YN;
+#define dame cout<<-1<<endl
+#define chmax(x,y) x = max(x,y)
+#define chmin(x,y) x = min(x,y)
+#define all(x) begin(x), end(x)
+const int mod = 1e9 + 7;
+const string x[4] = { "maerd", "remaerd", "esare", "resare"};
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    string s;
+    cin >> s;
+    reverse(all(s));
+    string t;
+    for (int i = 0; i < s.size(); i++) {
+        t.pb(s[i]);
+        for (int i = 0; i < 4; i++) {
+            if(t == x[i]) t = "";   
+        }
+    }
+    if(t.size() == 0)yn
+}
+
+
+
+/*#include <bits/stdc++.h>
+using namespace std;
+#define fi first
+#define se second
+#define pb push_back
+//#define eb emplace_back
+//#define em emplace
+//#define pob pop_back
+//using ld = long double;
+using ll = long long;
+using P = pair<int, int>;
+using LP = pair<ll, ll>;
+const ll LINF = 1001002003004005006ll;
+const int INF = 1001001001;
 #define yes cout<<"Yes"<<endl
 #define yesr {cout<<"Yes"<<endl; return 0;}
 #define no cout<<"No"<<endl
@@ -38,7 +81,7 @@ int main() {
         ans ++;
     }
     cout << ans << endl;
-}
+}*/
 
 
 /*
