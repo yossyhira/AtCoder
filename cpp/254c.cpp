@@ -34,3 +34,32 @@ int main() {
     cout << "Yes" << endl;
     return 0;
 }
+
+/*
+これは一回しかswapできないからダメ
+5 1
+2 3 4 5 1
+で落ちる
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    for (int i = 0; i < (n-k); i++) {
+        if(a[i + k] < a[i]) swap(a[i], a[i+k]);
+    }
+    for(auto a : a) cout << a << " ";
+    cout << endl;
+    for (int i = 0; i < (n - 1); i++) {
+        if(a[i + 1] < a[i]){
+            no;
+            return 0;
+        }
+    }
+    yes;
+}
+*/
