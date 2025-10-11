@@ -3407,6 +3407,7 @@ asin2とかacos2はない．例：asin(y/x). atanのときだけatan2にする�
 
 //二次元imos法 いもす//////////////////////////////////////////////////////////////////////////
 //(AtCoder/cpp/imos-2d.cpp)
+//(AtCoder/tenkei90/28.cpp) <= hwの指定ないやつ 座標+1とかもいらないバージョン
 #include <bits/stdc++.h>
 using namespace std;
 #define fi first
