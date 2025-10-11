@@ -1,0 +1,20 @@
+v1
+nv2
+v2
+nv1
+ans0nv1
+v3
+nv4
+nv5
+v4
+nv3
+ans0nv3
+nv5
+ans1nv5
+v5
+nv4
+ans2nv4
+nv3
+ans2nv3
+0 1 0 1 1 
+1
