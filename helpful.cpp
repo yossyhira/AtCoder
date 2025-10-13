@@ -729,6 +729,14 @@ if(M1.count(x)){
     M1[x] = 1;
 }
 
+//キー削除と要素数表示
+//類似(AtCoder/tenkei90/34.cpp)
+map<int, int> M1;
+M1[10]++;
+cout << M1.size() << endl;//1
+M1.erase(10);//キー10を削除
+cout << M1.size() << endl;//0
+
 //宣言
 // int 型の番地に int 型の変数を記録する場合（2^31 要素の int 型配列と同じような感じ）
 map<int, int> M1;
@@ -2601,6 +2609,7 @@ int main() {
 //(AtCoder/cpp/384d.cpp)
 //尺取り類似問題(https://atcoder.jp/contests/abc369/tasks/abc369_c)
 //円環尺取り自作：(AtCoder/tenkei90/76.cpp)
+//(/home/hirata/AtCoder/tenkei90/34.cpp) 最後も一応値更新忘れずに
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
