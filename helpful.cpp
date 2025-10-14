@@ -2916,6 +2916,7 @@ using namespace std;
 using namespace atcoder;
 using ll = long long;
 // 代表的な mod
+//mintで宣言！！！！(modint x;ではない)
 using mint = modint1000000007;     // 1e9+7
 // using mint = modint998244353;   // 998244353 (FTTに便利)
 // using mint = modint<123456789>; // 自作 mod mod = 123456789;
