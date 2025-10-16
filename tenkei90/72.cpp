@@ -35,32 +35,38 @@ int main() {
         cin >> mp[i];
     }
     int st_i, st_j;
-    vector<bool> vi(h, vector<bool>(w, false));
+    vector<vector<bool>> vi(h, vector<bool>(w, false));
     auto f = [&](auto f, int i, int j, int cnt){
+        int subans = 0;
         for (int direction = 0; direction < 4; direction++) {
             int next_x = i + dx[direction];
             int next_y = j + dy[direction];
             if (next_x < 0 || next_x >= h || next_y < 0 || next_y >= w) continue;
-            if (field[next_x][next_y] == '#') continue;
-            if(!vi[next_x][next_y]){
-                vi[next_x][next_y] = true;
-                f(f, i, j, cnt + 1);
-                vi[next_x][next_y] = false;
-            }
+            if (mp[next_x][next_y] == '#') continue;
+            //cnt=3以上でスタートかえって来たらcnt返す
             if(next_x == st_i && next_y == st_j && 3 <= cnt){
                 return cnt;
             }
+            if(!vi[next_x][next_y]){
+                vi[next_x][next_y] = true;
+                chmax(subans,  f(f, next_x, next_y, cnt + 1));
+                vi[next_x][next_y] = false;
+            }
         }
+        return subans;
     };
+    int ans = 0;
     for (int i = 0; i < h; i++) {
         for (int j = 0; j < w; j++) {
             if(mp[i][j] == '.'){
                 st_i = i;
                 st_j = j;
                 vi[st_i][st_j] = true;
-                f(f, i, j, 0);
+                chmax(ans, f(f, i, j, 1));
                 vi[st_i][st_j] = false;
             }
         }
     }
+    if(3 <= ans)cout << ans << endl;
+    else dame;
 }
