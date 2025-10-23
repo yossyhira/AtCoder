@@ -2564,6 +2564,19 @@ double = double + int;//できる(intを暗黙の型変換してくれる)
 double = int + int;//int + int でintの範囲外になるとオーバーフローする
 double = (double)int + int;//できる(intを暗黙の型変換してくれる)
 
+//ルート，sqrtで小数部分切り捨てて整数だけ求めたいときの誤差対策
+//(ABC428/D) snukeさんコードsqrtl()・テキストでの解説コード isqrt()
+//sqrtl(ll x)で誤差ほとんどなくせる(snukeさん情報)．一応不安なら以下
+// floor(sqrt(n)) を返す (ただし n が負の場合は 0 を返す)
+//(https://github.com/NyaanNyaan/library/blob/master/math/isqrt.hpp)
+long long isqrt(long long n) {
+  if (n <= 0) return 0;
+  long long x = sqrt(n);
+  while ((x + 1) * (x + 1) <= n) x++;
+  while (x * x > n) x--;
+  return x;
+}
+
 //ユーグリッド距離・三平方の定理
 double dist(int sx, int sy, int gx, int gy) {
     return sqrt((double)((sx - gx) * (sx - gx) + (sy - gy) * (sy - gy)));
