@@ -26,4 +26,44 @@ const int mod = 1e9 + 7;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+    int n, m;
+    cin >> n >> m;
+    vector<string> mp(n);
+    for (int i = 0; i < n; i++) {
+        cin >> mp[i];
+    }
+    vector<vector<string>> ans;
+    int cnt = 0;
+    for (int i = 0; i + m <= n; i++) {
+        for (int j = 0; j + m <= n; j++) {
+            vector<string> block;
+            for (int k = 0; k < m; k++) {
+                string s;
+               for (int l = 0; l < m; l++) {
+                    s.pb(mp[i + k][j + l]);
+                }
+                //cout << s << endl;
+               block.pb(s);
+            }
+            int cnt_ok = 0;
+            for (int i = 0; i < ans.size(); i++) {
+                bool ng = true;
+                for (int j = 0; j < m; j++) {
+                    for (int k = 0; k < m; k++) {
+                        //cout << block[j][k];
+                        if(ans[i][j][k] != block[j][k]) ng = false;
+                    }
+                    //cout << endl;
+                }
+                //cout << endl;
+                if(!ng) cnt_ok ++;
+            }
+            if(cnt_ok == ans.size()){
+                ans.pb(block);
+            }
+        }
+    }
+    cout << ans.size() << endl;
+
+    return 0;
 }

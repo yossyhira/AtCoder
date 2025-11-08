@@ -32,43 +32,40 @@ int main() {
     cin >> s;
     int l = 0, r = 0;
     int a_cnt = 0, b_cnt = 0;
-    ll ans = 0;
+    int ans = 0;
     while(r < (int)s.size()){
-        //cout <<"l : "<< l <<" r : " << r << " a : "<<a_cnt << " b : " << b_cnt << endl;
         if(s[r] == 'a') a_cnt ++;
         else b_cnt ++;
-        if(b_cnt < B) {
-            if(A <= (a_cnt)){
-                //cout << "ans : "<<l + 1 << r + 1 << endl;
-                ans ++;
-            }
-            r ++;
-        }
+        cout <<"l : "<< l <<" r : " << r << " a : "<<a_cnt << " b : " << b_cnt << endl;
+    
+        if(b_cnt < B) r ++;
         else{
-            //cout << "else in" << endl;
-            while(s[l] != 'b'){
-                a_cnt --;
-                if(A <= (a_cnt)){
-                    //cout << "ans : "<<l + 1 << r + 1 << endl;
+            cout << "else in" << endl;
+            while(1){
+                //cout << l << endl;
+                if(A <= (((r - l) + 1) - (B - 1))){
+                    cout << "ans : "<<l + 1 << r + 1 << endl;
                     ans ++;
+                }
+                if(s[l] == 'a') a_cnt --;
+                else b_cnt --;
+                cout <<"l : "<< l <<" r : " << r << " a : "<<a_cnt << " b : " << b_cnt << endl;
+                if(b_cnt < B) {
+                    break;
                 }
                 l ++;
             }
-
-            b_cnt --;
-            l ++;
-
             r ++;
-            //cout << "else ot" << endl;
+            cout << "else out" << endl;
         }
     }
     //cout << l << r << endl;
-    //cout << "fians : " << ans << endl;
+    //cout << ans << endl;
     while(1){
         if((int) s.size() <= l) break;
         if(s[l] == 'a') a_cnt --;
         else b_cnt --;
-        if(A <= (a_cnt)){
+        if(A <= (((r - l)) - (B - 1))){
             ans ++;
         }
         l ++;
